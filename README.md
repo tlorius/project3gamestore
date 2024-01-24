@@ -1,1 +1,1 @@
-# Gamestore readme
+# Gamestore
