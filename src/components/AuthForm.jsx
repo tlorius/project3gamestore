@@ -38,6 +38,7 @@ const AuthForm = ({ isLogin = false }) => {
         navigate("/login")
       }
       if (response === 200) {
+        //navigate user to page they were trying to access before loggin in if possible
         console.log(response.data.token)
         saveToken(response.data.token)
         console.log("login successful")
