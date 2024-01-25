@@ -3,7 +3,7 @@ import { ToastContainer, toast } from "react-toastify"
 import "react-toastify/dist/ReactToastify.css"
 
 const StorefrontPage = () => {
-  const handleToast = () => toast("Testing :)")
+  const handleToast = () => toast("Testing 🤣", { theme: "dark" })
   return (
     <>
       <h1>Homepage</h1>
