@@ -8,18 +8,40 @@ const AuthForm = ({ isLogin = false }) => {
 
   const handleSubmit = (event) => {
     event.preventDefault()
+    let payload
+    if (isLogin) {
+      payload = {
+        //update this depending on backend
+        loginCredential,
+        password,
+      }
+    } else {
+      payload = {
+        email,
+        userName,
+        password,
+      }
+    }
   }
   return (
     <>
       <form onSubmit={handleSubmit}>
-        <label>
-          Username / E-Mail
-          <input
-            type="text"
-            value={loginCredential}
-            onChange={(event) => setLoginCredential(event.target.value)}
-          />
-        </label>
+        {isLogin ? (
+          <label>
+            Username / E-Mail
+            <input
+              type="text"
+              value={loginCredential}
+              onChange={(event) => setLoginCredential(event.target.value)}
+            />
+          </label>
+        ) : (
+          <>
+            <label>signup email</label>
+            <label>signup username</label>
+          </>
+        )}
+
         <label>
           Password
           <input
@@ -28,6 +50,7 @@ const AuthForm = ({ isLogin = false }) => {
             onChange={(event) => setPassword(event.target.value)}
           />
         </label>
+        <input type="submit" value={isLogin ? "Login" : "Sign Up"} />
       </form>
     </>
   )
