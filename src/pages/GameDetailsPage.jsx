@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom"
+import { Link } from "react-router-dom";
 
 const GameDetailsPage = () => {
   return (
@@ -7,7 +7,7 @@ const GameDetailsPage = () => {
       <Link to="/games/1/update">Update Game</Link>
       <Link to="/games/1/addreview">Add new review</Link>
     </>
-  )
-}
+  );
+};
 
-export default GameDetailsPage
+export default GameDetailsPage;
