@@ -1,4 +1,5 @@
 import { useState } from "react"
+import axios from "axios"
 
 const AuthForm = ({ isLogin = false }) => {
   const [loginCredential, setLoginCredential] = useState("")
@@ -37,8 +38,22 @@ const AuthForm = ({ isLogin = false }) => {
           </label>
         ) : (
           <>
-            <label>signup email</label>
-            <label>signup username</label>
+            <label>
+              Email
+              <input
+                type="email"
+                value={email}
+                onChange={(event) => SetEmail(event.target.value)}
+              />
+            </label>
+            <label>
+              Username
+              <input
+                type="text"
+                value={userName}
+                onChange={(event) => setUserName(event.target.value)}
+              />
+            </label>
           </>
         )}
 
