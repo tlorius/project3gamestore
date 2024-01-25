@@ -1,29 +1,29 @@
-import { useState } from "react"
-import axios from "axios"
+import { useState } from "react";
+import axios from "axios";
 
 const AuthForm = ({ isLogin = false }) => {
-  const [loginCredential, setLoginCredential] = useState("")
-  const [email, SetEmail] = useState("")
-  const [userName, setUserName] = useState("")
-  const [password, setPassword] = useState("")
+  const [loginCredential, setLoginCredential] = useState("");
+  const [email, SetEmail] = useState("");
+  const [userName, setUserName] = useState("");
+  const [password, setPassword] = useState("");
 
   const handleSubmit = (event) => {
-    event.preventDefault()
-    let payload
+    event.preventDefault();
+    let payload;
     if (isLogin) {
       payload = {
         //update this depending on backend
         loginCredential,
         password,
-      }
+      };
     } else {
       payload = {
         email,
         userName,
         password,
-      }
+      };
     }
-  }
+  };
   return (
     <>
       <form onSubmit={handleSubmit}>
@@ -47,7 +47,7 @@ const AuthForm = ({ isLogin = false }) => {
               />
             </label>
             <label>
-              Username
+              Username123
               <input
                 type="text"
                 value={userName}
@@ -68,7 +68,7 @@ const AuthForm = ({ isLogin = false }) => {
         <input type="submit" value={isLogin ? "Login" : "Sign Up"} />
       </form>
     </>
-  )
-}
+  );
+};
 
-export default AuthForm
+export default AuthForm;
