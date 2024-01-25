@@ -23,7 +23,6 @@ const GameForm = ({ isUpdate = false }) => {
       price,
       description,
     };
-    console.log(gameId);
   };
 
   return (
