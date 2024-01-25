@@ -14,7 +14,7 @@ const AuthContextProvider = ({ children }) => {
     setIsAuthenticated(true)
     window.localStorage.setItem("authToken", tokenFromLogin)
     //check if how userID is stored in the token
-    const { userID } = jwtDecode(tokenFromLogin)
+    const { userId } = jwtDecode(tokenFromLogin)
     setUserId(userId)
   }
 
