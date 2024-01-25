@@ -22,9 +22,12 @@ const AuthContextProvider = ({ children }) => {
   //to redirect user to home or login page
   const verifyToken = async (tokenFromLocalStorage) => {
     try {
-      const response = await axios.get(`${import.meta.env.VITE_API_URL}`, {
-        headers: { Authorization: `Bearer ${tokenFromLocalStorage}` },
-      })
+      const response = await axios.get(
+        `${import.meta.env.VITE_API_URL}/auth/verify`,
+        {
+          headers: { Authorization: `Bearer ${tokenFromLocalStorage}` },
+        }
+      )
       if (response.status === 200) {
         setIsAuthenticated(true)
         setToken(tokenFromLocalStorage)

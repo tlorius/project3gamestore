@@ -1,5 +1,7 @@
-import { useState } from "react"
+import { useContext, useState } from "react"
 import axios from "axios"
+import { useNavigate } from "react-router-dom"
+import { AuthContext } from "../providers/AuthContext"
 
 const AuthForm = ({ isLogin = false }) => {
   const [loginCredential, setLoginCredential] = useState("")
@@ -7,7 +9,11 @@ const AuthForm = ({ isLogin = false }) => {
   const [userName, setUserName] = useState("")
   const [password, setPassword] = useState("")
 
-  const handleSubmit = (event) => {
+  const navigate = useNavigate()
+
+  const { saveToken } = useContext(AuthContext)
+
+  const handleSubmit = async (event) => {
     event.preventDefault()
     let payload
     if (isLogin) {
@@ -23,6 +29,20 @@ const AuthForm = ({ isLogin = false }) => {
         password,
       }
     }
+    try {
+      const response = await axios.post(
+        `${import.meta.env.VITE_API_URL}/auth/${isLogin ? "login" : "signup"}`,
+        payload
+      )
+      if (response === 201) {
+        navigate("/login")
+      }
+      if (response === 200) {
+        console.log(response.data.token)
+        saveToken(response.data.token)
+        console.log("login successful")
+      }
+    } catch (error) {}
   }
   return (
     <>
