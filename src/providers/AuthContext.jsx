@@ -77,14 +77,14 @@ const AuthContextProvider = ({ children }) => {
 
   return (
     <AuthContext.Provider
-      value={
-        (isAuthenticated,
+      value={{
+        isAuthenticated,
         isLoading,
         saveToken,
         requestWithToken,
         logout,
-        userId)
-      }
+        userId,
+      }}
     >
       {children}
     </AuthContext.Provider>

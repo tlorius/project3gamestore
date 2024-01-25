@@ -5,6 +5,7 @@ import { AuthContext } from "../providers/AuthContext"
 
 const Navbar = () => {
   const { logout } = useContext(AuthContext)
+
   return (
     //content is temporary: once auth is implemented ->
     //Store - Categories - if loggedin (Profile)/ if not (Login) - if logged in: wishlist
