@@ -1,8 +1,11 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import classes from "../styles/GameForm.module.css";
 import { useParams } from "react-router-dom";
+import { AuthContext } from "../providers/AuthContext";
 
 const GameForm = ({ isUpdate = false }) => {
+  const { requestWithToken } = useContext(AuthContext);
+  const { gameId } = useParams();
   const [title, setTitle] = useState("");
   const [imageUrl, setImageUrl] = useState("");
   const [developer, setDeveloper] = useState("");
@@ -10,9 +13,9 @@ const GameForm = ({ isUpdate = false }) => {
   const [releaseDate, setReleaseDate] = useState();
   const [price, setPrice] = useState(0);
   const [description, setDescription] = useState("");
-  const { gameId } = useParams();
+  const [tags, setTags] = useState();
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     const payload = {
       title,
@@ -22,7 +25,26 @@ const GameForm = ({ isUpdate = false }) => {
       releaseDate,
       price,
       description,
+      //update how tags are handled to allow for multiple tags
+      tags: [tags],
     };
+    try {
+      const response = await requestWithToken(
+        `/games${isUpdate ? `/${gameId}` : ""}`,
+        isUpdate ? "PUT" : "POST",
+        payload
+      );
+      if (response.status === 201) {
+        console.log(
+          "successfully created book - REPLACE THIS WITH ACTUAL CODE"
+        );
+      }
+      if (response.status === 200) {
+        console.log("successfully updated book - REPLACE WITH ACTUAL CODE");
+      }
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   return (
@@ -90,6 +112,15 @@ const GameForm = ({ isUpdate = false }) => {
             required
             value={description}
             onChange={(event) => setDescription(event.target.value)}
+          />
+        </label>
+        <label>
+          Category/Tags/change to input and handle as array
+          <input
+            type="text"
+            required
+            value={tags}
+            onChange={(event) => setTags(event.target.value)}
           />
         </label>
         <input type="submit" value={isUpdate ? "Update Game" : "Add Game"} />
