@@ -11,9 +11,9 @@ const GameDetailsPage = () => {
     if (isAuthenticated) {
       try {
         const response = await requestWithToken(
-          `/api/users/buygame/${userId}`,
+          `/users/buygame/${userId}`,
           "PUT",
-          gameId
+          { gameToAdd: gameId }
         );
         if (response.status === 200) {
           toast("😎👍 game added to your account", {
@@ -23,6 +23,11 @@ const GameDetailsPage = () => {
           console.log(`game successfully added to your account`);
         }
       } catch (error) {
+        //for now just throwing this for every error, need to change later
+        toast("😒 you already own this game", {
+          theme: "dark",
+          autoClose: 3000,
+        });
         console.log(error);
       }
     } else {
