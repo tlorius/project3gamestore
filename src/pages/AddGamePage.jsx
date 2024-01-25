@@ -1,5 +1,12 @@
-const AddGamePage = () => {
-  return <h1>Add new game</h1>
-}
+import GameForm from "../components/GameForm";
 
-export default AddGamePage
+const AddGamePage = () => {
+  return (
+    <>
+      <h1>Add new game</h1>
+      <GameForm />
+    </>
+  );
+};
+
+export default AddGamePage;

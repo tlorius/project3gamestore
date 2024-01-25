@@ -1,5 +1,12 @@
-const UpdateGamePage = () => {
-  return <h1>Update Current Game</h1>
-}
+import GameForm from "../components/GameForm";
 
-export default UpdateGamePage
+const UpdateGamePage = () => {
+  return (
+    <>
+      <h1>Update game</h1>
+      <GameForm isUpdate />
+    </>
+  );
+};
+
+export default UpdateGamePage;
