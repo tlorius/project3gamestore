@@ -15,7 +15,6 @@ const GameDetailsPage = () => {
         `${import.meta.env.VITE_API_URL}/api/games/${gameId}`
       );
       setGame(response.data);
-      console.log(response.data);
     } catch (error) {
       console.error(error);
     }
@@ -57,7 +56,9 @@ const GameDetailsPage = () => {
   return game ? (
     <>
       <h1>{game.title}</h1>
-
+      <Link to={`/games/${gameId}/reviews`}>
+        Reviews: {game.reviews.length}
+      </Link>
       <Link to={`/games/${gameId}/update`}>Update Game</Link>
       <button type="button" onClick={addGameToAccount}>
         "Buy" Game - Will add game to your account
