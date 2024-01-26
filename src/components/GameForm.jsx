@@ -17,6 +17,7 @@ const GameForm = ({ isUpdate = false }) => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    //image url is an array of strings, first element is the thumbnail image
     const payload = {
       title,
       imageUrl,
