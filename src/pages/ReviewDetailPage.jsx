@@ -13,7 +13,9 @@ const ReviewDetailPage = () => {
   useEffect(() => {
     const fetchReview = async () => {
       try {
-        const response = await axios.get(`/reviews/${reviewId}`);
+        const response = await axios.get(
+          `${import.meta.env.VITE_API_URL}/api/reviews/${reviewId}`
+        );
         if (response.status === 200) {
           setReview(response.data);
         } else {
@@ -26,9 +28,10 @@ const ReviewDetailPage = () => {
 
     const fetchGame = async () => {
       try {
-        const response = await axios.get(`/games/${gameId}`);
+        const response = await axios.get(
+          `${import.meta.env.VITE_API_URL}/api/games/${gameId}`
+        );
         if (response.status === 200) {
-          console.log(gameId);
           setGame(response.data);
         } else {
           console.error("Failed to fetch game:", response);
