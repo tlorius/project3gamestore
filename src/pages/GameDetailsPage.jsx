@@ -42,7 +42,7 @@ const GameDetailsPage = () => {
       <button type="button" onClick={addGameToAccount}>
         "Buy" Game - Will add game to your account
       </button>
-      <Link to="/games/1/addreview">Add new review</Link>
+      <Link to={`/games/${gameId}/addReview`}>Add new review</Link>
       <ToastContainer />
     </>
   );
