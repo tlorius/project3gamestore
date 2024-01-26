@@ -2,6 +2,7 @@
 import { useContext, useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { AuthContext } from "../providers/AuthContext";
+import classes from "../styles/ReviewForm.module.css";
 
 const ReviewForm = ({ reviewData = null, isUpdate = false }) => {
   const { requestWithToken } = useContext(AuthContext);
@@ -19,13 +20,14 @@ const ReviewForm = ({ reviewData = null, isUpdate = false }) => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     const payload = {
-      content,
-      isRecommended,
-      gameId,
+      comment: content,
+      recommend: isRecommended,
     };
 
     try {
-      const endpoint = `/api/reviews${isUpdate ? `/${reviewData._id}` : ""}`;
+      const endpoint = `/reviews/${
+        isUpdate ? `${reviewData._id}` : `${gameId}`
+      }`;
       const method = isUpdate ? "PUT" : "POST";
       const response = await requestWithToken(endpoint, method, payload);
 
