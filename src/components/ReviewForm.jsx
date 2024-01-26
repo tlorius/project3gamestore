@@ -1,35 +1,40 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
+// ReviewForm.jsx
+import { useContext, useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
+import { AuthContext } from "../providers/AuthContext";
 
-const ReviewForm = ({ reviewData = null, gameId, isUpdate = false }) => {
+const ReviewForm = ({ reviewData = null, isUpdate = false }) => {
+  const { requestWithToken } = useContext(AuthContext);
+  const { gameId } = useParams();
   const [content, setContent] = useState("");
   const [isRecommended, setIsRecommended] = useState(false);
 
   useEffect(() => {
-    if (reviewData) {
+    if (isUpdate && reviewData) {
       setContent(reviewData.content);
       setIsRecommended(reviewData.isRecommended);
     }
-  }, [reviewData]);
+  }, [reviewData, isUpdate]);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
     const payload = {
-      gameId,
       content,
       isRecommended,
+      gameId,
     };
 
     try {
-      if (isUpdate) {
-        await axios.put(
-          `${import.meta.env.VITE_API_URL}/api/reviews/${reviewData._id}`,
-          payload
-        );
-      } else {
-        await axios.post(
-          `${import.meta.env.VITE_API_URL}/api/reviews`,
-          payload
+      const endpoint = `/api/reviews${isUpdate ? `/${reviewData._id}` : ""}`;
+      const method = isUpdate ? "PUT" : "POST";
+      const response = await requestWithToken(endpoint, method, payload);
+
+      if (response.status === 201 || response.status === 200) {
+        console.log(
+          isUpdate
+            ? "Review updated successfully"
+            : "Review added successfully",
+          response.data
         );
       }
     } catch (error) {
@@ -38,25 +43,31 @@ const ReviewForm = ({ reviewData = null, gameId, isUpdate = false }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <label>
-        Review
-        <textarea
-          value={content}
-          onChange={(e) => setContent(e.target.value)}
-          required
-        />
-      </label>
-      <label>
-        Recommend this game?
+    <div>
+      <h2>Form to {isUpdate ? "update" : "add"} review</h2>
+      <form onSubmit={handleSubmit} className={classes.formCtn}>
+        <label>
+          Review Content
+          <textarea
+            required
+            value={content}
+            onChange={(event) => setContent(event.target.value)}
+          />
+        </label>
+        <label>
+          Recommend this game?
+          <input
+            type="checkbox"
+            checked={isRecommended}
+            onChange={() => setIsRecommended(!isRecommended)}
+          />
+        </label>
         <input
-          type="checkbox"
-          checked={isRecommended}
-          onChange={() => setIsRecommended(!isRecommended)}
+          type="submit"
+          value={isUpdate ? "Update Review" : "Add Review"}
         />
-      </label>
-      <button type="submit">{isUpdate ? "Update Review" : "Add Review"}</button>
-    </form>
+      </form>
+    </div>
   );
 };
 
