@@ -1,19 +1,20 @@
-import { Route, Routes } from "react-router"
-import Navbar from "./components/Navbar"
-import StorefrontPage from "./pages/StorefrontPage"
-import NotFoundPage from "./pages/NotFoundPage"
-import GameDetailsPage from "./pages/GameDetailsPage"
-import AddGamePage from "./pages/AddGamePage"
-import UpdateGamePage from "./pages/UpdateGamePage"
-import AddReviewPage from "./pages/AddReviewPage"
-import UpdateReviewPage from "./pages/UpdateReviewPage"
-import GameReviewsPage from "./pages/GameReviewsPage"
-import UserReviewsPage from "./pages/UserReviewsPage"
-import ProfilePage from "./pages/ProfilePage"
-import SignupPage from "./pages/SignupPage"
-import LoginPage from "./pages/LoginPage"
-import WishlistPage from "./pages/WishlistPage"
-import OwnedGamesPage from "./pages/OwnedGamesPage"
+import { Route, Routes } from "react-router";
+import Navbar from "./components/Navbar";
+import StorefrontPage from "./pages/StorefrontPage";
+import NotFoundPage from "./pages/NotFoundPage";
+import GameDetailsPage from "./pages/GameDetailsPage";
+import AddGamePage from "./pages/AddGamePage";
+import UpdateGamePage from "./pages/UpdateGamePage";
+import AddReviewPage from "./pages/AddReviewPage";
+import UpdateReviewPage from "./pages/UpdateReviewPage";
+import GameReviewsPage from "./pages/GameReviewsPage";
+import UserReviewsPage from "./pages/UserReviewsPage";
+import ProfilePage from "./pages/ProfilePage";
+import SignupPage from "./pages/SignupPage";
+import LoginPage from "./pages/LoginPage";
+import WishlistPage from "./pages/WishlistPage";
+import OwnedGamesPage from "./pages/OwnedGamesPage";
+import ReviewDetailPage from "./pages/ReviewDetailPage";
 
 function App() {
   return (
@@ -25,6 +26,10 @@ function App() {
         <Route path="/games/add" element={<AddGamePage />} />
         <Route path="/games/:gameId/update" element={<UpdateGamePage />} />
         <Route path="/games/:gameId/addreview" element={<AddReviewPage />} />
+        <Route
+          path="/games/:gameId/reviews/:reviewId"
+          element={<ReviewDetailPage />}
+        />
         <Route
           path="/games/:gameId/updatereview"
           element={<UpdateReviewPage />}
@@ -42,7 +47,7 @@ function App() {
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </>
-  )
+  );
 }
 
-export default App
+export default App;

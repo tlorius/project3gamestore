@@ -1,12 +1,13 @@
 // ReviewForm.jsx
 import { useContext, useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { AuthContext } from "../providers/AuthContext";
 import classes from "../styles/ReviewForm.module.css";
 
 const ReviewForm = ({ reviewData = null, isUpdate = false }) => {
   const { requestWithToken } = useContext(AuthContext);
   const { gameId } = useParams();
+  const navigate = useNavigate();
   const [content, setContent] = useState("");
   const [isRecommended, setIsRecommended] = useState(false);
 
@@ -25,9 +26,9 @@ const ReviewForm = ({ reviewData = null, isUpdate = false }) => {
     };
 
     try {
-      const endpoint = `/reviews/${
-        isUpdate ? `${reviewData._id}` : `${gameId}`
-      }`;
+      const endpoint = isUpdate
+        ? `/reviews/${reviewData._id}`
+        : `/reviews/${gameId}`;
       const method = isUpdate ? "PUT" : "POST";
       const response = await requestWithToken(endpoint, method, payload);
 
@@ -38,6 +39,7 @@ const ReviewForm = ({ reviewData = null, isUpdate = false }) => {
             : "Review added successfully",
           response.data
         );
+        navigate(`/games/${gameId}/reviews/${response.data._id}`);
       }
     } catch (error) {
       console.error("Error submitting the review:", error);
