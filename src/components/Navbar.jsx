@@ -4,7 +4,7 @@ import { useContext } from "react";
 import { AuthContext } from "../providers/AuthContext";
 
 const Navbar = () => {
-  const { isAuthenticated, logout } = useContext(AuthContext);
+  const { isAuthenticated, logout, userId } = useContext(AuthContext);
 
   return (
     //content is temporary: once auth is implemented ->
@@ -14,8 +14,8 @@ const Navbar = () => {
 
       {isAuthenticated ? (
         <>
-          <Link to="/profile/1">Profile</Link>
-          <Link to="/profile/1/wishlist">Wishlist</Link>
+          <Link to={`/profile/${userId}`}>Profile</Link>
+          <Link to={`/profile/${userId}/wishlist`}>Wishlist</Link>
           <button type="button" onClick={logout}>
             Logout
           </button>
