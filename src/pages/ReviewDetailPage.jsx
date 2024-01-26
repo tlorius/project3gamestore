@@ -1,18 +1,20 @@
 import React, { useContext, useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { AuthContext } from "../providers/AuthContext";
+import axios from "axios";
 
 const ReviewDetailPage = () => {
-  const [review, setReview] = useState([]);
+  const [review, setReview] = useState({});
   const { gameId, reviewId } = useParams();
   const { requestWithToken } = useContext(AuthContext);
+  const [game, setGame] = useState({});
   const navigate = useNavigate();
 
   useEffect(() => {
     const fetchReview = async () => {
       try {
-        const response = await requestWithToken(`/reviews/${reviewId}`, "GET");
-        if (response && response.status === 200) {
+        const response = await axios.get(`/reviews/${reviewId}`);
+        if (response.status === 200) {
           setReview(response.data);
         } else {
           console.error("Failed to fetch review:", response);
@@ -22,14 +24,23 @@ const ReviewDetailPage = () => {
       }
     };
 
-    /*     const fetchGameId = async () => {
-        try {
-            axios.get(`/games/${gameId}`);
+    const fetchGame = async () => {
+      try {
+        const response = await axios.get(`/games/${gameId}`);
+        if (response.status === 200) {
+          console.log(gameId);
+          setGame(response.data);
+        } else {
+          console.error("Failed to fetch game:", response);
         }
-    }; */
+      } catch (error) {
+        console.error("Error fetching game:", error);
+      }
+    };
 
     fetchReview();
-  }, [reviewId]);
+    fetchGame();
+  }, [gameId, reviewId]);
 
   const handleDeleteReview = async () => {
     try {
@@ -49,13 +60,20 @@ const ReviewDetailPage = () => {
   return (
     <div>
       <h1>Review Details</h1>
-      <div>
-        other detail will be added later
-        <p>{review.comment}</p>
-        <button onClick={() => handleDeleteReview(review._id)}>
-          Delete Review
-        </button>
-      </div>
+      {review && (
+        <div>
+          <p>{review.comment}</p>
+          <p>Recommended: {review.recommend ? "Yes" : "No"}</p>
+          {game && (
+            <>
+              <img src={game.imageUrl} alt={game.title} />
+              <h2>{game.title}</h2>
+              <Link to={`/games/${game._id}`}>View Game Details</Link>
+            </>
+          )}
+          <button onClick={handleDeleteReview}>Delete Review</button>
+        </div>
+      )}
     </div>
   );
 };
