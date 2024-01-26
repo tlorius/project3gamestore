@@ -4,7 +4,7 @@ import { UserContext } from "../providers/UserContext";
 import { AuthContext } from "../providers/AuthContext";
 
 const ProfilePage = () => {
-  const { user, setNeedsRefresh, reviewCount, gameCount } =
+  const { user, setNeedsRefresh, reviewCount, gameCount, wishlistCount } =
     useContext(UserContext);
   const { userId } = useContext(AuthContext);
 
@@ -17,7 +17,7 @@ const ProfilePage = () => {
       <h1>{user.username}s Profile</h1>
       <p>Username: {user.username}</p>
       <p>Email: {user.email}</p>
-      <Link to={`/profile/${userId}/wishlist`}>Wishlist</Link>
+      <Link to={`/profile/${userId}/wishlist`}>Wishlist: {wishlistCount}</Link>
       <Link to={`/profile/${userId}/reviews`}>All Reviews: {reviewCount}</Link>
       <Link to={`/profile/${userId}/games`}>All Games: {gameCount}</Link>
     </>

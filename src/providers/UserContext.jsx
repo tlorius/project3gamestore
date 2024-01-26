@@ -8,6 +8,7 @@ const UserContextProvider = ({ children }) => {
   const [user, setUser] = useState();
   const [gameCount, setGameCount] = useState(0);
   const [reviewCount, setReviewCount] = useState(0);
+  const [wishlistCount, setWishlistCount] = useState(0);
   const [needsRefresh, setNeedsRefresh] = useState(false);
   const fetchUser = async () => {
     try {
@@ -30,7 +31,6 @@ const UserContextProvider = ({ children }) => {
     if (user) {
       countGames();
       countReviews();
-      console.log(user);
     }
   }, [user]);
 
