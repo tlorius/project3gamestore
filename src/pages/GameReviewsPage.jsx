@@ -1,5 +1,12 @@
-const GameReviewsPage = () => {
-  return <h1>Show all reviews for a game</h1>
-}
+import { useParams } from "react-router-dom";
 
-export default GameReviewsPage
+const GameReviewsPage = () => {
+  const { gameId } = useParams();
+  return (
+    <>
+      <h1>Shows all reviews for a game</h1>
+    </>
+  );
+};
+
+export default GameReviewsPage;
