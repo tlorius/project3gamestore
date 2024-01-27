@@ -23,11 +23,15 @@ const GameDetailsPage = () => {
       console.error(error);
     }
   };
-  //fetching game and refetching user details
-  useEffect(() => {
-    fetchGame();
-    setNeedsRefresh(true);
-  }, [gameId]);
+
+  const checkGameOwnerStatus = () => {
+    if (isAuthenticated && user) {
+      setGameOwned(user.ownedGames.some((game) => game._id == gameId));
+      setGameWishListed(
+        user.wishlistedGames.some((game) => game._id == gameId)
+      );
+    }
+  };
 
   const addGameToAccount = async (isWishlist) => {
     //can only buy game if user is auth
@@ -52,6 +56,7 @@ const GameDetailsPage = () => {
             }
           );
           isWishlist ? setGameWishListed(true) : setGameOwned(true);
+          setNeedsRefresh(true);
         }
       } catch (error) {
         //for now just throwing this for every error, need to change later
@@ -85,6 +90,7 @@ const GameDetailsPage = () => {
             }
           );
           setGameWishListed(false);
+          setNeedsRefresh(true);
         }
       } catch (error) {
         toast("😒 you dont have this game wishlisted", {
@@ -98,9 +104,20 @@ const GameDetailsPage = () => {
     }
   };
 
+  //fetching game and refetching user details
+  useEffect(() => {
+    fetchGame();
+    setNeedsRefresh(true);
+  }, [gameId]);
+
+  useEffect(() => {
+    checkGameOwnerStatus();
+  }, [user]);
+
   return game ? (
     <>
       <h1>{game.title}</h1>
+      <p>{game.description}</p>
       <Link to={`/games/${gameId}/reviews`}>
         Reviews: {game.reviews.length}
       </Link>

@@ -27,10 +27,15 @@ const UserContextProvider = ({ children }) => {
     setReviewCount(user.reviews.length);
   };
 
+  const countWishlist = () => {
+    setWishlistCount(user.wishlistedGames.length);
+  };
+
   useEffect(() => {
     if (user) {
       countGames();
       countReviews();
+      countWishlist();
     }
   }, [user]);
 
@@ -47,7 +52,7 @@ const UserContextProvider = ({ children }) => {
 
   return (
     <UserContext.Provider
-      value={{ user, setNeedsRefresh, gameCount, reviewCount }}
+      value={{ user, setNeedsRefresh, gameCount, reviewCount, wishlistCount }}
     >
       {children}
     </UserContext.Provider>
