@@ -11,7 +11,7 @@ const WishlistPage = () => {
     setNeedsRefresh();
   }, [userId]);
 
-  return isAuthenticated ? (
+  return isAuthenticated && user ? (
     <>
       <h1>Wishlist Page of {user && user.username}</h1>
       <div>
