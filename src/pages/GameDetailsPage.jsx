@@ -7,7 +7,8 @@ import { UserContext } from "../providers/UserContext";
 
 const GameDetailsPage = () => {
   const { requestWithToken, userId, isAuthenticated } = useContext(AuthContext);
-  const { user, setNeedsRefresh } = useContext(UserContext);
+  const { user, setNeedsRefresh, removeGameFromWishlist } =
+    useContext(UserContext);
   const { gameId } = useParams();
   const [game, setGame] = useState();
 
@@ -60,37 +61,6 @@ const GameDetailsPage = () => {
     }
   };
 
-  const removeGameFromWishlist = async () => {
-    if (isAuthenticated) {
-      try {
-        const response = await requestWithToken(
-          `/users/removewishlistgame/${userId}`,
-          "PUT",
-          { gameToRemove: gameId }
-        );
-        if (response.status === 200) {
-          toast(
-            `😒👍 game removed from your wishlist"
-            }`,
-            {
-              theme: "dark",
-              autoClose: 3000,
-            }
-          );
-          setNeedsRefresh(true);
-        }
-      } catch (error) {
-        toast("😒 you dont have this game wishlisted", {
-          theme: "dark",
-          autoClose: 3000,
-        });
-        console.log(error);
-      }
-    } else {
-      console.error("please log in");
-    }
-  };
-
   //fetching game and refetching user details
   useEffect(() => {
     fetchGame();
@@ -117,7 +87,10 @@ const GameDetailsPage = () => {
               Add to Wishlist
             </button>
           ) : (
-            <button type="button" onClick={removeGameFromWishlist}>
+            <button
+              type="button"
+              onClick={() => removeGameFromWishlist(gameId)}
+            >
               Remove from Wishlist
             </button>
           )}
