@@ -2,6 +2,7 @@ import { useContext, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { UserContext } from "../providers/UserContext";
 import { AuthContext } from "../providers/AuthContext";
+import TwoFactorModal from "../components/TwoFactorModal";
 
 const ProfilePage = () => {
   const { user, setNeedsRefresh, reviewCount, gameCount, wishlistCount } =
@@ -20,6 +21,8 @@ const ProfilePage = () => {
       <Link to={`/profile/${userId}/wishlist`}>Wishlist: {wishlistCount}</Link>
       <Link to={`/profile/${userId}/reviews`}>All Reviews: {reviewCount}</Link>
       <Link to={`/profile/${userId}/games`}>All Games: {gameCount}</Link>
+      <button type="button">Disable 2FA</button>
+      <TwoFactorModal />
     </>
   ) : (
     <>

@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { AuthContext } from "../providers/AuthContext";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import axios from "axios";
 import { UserContext } from "../providers/UserContext";
 
@@ -99,8 +99,6 @@ const GameDetailsPage = () => {
           <Link to={`/games/${gameId}/update`}>Update Game</Link>
         </>
       )}
-
-      <ToastContainer />
     </>
   ) : (
     <>
