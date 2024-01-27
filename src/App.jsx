@@ -15,6 +15,7 @@ import LoginPage from "./pages/LoginPage";
 import WishlistPage from "./pages/WishlistPage";
 import OwnedGamesPage from "./pages/OwnedGamesPage";
 import ReviewDetailPage from "./pages/ReviewDetailPage";
+import "@mantine/core/styles.css";
 
 function App() {
   return (

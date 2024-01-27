@@ -47,9 +47,25 @@ const AuthContextProvider = ({ children }) => {
       window.localStorage.removeItem("authToken");
     }
   };
-  //make sure this function actually works
+
   const requestWithToken = async (endpoint, method = "GET", payload) => {
     const url = `${import.meta.env.VITE_API_URL}/api${endpoint}`;
+    const options = {
+      method,
+      url,
+      headers: { Authorization: `Bearer ${token}` },
+      data: payload,
+    };
+    try {
+      const response = await axios(options);
+      return response;
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const authRequestWithToken = async (endpoint, method = "GET", payload) => {
+    const url = `${import.meta.env.VITE_API_URL}/auth${endpoint}`;
     const options = {
       method,
       url,
@@ -88,6 +104,7 @@ const AuthContextProvider = ({ children }) => {
         isLoading,
         saveToken,
         requestWithToken,
+        authRequestWithToken,
         logout,
         userId,
       }}

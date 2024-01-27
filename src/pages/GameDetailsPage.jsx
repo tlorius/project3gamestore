@@ -1,11 +1,14 @@
 import { useContext, useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { AuthContext } from "../providers/AuthContext";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import axios from "axios";
+import { UserContext } from "../providers/UserContext";
 
 const GameDetailsPage = () => {
   const { requestWithToken, userId, isAuthenticated } = useContext(AuthContext);
+  const { user, setNeedsRefresh, removeGameFromWishlist } =
+    useContext(UserContext);
   const { gameId } = useParams();
   const [game, setGame] = useState();
 
@@ -20,25 +23,29 @@ const GameDetailsPage = () => {
     }
   };
 
-  useEffect(() => {
-    fetchGame();
-  }, [gameId]);
-
-  const addGameToAccount = async () => {
+  const addGameToAccount = async (isWishlist) => {
     //can only buy game if user is auth
     if (isAuthenticated) {
       try {
+        console.log(
+          `/users/${isWishlist ? "wishlistgame" : "buygame"}/${userId}`
+        );
         const response = await requestWithToken(
-          `/users/buygame/${userId}`,
+          `/users/${isWishlist ? "wishlistgame" : "buygame"}/${userId}`,
           "PUT",
           { gameToAdd: gameId }
         );
         if (response.status === 200) {
-          toast("😎👍 game added to your account", {
-            theme: "dark",
-            autoClose: 3000,
-          });
-          console.log(`game successfully added to your account`);
+          toast(
+            `😎👍 game ${
+              isWishlist ? "wishlisted!" : "added to your account!"
+            }`,
+            {
+              theme: "dark",
+              autoClose: 3000,
+            }
+          );
+          setNeedsRefresh(true);
         }
       } catch (error) {
         //for now just throwing this for every error, need to change later
@@ -53,18 +60,45 @@ const GameDetailsPage = () => {
       console.log("please log in");
     }
   };
+
+  //fetching game and refetching user details
+  useEffect(() => {
+    fetchGame();
+    setNeedsRefresh(true);
+  }, [gameId]);
+
   return game ? (
     <>
       <h1>{game.title}</h1>
+      <p>{game.description}</p>
       <Link to={`/games/${gameId}/reviews`}>
         Reviews: {game.reviews.length}
       </Link>
-      <Link to={`/games/${gameId}/update`}>Update Game</Link>
-      <button type="button" onClick={addGameToAccount}>
-        "Buy" Game - Will add game to your account
-      </button>
-      <Link to={`/games/${gameId}/addReview`}>Add new review</Link>
-      <ToastContainer />
+      {/* conditionally render buttons/links depending if the user is logged in/ already has the game wishlisted*/}
+      {isAuthenticated && (
+        <>
+          {!user?.ownedGames.some((game) => game._id == gameId) && (
+            <button type="button" onClick={() => addGameToAccount(false)}>
+              "Buy" Game - Will add game to your account
+            </button>
+          )}
+          {!user?.wishlistedGames.some((game) => game._id == gameId) ? (
+            <button type="button" onClick={() => addGameToAccount(true)}>
+              Add to Wishlist
+            </button>
+          ) : (
+            <button
+              type="button"
+              onClick={() => removeGameFromWishlist(gameId)}
+            >
+              Remove from Wishlist
+            </button>
+          )}
+
+          <Link to={`/games/${gameId}/addReview`}>Add new review</Link>
+          <Link to={`/games/${gameId}/update`}>Update Game</Link>
+        </>
+      )}
     </>
   ) : (
     <>

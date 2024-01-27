@@ -5,6 +5,9 @@ import { BrowserRouter } from "react-router-dom";
 import AuthContextProvider from "./providers/AuthContext.jsx";
 import ReviewsContextProvider from "./providers/ReviewsContext.jsx";
 import UserContextProvider from "./providers/UserContext.jsx";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { MantineProvider } from "@mantine/core";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
@@ -12,7 +15,10 @@ ReactDOM.createRoot(document.getElementById("root")).render(
       <AuthContextProvider>
         <UserContextProvider>
           <ReviewsContextProvider>
-            <App />
+            <MantineProvider>
+              <App />
+              <ToastContainer />
+            </MantineProvider>
           </ReviewsContextProvider>
         </UserContextProvider>
       </AuthContextProvider>
