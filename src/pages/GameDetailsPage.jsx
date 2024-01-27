@@ -3,11 +3,15 @@ import { Link, useParams } from "react-router-dom";
 import { AuthContext } from "../providers/AuthContext";
 import { ToastContainer, toast } from "react-toastify";
 import axios from "axios";
+import { UserContext } from "../providers/UserContext";
 
 const GameDetailsPage = () => {
   const { requestWithToken, userId, isAuthenticated } = useContext(AuthContext);
+  const { user, setNeedsRefresh } = useContext(UserContext);
   const { gameId } = useParams();
   const [game, setGame] = useState();
+  const [gameOwned, setGameOwned] = useState(false);
+  const [gameWishListed, setGameWishListed] = useState(false);
 
   const fetchGame = async () => {
     try {
@@ -19,26 +23,36 @@ const GameDetailsPage = () => {
       console.error(error);
     }
   };
-
+  //fetching game and refetching user details
   useEffect(() => {
     fetchGame();
+    setNeedsRefresh(true);
   }, [gameId]);
 
-  const addGameToAccount = async () => {
+  const addGameToAccount = async (isWishlist) => {
     //can only buy game if user is auth
     if (isAuthenticated) {
       try {
+        console.log(
+          `/users/${isWishlist ? "wishlistgame" : "buygame"}/${userId}`
+        );
         const response = await requestWithToken(
-          `/users/buygame/${userId}`,
+          `/users/${isWishlist ? "wishlistgame" : "buygame"}/${userId}`,
           "PUT",
           { gameToAdd: gameId }
         );
         if (response.status === 200) {
-          toast("😎👍 game added to your account", {
-            theme: "dark",
-            autoClose: 3000,
-          });
+          toast(
+            `😎👍 game ${
+              isWishlist ? "wishlisted!" : "added to your account!"
+            }`,
+            {
+              theme: "dark",
+              autoClose: 3000,
+            }
+          );
           console.log(`game successfully added to your account`);
+          setGameOwned(true);
         }
       } catch (error) {
         //for now just throwing this for every error, need to change later
@@ -53,17 +67,64 @@ const GameDetailsPage = () => {
       console.log("please log in");
     }
   };
+
+  const removeGameFromWishlist = async () => {
+    if (isAuthenticated) {
+      try {
+        const response = await requestWithToken(
+          `/users/removewishlistgame/${userId}`,
+          "PUT",
+          { gameToRemove: gameId }
+        );
+        if (response.status === 200) {
+          toast(
+            `😒👍 game removed from your wishlist"
+            }`,
+            {
+              theme: "dark",
+              autoClose: 3000,
+            }
+          );
+        }
+      } catch (error) {
+        toast("😒 you dont have this game wishlisted", {
+          theme: "dark",
+          autoClose: 3000,
+        });
+        console.log(error);
+      }
+    } else {
+      console.error("please log in");
+    }
+  };
+
   return game ? (
     <>
       <h1>{game.title}</h1>
       <Link to={`/games/${gameId}/reviews`}>
         Reviews: {game.reviews.length}
       </Link>
-      <Link to={`/games/${gameId}/update`}>Update Game</Link>
-      <button type="button" onClick={addGameToAccount}>
-        "Buy" Game - Will add game to your account
-      </button>
-      <Link to={`/games/${gameId}/addReview`}>Add new review</Link>
+      {/* conditionally render buttons/links depending if the user is logged in/ already has the game wishlisted*/}
+      {isAuthenticated && (
+        <>
+          {!gameOwned &&
+            !user?.ownedGames.some((game) => game._id == gameId) && (
+              <button type="button" onClick={() => addGameToAccount(false)}>
+                "Buy" Game - Will add game to your account
+              </button>
+            )}
+
+          <button type="button" onClick={() => addGameToAccount(true)}>
+            Add to Wishlist
+          </button>
+          <button type="button" onClick={removeGameFromWishlist}>
+            Remove from Wishlist
+          </button>
+          <Link to={`/games/${gameId}/addReview`}>Add new review</Link>
+          <Link to={`/games/${gameId}/update`}>Update Game</Link>
+        </>
+      )}
+
       <ToastContainer />
     </>
   ) : (
