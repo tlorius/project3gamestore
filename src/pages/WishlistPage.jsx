@@ -4,7 +4,8 @@ import { UserContext } from "../providers/UserContext";
 
 const WishlistPage = () => {
   const { userId, isAuthenticated } = useContext(AuthContext);
-  const { user, setNeedsRefresh } = useContext(UserContext);
+  const { user, setNeedsRefresh, removeGameFromWishlist } =
+    useContext(UserContext);
 
   useEffect(() => {
     setNeedsRefresh();
@@ -20,7 +21,12 @@ const WishlistPage = () => {
               <h3>{game.title}</h3>
               <p>{game.description}</p>
               <p>Price: {game.price}</p>
-              <button type="button"></button>
+              <button
+                type="button"
+                onClick={() => removeGameFromWishlist(game._id)}
+              >
+                Remove from Wishlist
+              </button>
             </div>
           );
         })}
