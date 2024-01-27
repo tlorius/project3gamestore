@@ -51,8 +51,7 @@ const GameDetailsPage = () => {
               autoClose: 3000,
             }
           );
-          console.log(`game successfully added to your account`);
-          setGameOwned(true);
+          isWishlist ? setGameWishListed(true) : setGameOwned(true);
         }
       } catch (error) {
         //for now just throwing this for every error, need to change later
@@ -85,6 +84,7 @@ const GameDetailsPage = () => {
               autoClose: 3000,
             }
           );
+          setGameWishListed(false);
         }
       } catch (error) {
         toast("😒 you dont have this game wishlisted", {
@@ -113,13 +113,17 @@ const GameDetailsPage = () => {
                 "Buy" Game - Will add game to your account
               </button>
             )}
+          {!gameWishListed &&
+          !user?.wishlistedGames.some((game) => game._id == gameId) ? (
+            <button type="button" onClick={() => addGameToAccount(true)}>
+              Add to Wishlist
+            </button>
+          ) : (
+            <button type="button" onClick={removeGameFromWishlist}>
+              Remove from Wishlist
+            </button>
+          )}
 
-          <button type="button" onClick={() => addGameToAccount(true)}>
-            Add to Wishlist
-          </button>
-          <button type="button" onClick={removeGameFromWishlist}>
-            Remove from Wishlist
-          </button>
           <Link to={`/games/${gameId}/addReview`}>Add new review</Link>
           <Link to={`/games/${gameId}/update`}>Update Game</Link>
         </>
