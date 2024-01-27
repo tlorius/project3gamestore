@@ -20,6 +20,7 @@ const WishlistPage = () => {
               <h3>{game.title}</h3>
               <p>{game.description}</p>
               <p>Price: {game.price}</p>
+              <button type="button"></button>
             </div>
           );
         })}

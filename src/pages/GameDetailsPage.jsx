@@ -10,8 +10,6 @@ const GameDetailsPage = () => {
   const { user, setNeedsRefresh } = useContext(UserContext);
   const { gameId } = useParams();
   const [game, setGame] = useState();
-  const [gameOwned, setGameOwned] = useState(false);
-  const [gameWishListed, setGameWishListed] = useState(false);
 
   const fetchGame = async () => {
     try {
@@ -21,15 +19,6 @@ const GameDetailsPage = () => {
       setGame(response.data);
     } catch (error) {
       console.error(error);
-    }
-  };
-
-  const checkGameOwnerStatus = () => {
-    if (isAuthenticated && user) {
-      setGameOwned(user.ownedGames.some((game) => game._id == gameId));
-      setGameWishListed(
-        user.wishlistedGames.some((game) => game._id == gameId)
-      );
     }
   };
 
@@ -55,7 +44,6 @@ const GameDetailsPage = () => {
               autoClose: 3000,
             }
           );
-          isWishlist ? setGameWishListed(true) : setGameOwned(true);
           setNeedsRefresh(true);
         }
       } catch (error) {
@@ -89,7 +77,6 @@ const GameDetailsPage = () => {
               autoClose: 3000,
             }
           );
-          setGameWishListed(false);
           setNeedsRefresh(true);
         }
       } catch (error) {
@@ -110,10 +97,6 @@ const GameDetailsPage = () => {
     setNeedsRefresh(true);
   }, [gameId]);
 
-  useEffect(() => {
-    checkGameOwnerStatus();
-  }, [user]);
-
   return game ? (
     <>
       <h1>{game.title}</h1>
@@ -124,14 +107,12 @@ const GameDetailsPage = () => {
       {/* conditionally render buttons/links depending if the user is logged in/ already has the game wishlisted*/}
       {isAuthenticated && (
         <>
-          {!gameOwned &&
-            !user?.ownedGames.some((game) => game._id == gameId) && (
-              <button type="button" onClick={() => addGameToAccount(false)}>
-                "Buy" Game - Will add game to your account
-              </button>
-            )}
-          {!gameWishListed &&
-          !user?.wishlistedGames.some((game) => game._id == gameId) ? (
+          {!user?.ownedGames.some((game) => game._id == gameId) && (
+            <button type="button" onClick={() => addGameToAccount(false)}>
+              "Buy" Game - Will add game to your account
+            </button>
+          )}
+          {!user?.wishlistedGames.some((game) => game._id == gameId) ? (
             <button type="button" onClick={() => addGameToAccount(true)}>
               Add to Wishlist
             </button>
