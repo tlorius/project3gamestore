@@ -19,6 +19,12 @@ const AuthForm = ({ isLogin = false }) => {
 
   const { saveToken } = useContext(AuthContext);
 
+  const clearLoginForms = () => {
+    setLoginCredential("");
+    setPassword("");
+    setMFACode("");
+  };
+
   const handleSubmit = async (event) => {
     event.preventDefault();
     let payload;
@@ -73,7 +79,11 @@ const AuthForm = ({ isLogin = false }) => {
         navigate("/");
       }
     } catch (error) {
-      console.error(error);
+      toast.error("Code incorrect, please try to login again", {
+        theme: "dark",
+      });
+      clearLoginForms();
+      close();
     }
   };
 
@@ -135,11 +145,9 @@ const AuthForm = ({ isLogin = false }) => {
               onChange={(event) => setMFACode(event.target.value)}
             />
           </label>
+          <input type="submit" value="Submit 2FA Code" />
         </form>
       </Modal>
-      <button type="button" onClick={open}>
-        test 2fa modal
-      </button>
     </>
   );
 };
