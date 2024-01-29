@@ -6,16 +6,11 @@ import { UserContext } from "../providers/UserContext";
 
 const Navbar = () => {
   const { isAuthenticated, logout, userId } = useContext(AuthContext);
-  const { user, wishlistCount } = useContext(UserContext);
-  const [wishlistDisplay, setWishlistDisplay] = useState(false);
-
-  useEffect(() => {
-    setWishlistDisplay(wishlistCount);
-  }, [user, wishlistCount]);
+  const { user, wishlistCount, cartCount } = useContext(UserContext);
 
   return (
     //content is temporary: once auth is implemented ->
-    //Store - Categories - if loggedin (Profile)/ if not (Login) - if logged in: wishlist
+    //Store - Categories - if loggedin (Profile)/ if not (Login) - if logged in: wishlist +cart
     <nav className={classes.navCtn}>
       <Link to="/">Store</Link>
 
@@ -25,6 +20,8 @@ const Navbar = () => {
           <Link to={`/profile/${userId}/wishlist`}>
             Wishlist [{wishlistCount}]
           </Link>
+          {/*replace this by icon later and fix link once site exists */}
+          <Link>Cart [{cartCount}]</Link>
           <button type="button" onClick={logout}>
             Logout
           </button>
