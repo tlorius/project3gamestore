@@ -3,9 +3,9 @@ import { AuthContext } from "../providers/AuthContext";
 import { UserContext } from "../providers/UserContext";
 
 const CartModal = () => {
-  const { isAuth } = useContext(AuthContext);
+  const { isAuthenticated } = useContext(AuthContext);
   const { user, cartCount } = useContext(UserContext);
-  return isAuth ? (
+  return isAuthenticated ? (
     <>
       <p>Cart: {cartCount}</p>
     </>
