@@ -1,15 +1,14 @@
 import React, { useState, useEffect, useContext } from "react";
-import { UserContext } from "../providers/UserContext";
+import { AuthContext } from "../providers/AuthContext";
 
 const GameDevDashboardPage = () => {
   const [games, setGames] = useState([]);
-  const { userId } = useContext(UserContext);
+  const { requestWithToken, userId } = useContext(AuthContext);
 
   useEffect(() => {
     const fetchGamesByUser = async () => {
-      const response = await fetch(`/api/games/by-user/${userId}`);
-      const data = await response.json();
-      setGames(data);
+      const response = await requestWithToken(`/games/dev/${userId}`);
+      setGames(response.data);
     };
 
     if (userId) {

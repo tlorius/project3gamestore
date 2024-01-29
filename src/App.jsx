@@ -47,11 +47,8 @@ function App() {
 
         <Route path="/checkout" element={<CheckoutPage />} />
 
-        <Route path="/dashboards/admin" element={<AdminDashboardPage />} />
-        <Route
-          path="/dashboards/dev/:userId"
-          element={<GameDevDashboardPage />}
-        />
+        <Route path="/dashboard/admin" element={<AdminDashboardPage />} />
+        <Route path="/dashboard/dev" element={<GameDevDashboardPage />} />
 
         <Route path="/signup" element={<SignupPage />} />
         <Route path="/login" element={<LoginPage />} />
