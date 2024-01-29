@@ -27,11 +27,9 @@ const GameDetailsPage = () => {
     //can only buy game if user is auth
     if (isAuthenticated) {
       try {
-        console.log(
-          `/users/${isWishlist ? "wishlistgame" : "buygame"}/${userId}`
-        );
+        console.log(`/users/${isWishlist ? "wishlistgame" : "buygame"}`);
         const response = await requestWithToken(
-          `/users/${isWishlist ? "wishlistgame" : "buygame"}/${userId}`,
+          `/users/${isWishlist ? "wishlistgame" : "buygame"}`,
           "PUT",
           { gameToAdd: gameId }
         );
