@@ -35,17 +35,18 @@ const GameDetailsPage = () => {
       <Link to={`/games/${gameId}/reviews`}>
         Reviews: {game.reviews.length}
       </Link>
-      {/* conditionally render buttons/links depending if the user is logged in/ already has the game wishlisted*/}
+      {/* conditionally render buttons/links depending if the user is logged in/ already has the game on any list*/}
       {isAuthenticated && (
         <>
-          {!user?.ownedGames.some((game) => game._id == gameId) && (
-            <button
-              type="button"
-              onClick={() => addGameToAccount("buyfree", gameId)}
-            >
-              Add Free Game to your Account
-            </button>
-          )}
+          {!user?.ownedGames.some((game) => game._id == gameId) &&
+            game.price === 0 && (
+              <button
+                type="button"
+                onClick={() => addGameToAccount("buyfree", gameId)}
+              >
+                Add Free Game to your Account
+              </button>
+            )}
           {!user?.wishlistedGames.some((game) => game._id == gameId) ? (
             <button
               type="button"
@@ -76,8 +77,10 @@ const GameDetailsPage = () => {
               Remove from Cart
             </button>
           )}
+          {user?.ownedGames.some((game) => game._id == gameId) && (
+            <Link to={`/games/${gameId}/addReview`}>Add new review</Link>
+          )}
 
-          <Link to={`/games/${gameId}/addReview`}>Add new review</Link>
           {/*might remove the update button or make it conditional */}
           <Link to={`/games/${gameId}/update`}>Update Game</Link>
         </>
