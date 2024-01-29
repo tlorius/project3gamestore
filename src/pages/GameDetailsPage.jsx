@@ -23,11 +23,11 @@ const GameDetailsPage = () => {
     }
   };
 
+  //pass one of 3 values - "wishlist, cart, buyfree"
   const addGameToAccount = async (isWishlist) => {
     //can only buy game if user is auth
     if (isAuthenticated) {
       try {
-        console.log(`/users/${isWishlist ? "wishlistgame" : "buygame"}`);
         const response = await requestWithToken(
           `/users/${isWishlist ? "wishlistgame" : "buygame"}`,
           "PUT",
@@ -91,6 +91,11 @@ const GameDetailsPage = () => {
             >
               Remove from Wishlist
             </button>
+          )}
+          {!user?.cart.some((game) => game._id == gameId) ? (
+            <button type="button">Add to Cart</button>
+          ) : (
+            <button type="button">Remove from Cart</button>
           )}
 
           <Link to={`/games/${gameId}/addReview`}>Add new review</Link>

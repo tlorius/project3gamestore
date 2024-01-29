@@ -10,6 +10,7 @@ const UserContextProvider = ({ children }) => {
   const [gameCount, setGameCount] = useState(0);
   const [reviewCount, setReviewCount] = useState(0);
   const [wishlistCount, setWishlistCount] = useState(0);
+  const [cartCount, setCartCount] = useState(0);
   const [needsRefresh, setNeedsRefresh] = useState(false);
 
   const fetchUser = async () => {
@@ -52,23 +53,16 @@ const UserContextProvider = ({ children }) => {
     }
   };
 
-  const countGames = () => {
+  const countUserLists = () => {
     setGameCount(user.ownedGames.length);
-  };
-
-  const countReviews = () => {
     setReviewCount(user.reviews.length);
-  };
-
-  const countWishlist = () => {
     setWishlistCount(user.wishlistedGames.length);
+    setCartCount(user.cart.length);
   };
 
   useEffect(() => {
     if (user) {
-      countGames();
-      countReviews();
-      countWishlist();
+      countUserLists();
     }
   }, [user]);
 
@@ -91,6 +85,7 @@ const UserContextProvider = ({ children }) => {
         gameCount,
         reviewCount,
         wishlistCount,
+        cartCount,
         removeGameFromWishlist,
       }}
     >

@@ -16,6 +16,9 @@ import WishlistPage from "./pages/WishlistPage";
 import OwnedGamesPage from "./pages/OwnedGamesPage";
 import ReviewDetailPage from "./pages/ReviewDetailPage";
 import "@mantine/core/styles.css";
+import AdminDashboardPage from "./pages/AdminDashboardPage";
+import GameDevDashboardPage from "./pages/GameDevDashboardPage";
+import CheckoutPage from "./pages/CheckoutPage";
 
 function App() {
   return (
@@ -41,6 +44,14 @@ function App() {
         <Route path="/profile/:userId/reviews" element={<UserReviewsPage />} />
         <Route path="/profile/:userId/wishlist" element={<WishlistPage />} />
         <Route path="/profile/:userId/games" element={<OwnedGamesPage />} />
+
+        <Route path="/checkout" element={<CheckoutPage />} />
+
+        <Route path="/dashboards/admin" element={<AdminDashboardPage />} />
+        <Route
+          path="/dashboards/dev/:userId"
+          element={<GameDevDashboardPage />}
+        />
 
         <Route path="/signup" element={<SignupPage />} />
         <Route path="/login" element={<LoginPage />} />
