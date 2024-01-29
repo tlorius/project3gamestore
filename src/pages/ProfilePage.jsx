@@ -36,6 +36,7 @@ const ProfilePage = () => {
       <Link to={`/profile/${userId}/wishlist`}>Wishlist: {wishlistCount}</Link>
       <Link to={`/profile/${userId}/reviews`}>All Reviews: {reviewCount}</Link>
       <Link to={`/profile/${userId}/games`}>All Games: {gameCount}</Link>
+      <Link to="/dashboard/dev">My Developer Dashboard</Link>
       {user.otp_enabled ? (
         <>
           <p>2FA: ✅enabled</p>
