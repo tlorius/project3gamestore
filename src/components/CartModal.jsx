@@ -7,7 +7,8 @@ import { useNavigate } from "react-router-dom";
 
 const CartModal = () => {
   const { isAuthenticated } = useContext(AuthContext);
-  const { user, cartCount, removeGameFromAccount } = useContext(UserContext);
+  const { user, cartCount, removeGameFromAccount, cartTotalBeforeDiscount } =
+    useContext(UserContext);
   const [opened, { open, close }] = useDisclosure();
 
   const navigate = useNavigate();
@@ -46,6 +47,7 @@ const CartModal = () => {
             </div>
           ))}
         </div>
+        <h4>Total: {(cartTotalBeforeDiscount / 100).toFixed(2)}€</h4>
         <button onClick={handleCheckoutRedirect}>CHECKOUT</button>
       </Modal>
     </>

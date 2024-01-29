@@ -12,6 +12,7 @@ const UserContextProvider = ({ children }) => {
   const [wishlistCount, setWishlistCount] = useState(0);
   const [cartCount, setCartCount] = useState(0);
   const [needsRefresh, setNeedsRefresh] = useState(false);
+  const [cartTotalBeforeDiscount, setCartTotalBeforeDiscount] = useState(0);
 
   const fetchUser = async () => {
     try {
@@ -112,11 +113,21 @@ const UserContextProvider = ({ children }) => {
     }
   };
 
+  const calculateCartTotal = () => {
+    if (user && user.cart.length > 0) {
+      const total = user.cart.reduce((total, item) => {
+        return total + item.price * (1 - item.discountInPercent / 100);
+      }, 0);
+      setCartTotalBeforeDiscount(total);
+    }
+  };
+
   const countUserLists = () => {
     setGameCount(user.ownedGames.length);
     setReviewCount(user.reviews.length);
     setWishlistCount(user.wishlistedGames.length);
     setCartCount(user.cart.length);
+    calculateCartTotal();
   };
 
   useEffect(() => {
@@ -147,6 +158,8 @@ const UserContextProvider = ({ children }) => {
         cartCount,
         removeGameFromAccount,
         addGameToAccount,
+        cartTotalBeforeDiscount,
+        calculateCartTotal,
       }}
     >
       {children}
