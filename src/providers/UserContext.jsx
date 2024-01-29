@@ -18,6 +18,7 @@ const UserContextProvider = ({ children }) => {
     try {
       const response = await requestWithToken(`/users/${userId}`);
       setUser(response.data);
+      setNeedsRefresh(false);
     } catch (error) {
       console.error(error);
     }

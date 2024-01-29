@@ -100,7 +100,7 @@ const CheckoutPage = () => {
     );
     const purchasePayload = {
       games: filteredGamesToPurchase,
-      discountCode: appliedCode.code,
+      discountCode: appliedCode ? appliedCode.code : "",
     };
     try {
       const orderResponse = await requestWithToken(
@@ -163,11 +163,11 @@ const CheckoutPage = () => {
         <>
           <p>Currently applied discount: {appliedCode.discountInPercent}%</p>
           <h4>Total after discount: {(finalTotalPrice / 100).toFixed(2)}€</h4>
-          <button type="button" onClick={handlePurchase}>
-            COMPLETE ORDER
-          </button>
         </>
       )}
+      <button type="button" onClick={handlePurchase}>
+        COMPLETE ORDER
+      </button>
     </>
   ) : (
     <>
