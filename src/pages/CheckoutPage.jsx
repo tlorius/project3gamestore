@@ -2,16 +2,24 @@ import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../providers/AuthContext";
 import { UserContext } from "../providers/UserContext";
 import axios from "axios";
+import { toast } from "react-toastify";
+import { useNavigate } from "react-router";
 
 const CheckoutPage = () => {
-  const { isAuthenticated } = useContext(AuthContext);
-  const { user, removeGameFromAccount, cartTotalBeforeDiscount } =
-    useContext(UserContext);
+  const { userId, requestWithToken, isAuthenticated } = useContext(AuthContext);
+  const {
+    user,
+    setNeedsRefresh,
+    removeGameFromAccount,
+    cartTotalBeforeDiscount,
+  } = useContext(UserContext);
   const [discountCode, setDiscountCode] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const [displayError, setDisplayError] = useState(false);
   const [appliedCode, setAppliedCode] = useState(null);
   const [finalTotalPrice, setFinalTotalPrice] = useState(0);
+
+  const navigate = useNavigate();
 
   const validateDiscountCode = async (event) => {
     event.preventDefault();
@@ -95,9 +103,28 @@ const CheckoutPage = () => {
       discountCode: appliedCode.code,
     };
     try {
-      console.log(purchasePayload);
+      const orderResponse = await requestWithToken(
+        `/orders/processpurchase`,
+        "POST",
+        purchasePayload
+      );
+      if (orderResponse.status === 200) {
+        try {
+          const invoiceResponse = await requestWithToken(
+            `/invoices/fulfillinvoice/${orderResponse.data._id}`,
+            "POST"
+          );
+          if (invoiceResponse.status === 200) {
+            setNeedsRefresh(true);
+            toast.success("purchase completed successfully", { theme: "dark" });
+            navigate(`/profile/${userId}`);
+          }
+        } catch (error) {
+          console.log(error, "issue with creating invoice");
+        }
+      }
     } catch (error) {
-      console.log(error);
+      console.log(error, "issue with order");
     }
   };
 
@@ -137,7 +164,7 @@ const CheckoutPage = () => {
           <p>Currently applied discount: {appliedCode.discountInPercent}%</p>
           <h4>Total after discount: {(finalTotalPrice / 100).toFixed(2)}€</h4>
           <button type="button" onClick={handlePurchase}>
-            welp here goes nothing
+            COMPLETE ORDER
           </button>
         </>
       )}
