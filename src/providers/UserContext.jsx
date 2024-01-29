@@ -25,7 +25,7 @@ const UserContextProvider = ({ children }) => {
     if (isAuthenticated) {
       try {
         const response = await requestWithToken(
-          `/users/removewishlistgame/${userId}`,
+          `/users/removewishlistgame/`,
           "PUT",
           { gameToRemove: gameId }
         );
