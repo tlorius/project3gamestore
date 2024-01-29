@@ -3,10 +3,11 @@ import classes from "../styles/Navbar.module.css";
 import { useContext } from "react";
 import { AuthContext } from "../providers/AuthContext";
 import { UserContext } from "../providers/UserContext";
+import CartModal from "./CartModal";
 
 const Navbar = () => {
   const { isAuthenticated, logout, userId } = useContext(AuthContext);
-  const { user, wishlistCount, cartCount } = useContext(UserContext);
+  const { user, wishlistCount } = useContext(UserContext);
 
   return (
     //content is temporary: once auth is implemented ->
@@ -21,7 +22,7 @@ const Navbar = () => {
             Wishlist [{wishlistCount}]
           </Link>
           {/*replace this by icon later and fix link once site exists */}
-          <Link>Cart [{cartCount}]</Link>
+          <CartModal />
           <button type="button" onClick={logout}>
             Logout
           </button>
