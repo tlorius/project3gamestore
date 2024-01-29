@@ -47,36 +47,38 @@ const GameDetailsPage = () => {
                 Add Free Game to your Account
               </button>
             )}
-          {!user?.wishlistedGames.some((game) => game._id == gameId) ? (
-            <button
-              type="button"
-              onClick={() => addGameToAccount("wishlist", gameId)}
-            >
-              Add to Wishlist
-            </button>
-          ) : (
-            <button
-              type="button"
-              onClick={() => removeGameFromAccount("wishlist", gameId)}
-            >
-              Remove from Wishlist
-            </button>
-          )}
-          {!user?.cart.some((game) => game._id == gameId) ? (
-            <button
-              type="button"
-              onClick={() => addGameToAccount("cart", gameId)}
-            >
-              Add to Cart
-            </button>
-          ) : (
-            <button
-              type="button"
-              onClick={() => removeGameFromAccount("cart", gameId)}
-            >
-              Remove from Cart
-            </button>
-          )}
+          {!user?.ownedGames.some((game) => game._id == gameId) &&
+            (!user?.wishlistedGames.some((game) => game._id == gameId) ? (
+              <button
+                type="button"
+                onClick={() => addGameToAccount("wishlist", gameId)}
+              >
+                Add to Wishlist
+              </button>
+            ) : (
+              <button
+                type="button"
+                onClick={() => removeGameFromAccount("wishlist", gameId)}
+              >
+                Remove from Wishlist
+              </button>
+            ))}
+          {!user?.ownedGames.some((game) => game._id == gameId) &&
+            (!user?.cart.some((game) => game._id == gameId) ? (
+              <button
+                type="button"
+                onClick={() => addGameToAccount("cart", gameId)}
+              >
+                Add to Cart
+              </button>
+            ) : (
+              <button
+                type="button"
+                onClick={() => removeGameFromAccount("cart", gameId)}
+              >
+                Remove from Cart
+              </button>
+            ))}
           {user?.ownedGames.some((game) => game._id == gameId) && (
             <Link to={`/games/${gameId}/addReview`}>Add new review</Link>
           )}
