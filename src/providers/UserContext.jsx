@@ -12,28 +12,43 @@ const UserContextProvider = ({ children }) => {
   const [wishlistCount, setWishlistCount] = useState(0);
   const [cartCount, setCartCount] = useState(0);
   const [needsRefresh, setNeedsRefresh] = useState(false);
+  const [cartTotalBeforeDiscount, setCartTotalBeforeDiscount] = useState(0);
 
   const fetchUser = async () => {
     try {
       const response = await requestWithToken(`/users/${userId}`);
       setUser(response.data);
+      setNeedsRefresh(false);
     } catch (error) {
       console.error(error);
     }
   };
 
-  const removeGameFromWishlist = async (gameId) => {
+  //refactor like the add function
+  const removeGameFromAccount = async (whereToRemove, gameId) => {
+    let toastText = "";
+    let urlVariable = "";
+    switch (whereToRemove) {
+      case "wishlist":
+        toastText = "Game removed from your Wishlist!";
+        urlVariable = "removewishlistgame";
+        break;
+      case "cart":
+        toastText = "Game removed from your Shopping Cart!";
+        urlVariable = "removefromcart";
+        break;
+    }
     if (isAuthenticated) {
       try {
         const response = await requestWithToken(
-          `/users/removewishlistgame/`,
+          `/users/${urlVariable}/`,
           "PUT",
           { gameToRemove: gameId }
         );
         if (response.status === 200) {
           toast(
-            `😒👍 game removed from your wishlist"
-            }`,
+            `😒👍 ${toastText}
+            `,
             {
               theme: "dark",
               autoClose: 3000,
@@ -42,7 +57,7 @@ const UserContextProvider = ({ children }) => {
           setNeedsRefresh(true);
         }
       } catch (error) {
-        toast("😒 you dont have this game wishlisted", {
+        toast("😒 unable to remove this game", {
           theme: "dark",
           autoClose: 3000,
         });
@@ -53,11 +68,67 @@ const UserContextProvider = ({ children }) => {
     }
   };
 
+  //pass one of 3 values - "wishlist, cart, buyfree"
+  const addGameToAccount = async (whereToAdd, gameId) => {
+    let toastText = "";
+    let urlVariable = "";
+    switch (whereToAdd) {
+      case "wishlist":
+        toastText = "Game added to your Wishlist!";
+        urlVariable = "wishlistgame";
+        break;
+      case "buyfree":
+        toastText = "Free Game added to your account!";
+        urlVariable = "buygame";
+        break;
+      case "cart":
+        toastText = "Game added to your Shopping Cart!";
+        urlVariable = "addtocart";
+        break;
+    }
+    if (isAuthenticated) {
+      try {
+        const response = await requestWithToken(
+          `/users/${urlVariable}`,
+          "PUT",
+          { gameToAdd: gameId }
+        );
+        if (response.status === 200) {
+          toast(`😎👍  ${toastText}`, {
+            theme: "dark",
+            autoClose: 3000,
+          });
+          setNeedsRefresh(true);
+        }
+      } catch (error) {
+        //for now just throwing this for every error, need to change later
+        toast("😒 unable to add game again", {
+          theme: "dark",
+          autoClose: 3000,
+        });
+        console.log(error);
+      }
+    } else {
+      //replace with actual error handling
+      console.log("please log in");
+    }
+  };
+
+  const calculateCartTotal = () => {
+    if (user && user.cart.length > 0) {
+      const total = user.cart.reduce((total, item) => {
+        return total + item.price * (1 - item.discountInPercent / 100);
+      }, 0);
+      setCartTotalBeforeDiscount(total);
+    }
+  };
+
   const countUserLists = () => {
     setGameCount(user.ownedGames.length);
     setReviewCount(user.reviews.length);
     setWishlistCount(user.wishlistedGames.length);
     setCartCount(user.cart.length);
+    calculateCartTotal();
   };
 
   useEffect(() => {
@@ -86,7 +157,10 @@ const UserContextProvider = ({ children }) => {
         reviewCount,
         wishlistCount,
         cartCount,
-        removeGameFromWishlist,
+        removeGameFromAccount,
+        addGameToAccount,
+        cartTotalBeforeDiscount,
+        calculateCartTotal,
       }}
     >
       {children}
