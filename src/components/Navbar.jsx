@@ -30,8 +30,6 @@ const Navbar = () => {
       ) : (
         <Link to="/login">Login</Link>
       )}
-
-      {/*replace the 1 with actual user ID */}
     </nav>
   );
 };

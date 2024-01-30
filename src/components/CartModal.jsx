@@ -52,9 +52,7 @@ const CartModal = () => {
       </Modal>
     </>
   ) : (
-    <>
-      <Loader color="blue" size="xl" type="dots" />
-    </>
+    <></>
   );
 };
 
