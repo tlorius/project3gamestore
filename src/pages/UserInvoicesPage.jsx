@@ -4,6 +4,7 @@ import { toast } from "react-toastify";
 import classes from "../styles/UserInvoicesPage.module.css";
 import InvoiceDetailsModal from "../components/InvoiceDetailsModal";
 import { useDisclosure } from "@mantine/hooks";
+import { Loader } from "@mantine/core";
 
 const UserInvoicesPage = () => {
   const [invoices, setInvoices] = useState();
@@ -68,7 +69,7 @@ const UserInvoicesPage = () => {
     </>
   ) : (
     <>
-      <h1>Loading...</h1>
+      <Loader color="blue" size="xl" type="dots" />
     </>
   );
 };

@@ -3,6 +3,7 @@ import { Link, useParams } from "react-router-dom";
 import { AuthContext } from "../providers/AuthContext";
 import axios from "axios";
 import { UserContext } from "../providers/UserContext";
+import { Loader } from "@mantine/core";
 
 const GameDetailsPage = () => {
   const { userId, isAuthenticated } = useContext(AuthContext);
@@ -90,7 +91,7 @@ const GameDetailsPage = () => {
     </>
   ) : (
     <>
-      <h1>Loading...</h1>
+      <Loader color="blue" size="xl" type="dots" />
     </>
   );
 };

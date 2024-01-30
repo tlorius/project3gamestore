@@ -1,6 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../providers/AuthContext";
 import { toast } from "react-toastify";
+import { Loader } from "@mantine/core";
 
 const AdminDashboardPage = () => {
   const { isAuthenticated, requestWithToken } = useContext(AuthContext);
@@ -268,7 +269,7 @@ const AdminDashboardPage = () => {
     </>
   ) : (
     <>
-      <h1>Loading</h1>
+      <Loader color="blue" size="xl" type="dots" />
     </>
   );
 };

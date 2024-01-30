@@ -2,7 +2,7 @@ import { useContext } from "react";
 import { AuthContext } from "../providers/AuthContext";
 import { UserContext } from "../providers/UserContext";
 import { useDisclosure } from "@mantine/hooks";
-import { Modal } from "@mantine/core";
+import { Loader, Modal } from "@mantine/core";
 import { useNavigate } from "react-router-dom";
 
 const CartModal = () => {
@@ -52,7 +52,9 @@ const CartModal = () => {
       </Modal>
     </>
   ) : (
-    <></>
+    <>
+      <Loader color="blue" size="xl" type="dots" />
+    </>
   );
 };
 

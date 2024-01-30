@@ -1,4 +1,4 @@
-import { Modal } from "@mantine/core";
+import { Loader, Modal } from "@mantine/core";
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../providers/AuthContext";
 import { toast } from "react-toastify";
@@ -83,7 +83,7 @@ const InvoiceDetailsModal = ({ opened, close, invoiceId }) => {
     </>
   ) : (
     <>
-      <h1>Loading...</h1>
+      <Loader color="blue" size="xl" type="dots" />
     </>
   );
 };

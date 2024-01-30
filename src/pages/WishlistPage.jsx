@@ -2,6 +2,7 @@ import { useContext, useEffect } from "react";
 import { AuthContext } from "../providers/AuthContext";
 import { UserContext } from "../providers/UserContext";
 import { Link } from "react-router-dom";
+import { Loader } from "@mantine/core";
 
 const WishlistPage = () => {
   const { userId, isAuthenticated } = useContext(AuthContext);
@@ -43,7 +44,7 @@ const WishlistPage = () => {
       </div>
     </>
   ) : (
-    <h1>Loading...</h1>
+    <Loader color="blue" size="xl" type="dots" />
   );
 };
 
