@@ -24,7 +24,7 @@ const UserContextProvider = ({ children }) => {
     }
   };
 
-  //refactor like the add function
+  //takes 2 values "wishlist", "cart" and ID
   const removeGameFromAccount = async (whereToRemove, gameId) => {
     let toastText = "";
     let urlVariable = "";

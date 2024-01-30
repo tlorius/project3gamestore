@@ -2,7 +2,7 @@ import { useContext } from "react";
 import { AuthContext } from "../providers/AuthContext";
 import { UserContext } from "../providers/UserContext";
 import { useDisclosure } from "@mantine/hooks";
-import { Modal } from "@mantine/core";
+import { Loader, Modal } from "@mantine/core";
 import { useNavigate } from "react-router-dom";
 
 const CartModal = () => {
@@ -20,7 +20,7 @@ const CartModal = () => {
 
   return isAuthenticated && user ? (
     <>
-      {/*first div is the image of the cart, on hover the modal should open */}
+      {/*first div is the image of the cart, on CLICK the modal should open */}
       {cartCount === 0 ? (
         <></>
       ) : (
@@ -52,7 +52,9 @@ const CartModal = () => {
       </Modal>
     </>
   ) : (
-    <></>
+    <>
+      <Loader color="blue" size="xl" type="dots" />
+    </>
   );
 };
 

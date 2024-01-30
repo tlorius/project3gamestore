@@ -4,6 +4,7 @@ import { UserContext } from "../providers/UserContext";
 import { AuthContext } from "../providers/AuthContext";
 import TwoFactorModal from "../components/TwoFactorModal";
 import { toast } from "react-toastify";
+import { Loader } from "@mantine/core";
 
 const ProfilePage = () => {
   const { user, setNeedsRefresh, reviewCount, gameCount, wishlistCount } =
@@ -40,6 +41,7 @@ const ProfilePage = () => {
       {user?.roles.includes("ADMIN") && (
         <Link to="/dashboard/admin">My Admin Dashboard</Link>
       )}
+      <Link to={`/profile/${userId}/invoices`}>Invoices</Link>
 
       {user.otp_enabled ? (
         <>
@@ -54,7 +56,7 @@ const ProfilePage = () => {
     </>
   ) : (
     <>
-      <h1>Loading...</h1>
+      <Loader color="blue" size="xl" type="dots" />
     </>
   );
 };

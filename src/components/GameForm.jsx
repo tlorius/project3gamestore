@@ -1,7 +1,8 @@
 import { useContext, useState } from "react";
 import classes from "../styles/GameForm.module.css";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { AuthContext } from "../providers/AuthContext";
+import { toast } from "react-toastify";
 
 const GameForm = ({ isUpdate = false }) => {
   const { requestWithToken } = useContext(AuthContext);
@@ -14,6 +15,8 @@ const GameForm = ({ isUpdate = false }) => {
   const [price, setPrice] = useState(0);
   const [description, setDescription] = useState("");
   const [tags, setTags] = useState();
+
+  const navigate = useNavigate();
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -44,7 +47,9 @@ const GameForm = ({ isUpdate = false }) => {
         console.log("successfully updated game - REPLACE WITH ACTUAL CODE");
       }
     } catch (error) {
-      console.error(error);
+      toast.error(
+        `Error occured while ${isUpdate ? "updating" : "adding"} game!`
+      );
     }
   };
 

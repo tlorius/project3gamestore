@@ -4,6 +4,7 @@ import { UserContext } from "../providers/UserContext";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router";
+import { Loader } from "@mantine/core";
 
 const CheckoutPage = () => {
   const { userId, requestWithToken, isAuthenticated } = useContext(AuthContext);
@@ -171,7 +172,7 @@ const CheckoutPage = () => {
     </>
   ) : (
     <>
-      <h1>Loading...</h1>
+      <Loader color="blue" size="xl" type="dots" />
     </>
   );
 };
