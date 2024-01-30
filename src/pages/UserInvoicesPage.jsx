@@ -1,13 +1,15 @@
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../providers/AuthContext";
-import { UserContext } from "../providers/UserContext";
 import { toast } from "react-toastify";
 import classes from "../styles/UserInvoicesPage.module.css";
+import InvoiceDetailsModal from "../components/InvoiceDetailsModal";
+import { useDisclosure } from "@mantine/hooks";
 
 const UserInvoicesPage = () => {
   const [invoices, setInvoices] = useState();
   const { isAuthenticated, requestWithToken } = useContext(AuthContext);
-  const { user } = useContext(UserContext);
+  const [opened, { open, close }] = useDisclosure();
+  const [invoiceId, setInvoiceId] = useState();
 
   const fetchInvoices = async () => {
     try {
@@ -25,11 +27,16 @@ const UserInvoicesPage = () => {
     return formattedDate.replace(/\//g, ".");
   };
 
-  const openModal = (invoiceId) => {};
+  const openModal = (invoiceId) => {
+    setInvoiceId(invoiceId);
+    open();
+  };
 
   useEffect(() => {
-    fetchInvoices();
-  }, []);
+    if (isAuthenticated) {
+      fetchInvoices();
+    }
+  }, [isAuthenticated]);
 
   return isAuthenticated ? (
     <>
@@ -53,6 +60,11 @@ const UserInvoicesPage = () => {
             </div>
           );
         })}
+      <InvoiceDetailsModal
+        opened={opened}
+        close={close}
+        invoiceId={invoiceId}
+      />
     </>
   ) : (
     <>

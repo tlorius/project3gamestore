@@ -20,7 +20,7 @@ const CartModal = () => {
 
   return isAuthenticated && user ? (
     <>
-      {/*first div is the image of the cart, on hover the modal should open */}
+      {/*first div is the image of the cart, on CLICK the modal should open */}
       {cartCount === 0 ? (
         <></>
       ) : (
