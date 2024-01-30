@@ -19,6 +19,7 @@ import "@mantine/core/styles.css";
 import AdminDashboardPage from "./pages/AdminDashboardPage";
 import GameDevDashboardPage from "./pages/GameDevDashboardPage";
 import CheckoutPage from "./pages/CheckoutPage";
+import UserInvoicesPage from "./pages/UserInvoicesPage";
 
 function App() {
   return (
@@ -44,6 +45,10 @@ function App() {
         <Route path="/profile/:userId/reviews" element={<UserReviewsPage />} />
         <Route path="/profile/:userId/wishlist" element={<WishlistPage />} />
         <Route path="/profile/:userId/games" element={<OwnedGamesPage />} />
+        <Route
+          path="/profile/:userId/invoices"
+          element={<UserInvoicesPage />}
+        />
 
         <Route path="/checkout" element={<CheckoutPage />} />
 
