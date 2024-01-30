@@ -31,9 +31,27 @@ const InvoiceDetailsModal = ({ opened, close, invoiceId }) => {
       <Modal opened={opened} onClose={close} title="Invoice Details">
         {invoice && (
           <div>
-            <p>render all games here</p>
+            {invoice.fromOrder.items.map((game) => {
+              return (
+                <p key={game._id}>
+                  {game.gameId.title}:{" "}
+                  {game.defaultPriceInEuroCent === game.finalItemPrice ? (
+                    `${(game.finalItemPrice / 100).toFixed(2)}€`
+                  ) : (
+                    <>
+                      <span className={classes.crossText}>
+                        {(game.defaultPriceInEuroCent / 100).toFixed(2)}€{" "}
+                      </span>
+                      {(game.finalItemPrice / 100).toFixed(2)}€
+                    </>
+                  )}
+                </p>
+              );
+            })}
+
+            {/*only show discount if there was a code used, show price difference if discount was applied */}
             {invoice.fromOrder.discountCodePercentage > 0 && (
-              <p>Discount:{invoice.fromOrder.discountCodePercentage}%</p>
+              <p>Discount: {invoice.fromOrder.discountCodePercentage}%</p>
             )}
             {invoice.fromOrder.totalInEuroCentBeforeDiscount ===
             invoice.fromOrder.totalInEuroCentAfterDiscount ? (
