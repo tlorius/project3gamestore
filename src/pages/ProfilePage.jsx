@@ -37,6 +37,10 @@ const ProfilePage = () => {
       <Link to={`/profile/${userId}/reviews`}>All Reviews: {reviewCount}</Link>
       <Link to={`/profile/${userId}/games`}>All Games: {gameCount}</Link>
       <Link to="/dashboard/dev">My Developer Dashboard</Link>
+      {user?.roles.includes("ADMIN") && (
+        <Link to="/dashboard/admin">My Admin Dashboard</Link>
+      )}
+
       {user.otp_enabled ? (
         <>
           <p>2FA: ✅enabled</p>

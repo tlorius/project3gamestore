@@ -37,11 +37,11 @@ const GameForm = ({ isUpdate = false }) => {
       );
       if (response.status === 201) {
         console.log(
-          "successfully created book - REPLACE THIS WITH ACTUAL CODE"
+          "successfully created game - REPLACE THIS WITH ACTUAL CODE"
         );
       }
       if (response.status === 200) {
-        console.log("successfully updated book - REPLACE WITH ACTUAL CODE");
+        console.log("successfully updated game - REPLACE WITH ACTUAL CODE");
       }
     } catch (error) {
       console.error(error);
