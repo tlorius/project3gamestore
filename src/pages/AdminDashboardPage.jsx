@@ -1,15 +1,20 @@
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../providers/AuthContext";
 import { toast } from "react-toastify";
+import { Paper, Text } from "@mantine/core";
 
 const AdminDashboardPage = () => {
-  const [revenue, setRevenue] = useState();
-  const [couponCodes, setCouponCodes] = useState();
   const { isAuthenticated, requestWithToken } = useContext(AuthContext);
+  const [revenue, setRevenue] = useState();
+  const [couponCodes, setCouponCodes] = useState([]);
   const [code, setCode] = useState("");
   const [discountInPercent, setDiscountInPercent] = useState(10);
   const [appliesToAlreadyDiscountedGames, setAppliesToAlreadyDiscountedGames] =
     useState(true);
+  const [userNameToFind, setUserNameToFind] = useState("");
+  const [userIdToUpdate, setUserIdToUpdate] = useState("");
+  const [rolesOfUser, setRolesOfUser] = useState([]);
+  const [userNameToDisplay, setUserNameToDisplay] = useState("");
 
   const getCouponCodes = async () => {
     try {
@@ -58,9 +63,36 @@ const AdminDashboardPage = () => {
     }
   };
 
-  const logstuff = () => {
-    console.log(revenue);
-    console.log(couponCodes);
+  const deleteCoupon = async (codeId) => {
+    try {
+      const response = await requestWithToken(
+        `/discountcodes/${codeId}`,
+        "DELETE"
+      );
+      if (response.status === 204) {
+        await getCouponCodes();
+        toast.success("successfully deleted code");
+      }
+    } catch (error) {
+      toast.error("failed to delete code", { theme: "dark" });
+    }
+  };
+
+  const findUserByUserName = async (event) => {
+    event.preventDefault();
+    try {
+      const response = await requestWithToken(
+        `/users/roles/${userNameToFind.trim()}`
+      );
+      if (response.status === 200) {
+        setUserIdToUpdate(response.data.id);
+        setRolesOfUser(response.data.roles);
+        setUserNameToDisplay(response.data.username);
+        toast.success("successfully retrieved userdata");
+      }
+    } catch (error) {
+      toast.error("failed to fetch user");
+    }
   };
 
   const clearInputs = () => {
@@ -70,16 +102,30 @@ const AdminDashboardPage = () => {
   };
 
   useEffect(() => {
-    getCouponCodes();
-    getRevenues();
-  }, []);
+    if (isAuthenticated) {
+      getCouponCodes();
+      getRevenues();
+    }
+  }, [isAuthenticated]);
   return isAuthenticated ? (
     <>
       <h1>admin content</h1>
       <div>
-        <h3>Discount codes</h3>
+        <h3>Discount Codes</h3>
+        <p>name - discount % - applies to already discounted games? - delete</p>
         <div>
-          render all codes here <div>button to delete one</div>
+          {couponCodes &&
+            couponCodes.map((dcode) => {
+              return (
+                <div key={dcode._id}>
+                  {dcode.code} - {dcode.discountInPercent}% -{" "}
+                  {dcode.appliesToAlreadyDiscountedGames ? "✅" : "❌"}
+                  <button type="button" onClick={() => deleteCoupon(dcode._id)}>
+                    x
+                  </button>
+                </div>
+              );
+            })}
         </div>
         <div>
           <form onSubmit={createCode}>
@@ -112,17 +158,37 @@ const AdminDashboardPage = () => {
             <input type="submit" value={"Add Discount Code"} />
           </form>
         </div>
-      </div>
-      <div>
-        <h3>Revenues</h3>
         <div>
-          <div>rev 1</div>
-          <div>rev 2</div>
+          <form onSubmit={findUserByUserName}>
+            <label>
+              Username:{" "}
+              <input
+                type="text"
+                value={userNameToFind}
+                onChange={(event) => setUserNameToFind(event.target.value)}
+              />
+            </label>
+            <input type="submit" value={"Find user"} />
+          </form>
+          {userIdToUpdate && (
+            <>
+              <h4>{userNameToDisplay}</h4>
+              <p>{userIdToUpdate}</p>
+              <p>{rolesOfUser.map((role) => role + " ")}</p>
+            </>
+          )}
         </div>
       </div>
-      <button type="button" onClick={logstuff}>
-        LOG data for now
-      </button>
+      {revenue && (
+        <Paper shadow="xs" p="xl" bg={"grey"}>
+          <Text>Revenues</Text>
+          <Text>Total Revenue: {(revenue.sumAllTime / 100).toFixed(2)}€</Text>
+          <Text>
+            Revenue in the last 30 days:{" "}
+            {(revenue.sumThirtyDays / 100).toFixed(2)}€
+          </Text>
+        </Paper>
+      )}
     </>
   ) : (
     <>
