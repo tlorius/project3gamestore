@@ -1,12 +1,20 @@
 import { Modal } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
+import { UserContext } from "../providers/UserContext";
+import { useContext } from "react";
+import { AuthContext } from "../providers/AuthContext";
 
 const InvoiceDetailsModal = () => {
   const [opened, { open, close }] = useDisclosure();
-  return (
+  const { isAuthenticated } = useContext(AuthContext);
+  const { user } = useContext(UserContext);
+  return isAuthenticated ? (
     <>
-      <h1>Details of one invoice</h1>
-      <Modal>hmmm</Modal>
+      <Modal>One invoice :)</Modal>
+    </>
+  ) : (
+    <>
+      <h1>Loading...</h1>
     </>
   );
 };

@@ -40,6 +40,7 @@ const ProfilePage = () => {
       {user?.roles.includes("ADMIN") && (
         <Link to="/dashboard/admin">My Admin Dashboard</Link>
       )}
+      <Link to={`/profile/${userId}/invoices`}>Invoices</Link>
 
       {user.otp_enabled ? (
         <>
