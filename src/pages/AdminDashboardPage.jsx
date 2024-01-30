@@ -161,7 +161,7 @@ const AdminDashboardPage = () => {
           couponCodes.map((dcode) => {
             return (
               <div key={dcode._id}>
-                {dcode.code} - {dcode.discountInPercent}% -{" "}
+                {dcode.code} - {dcode.discountInPercent}% -{" - "}
                 {dcode.appliesToAlreadyDiscountedGames ? "✅" : "❌"}
                 <button type="button" onClick={() => deleteCoupon(dcode._id)}>
                   x
