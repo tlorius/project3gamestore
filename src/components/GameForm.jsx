@@ -35,7 +35,7 @@ const GameForm = ({ isUpdate = false }) => {
     setTimeout(() => {
       setTagField("");
       autocompleteRef.current.focus();
-    }, 10);
+    }, 5);
   };
 
   const handleSubmit = async (event) => {
@@ -156,7 +156,7 @@ const GameForm = ({ isUpdate = false }) => {
         <Autocomplete
           value={tagField}
           onChange={(value) => setTagField(value)}
-          data={["mmo", "action", "rpg"]}
+          data={categories}
           onOptionSubmit={(value) => handleTagSelect(value)}
           ref={autocompleteRef}
         />
