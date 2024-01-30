@@ -35,7 +35,7 @@ function App() {
           element={<ReviewDetailPage />}
         />
         <Route
-          path="/games/:gameId/updatereview"
+          path="/games/:gameId/updatereview/:reviewId"
           element={<UpdateReviewPage />}
         />
         <Route path="/games/:gameId/reviews" element={<GameReviewsPage />} />

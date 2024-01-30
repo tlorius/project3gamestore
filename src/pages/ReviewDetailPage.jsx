@@ -74,6 +74,9 @@ const ReviewDetailPage = () => {
               <Link to={`/games/${game._id}`}>View Game Details</Link>
             </>
           )}
+          <Link to={`/games/${game._id}/updatereview/${reviewId}`}>
+            Update review
+          </Link>
           <button onClick={handleDeleteReview}>Delete Review</button>
         </div>
       )}

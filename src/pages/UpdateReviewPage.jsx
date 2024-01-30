@@ -26,9 +26,7 @@ const UpdateReviewPage = () => {
       }
     };
 
-    if (isUpdate) {
-      fetchReviewData();
-    }
+    fetchReviewData();
   }, [gameId, reviewId, requestWithToken]);
 
   return (
