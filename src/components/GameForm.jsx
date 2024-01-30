@@ -3,9 +3,12 @@ import classes from "../styles/GameForm.module.css";
 import { useNavigate, useParams } from "react-router-dom";
 import { AuthContext } from "../providers/AuthContext";
 import { toast } from "react-toastify";
+import { GameContext } from "../providers/GameContext";
+import { Autocomplete } from "@mantine/core";
 
 const GameForm = ({ isUpdate = false }) => {
   const { requestWithToken } = useContext(AuthContext);
+  const { categories } = useContext(GameContext);
   const { gameId } = useParams();
   const [title, setTitle] = useState("");
   const [imageUrl, setImageUrl] = useState("");
@@ -14,9 +17,25 @@ const GameForm = ({ isUpdate = false }) => {
   const [releaseDate, setReleaseDate] = useState();
   const [price, setPrice] = useState(0);
   const [description, setDescription] = useState("");
-  const [tags, setTags] = useState();
+  const [tags, setTags] = useState([]);
+  const [tagField, setTagField] = useState("");
+  const [isFocused, setIsFocused] = useState(false);
 
   const navigate = useNavigate();
+
+  const handleTagSelect = (tag) => {
+    if (!tags.includes(tag)) {
+      setTags([...tags, tag]);
+    }
+    //doesnt clear field if its focussed
+
+    setIsFocused(false);
+    setTagField("");
+
+    setTimeout(() => {
+      setIsFocused(true);
+    }, 10);
+  };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -39,12 +58,12 @@ const GameForm = ({ isUpdate = false }) => {
         payload
       );
       if (response.status === 201) {
-        console.log(
-          "successfully created game - REPLACE THIS WITH ACTUAL CODE"
-        );
+        toast.success("successfully added game");
+        navigate(`/games/${response.data._id}`);
       }
       if (response.status === 200) {
-        console.log("successfully updated game - REPLACE WITH ACTUAL CODE");
+        toast.success("successfully udpated game");
+        navigate(`/games/${response.data._id}`);
       }
     } catch (error) {
       toast.error(
@@ -103,7 +122,7 @@ const GameForm = ({ isUpdate = false }) => {
           />
         </label>
         <label>
-          Price
+          Price in €(ex. 59.99 or 59,99)
           <input
             type="number"
             required
@@ -131,6 +150,20 @@ const GameForm = ({ isUpdate = false }) => {
         </label>
         <input type="submit" value={isUpdate ? "Update Game" : "Add Game"} />
       </form>
+      <label>
+        Tags
+        <Autocomplete
+          value={tagField}
+          onChange={(value) => setTagField(value)}
+          data={["mmo", "action", "rpg"]}
+          onOptionSubmit={(value) => handleTagSelect(value)}
+          capture={isFocused}
+        />
+      </label>
+      <button type="button" onClick={() => setTagField("")}>
+        test empty field
+      </button>
+      <div>Selected Items: {tags.join(", ")}</div>
     </>
   );
 };
