@@ -1,3 +1,31 @@
 .gamesCtn {
   font-size: 1rem;
 }
+.topContainer{
+  display: flex;
+  flex-direction: row;
+
+  align-items: center;
+  justify-content: space-evenly;
+}
+.bottomContainer{
+  display: flex;
+  flex-direction: row;
+
+  align-items: center;
+  justify-content: center;
+
+  margin-top: 20px;
+
+  gap: 10px;
+}
+.bottomContainer > span{
+  font-size: 20px;
+  font-weight: bolder;
+
+  border: 2px solid black;
+
+  padding: 5px;
+
+  cursor: pointer;
+}

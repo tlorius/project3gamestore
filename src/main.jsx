@@ -7,6 +7,7 @@ import ReviewsContextProvider from "./providers/ReviewsContext.jsx";
 import UserContextProvider from "./providers/UserContext.jsx";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { GameContextProvider } from "./providers/GameContext.jsx";
 import { MantineProvider } from "@mantine/core";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
@@ -14,12 +15,14 @@ ReactDOM.createRoot(document.getElementById("root")).render(
     <BrowserRouter>
       <AuthContextProvider>
         <UserContextProvider>
-          <ReviewsContextProvider>
-            <MantineProvider>
-              <App />
-              <ToastContainer />
-            </MantineProvider>
-          </ReviewsContextProvider>
+          <GameContextProvider>
+            <ReviewsContextProvider>
+              <MantineProvider>
+                <App />
+                <ToastContainer theme="dark" />
+              </MantineProvider>
+            </ReviewsContextProvider>
+          </GameContextProvider>
         </UserContextProvider>
       </AuthContextProvider>
     </BrowserRouter>
