@@ -40,8 +40,8 @@ const InvoiceDetailsModal = ({ opened, close, invoiceId }) => {
                   ) : (
                     <>
                       <span className={classes.crossText}>
-                        {(game.defaultPriceInEuroCent / 100).toFixed(2)}€{" "}
-                      </span>
+                        {(game.defaultPriceInEuroCent / 100).toFixed(2)}€
+                      </span>{" "}
                       {(game.finalItemPrice / 100).toFixed(2)}€
                     </>
                   )}
@@ -55,7 +55,7 @@ const InvoiceDetailsModal = ({ opened, close, invoiceId }) => {
             )}
             {invoice.fromOrder.totalInEuroCentBeforeDiscount ===
             invoice.fromOrder.totalInEuroCentAfterDiscount ? (
-              <p>
+              <p className={classes.priceTotal}>
                 Total:{" "}
                 {(invoice.fromOrder.totalInEuroCentAfterDiscount / 100).toFixed(
                   2
@@ -63,7 +63,7 @@ const InvoiceDetailsModal = ({ opened, close, invoiceId }) => {
                 €
               </p>
             ) : (
-              <p>
+              <p className={classes.priceTotal}>
                 Total:{" "}
                 <span className={classes.crossText}>
                   {(
