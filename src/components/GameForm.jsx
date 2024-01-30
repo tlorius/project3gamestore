@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useRef, useState } from "react";
 import classes from "../styles/GameForm.module.css";
 import { useNavigate, useParams } from "react-router-dom";
 import { AuthContext } from "../providers/AuthContext";
@@ -19,9 +19,9 @@ const GameForm = ({ isUpdate = false }) => {
   const [description, setDescription] = useState("");
   const [tags, setTags] = useState([]);
   const [tagField, setTagField] = useState("");
-  const [isFocused, setIsFocused] = useState(false);
 
   const navigate = useNavigate();
+  const autocompleteRef = useRef(null);
 
   const handleTagSelect = (tag) => {
     if (!tags.includes(tag)) {
@@ -29,11 +29,12 @@ const GameForm = ({ isUpdate = false }) => {
     }
     //doesnt clear field if its focussed
 
-    setIsFocused(false);
-    setTagField("");
-
+    if (autocompleteRef.current) {
+      autocompleteRef.current.blur();
+    }
     setTimeout(() => {
-      setIsFocused(true);
+      setTagField("");
+      autocompleteRef.current.focus();
     }, 10);
   };
 
@@ -157,7 +158,7 @@ const GameForm = ({ isUpdate = false }) => {
           onChange={(value) => setTagField(value)}
           data={["mmo", "action", "rpg"]}
           onOptionSubmit={(value) => handleTagSelect(value)}
-          capture={isFocused}
+          ref={autocompleteRef}
         />
       </label>
       <button type="button" onClick={() => setTagField("")}>
