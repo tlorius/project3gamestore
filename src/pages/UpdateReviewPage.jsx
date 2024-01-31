@@ -1,4 +1,3 @@
-// UpdateReviewPage.jsx
 import React, { useState, useEffect, useContext } from "react";
 import { useParams } from "react-router-dom";
 import ReviewForm from "../components/ReviewForm";
@@ -12,10 +11,8 @@ const UpdateReviewPage = () => {
   useEffect(() => {
     const fetchReviewData = async () => {
       try {
-        const response = await requestWithToken(
-          `/api/reviews/${reviewId}`,
-          "GET"
-        );
+        const response = await requestWithToken(`/reviews/${reviewId}`, "GET");
+
         if (response.status === 200) {
           setReviewData(response.data);
         } else {
@@ -32,7 +29,11 @@ const UpdateReviewPage = () => {
   return (
     <div>
       <h1>Update Review</h1>
-      {reviewData && <ReviewForm reviewData={reviewData} isUpdate={true} />}
+      {reviewData ? (
+        <ReviewForm reviewData={reviewData} isUpdate={true} />
+      ) : (
+        <p>Loading...</p>
+      )}
     </div>
   );
 };

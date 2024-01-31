@@ -33,7 +33,7 @@ const UserReviewsPage = () => {
               >
                 <p>Game: {review.game.title}</p>
                 <p>Comment: {review.comment}</p>
-                <p>Recommended?: {review.recommend ? "Yes" : "NO"}</p>
+                <p>Recommended?: {review.recommend ? "✅" : "❌"}</p>
               </Link>
             );
           })}

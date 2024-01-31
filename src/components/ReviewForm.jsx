@@ -14,7 +14,7 @@ const ReviewForm = ({ reviewData = null, isUpdate = false }) => {
   useEffect(() => {
     if (isUpdate && reviewData) {
       setContent(reviewData.content);
-      setIsRecommended(reviewData.isRecommended);
+      setIsRecommended(reviewData.recommend === "Recommended");
     }
   }, [reviewData, isUpdate]);
 
