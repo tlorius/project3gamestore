@@ -45,8 +45,8 @@ const GameDevDashboardPage = () => {
       {games.length > 0 ? (
         <ul>
           {games.map((game) => (
-            <li key={game.id}>
-              <Link to={`/games/${game.id}`}>
+            <li key={game._id}>
+              <Link to={`/games/${game._id}`}>
                 <h2>{game.title}</h2>
                 <p>Price: {(game.price / 100).toFixed(2)}€</p>
                 <p>Description: {game.description}</p>
