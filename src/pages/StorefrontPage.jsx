@@ -85,7 +85,9 @@ const StorefrontPage = () => {
                     />
                     <span className={classes.gameCardTitle}>{game.title}</span>
                     <span className={classes.gameCardPrice}>
-                      {(game.price / 100).toFixed(2)}€
+                      {game.price === 0
+                        ? "FREE"
+                        : `${(game.price / 100).toFixed(2)}€`}
                     </span>
                   </div>
                 </Link>
@@ -102,7 +104,9 @@ const StorefrontPage = () => {
                     />
                     <span className={classes.gameCardTitle}>{game.title}</span>
                     <span className={classes.gameCardPrice}>
-                      {(game.price / 100).toFixed(2)}€
+                      {game.price === 0
+                        ? "FREE"
+                        : `${(game.price / 100).toFixed(2)}€`}
                     </span>
                   </div>
                 </Link>
@@ -119,7 +123,9 @@ const StorefrontPage = () => {
                     />
                     <span className={classes.gameCardTitle}>{game.title}</span>
                     <span className={classes.gameCardPrice}>
-                      {(game.price / 100).toFixed(2)}€
+                      {game.price === 0
+                        ? "FREE"
+                        : `${(game.price / 100).toFixed(2)}€`}
                     </span>
                   </div>
                 </Link>
@@ -136,7 +142,9 @@ const StorefrontPage = () => {
                     />
                     <span className={classes.gameCardTitle}>{game.title}</span>
                     <span className={classes.gameCardPrice}>
-                      {(game.price / 100).toFixed(2)}€
+                      {game.price === 0
+                        ? "FREE"
+                        : `${(game.price / 100).toFixed(2)}€`}
                     </span>
                   </div>
                 </Link>
@@ -151,7 +159,9 @@ const StorefrontPage = () => {
                   />
                   <span className={classes.gameCardTitle}>{game.title}</span>
                   <span className={classes.gameCardPrice}>
-                    {(game.price / 100).toFixed(2)}€
+                    {game.price === 0
+                      ? "FREE"
+                      : `${(game.price / 100).toFixed(2)}€`}
                   </span>
                 </div>
               </Link>
@@ -166,7 +176,9 @@ const StorefrontPage = () => {
                   />
                   <span className={classes.gameCardTitle}>{game.title}</span>
                   <span className={classes.gameCardPrice}>
-                    {(game.price / 100).toFixed(2)}€
+                    {game.price === 0
+                      ? "FREE"
+                      : `${(game.price / 100).toFixed(2)}€`}
                   </span>
                 </div>
               </Link>
@@ -181,7 +193,9 @@ const StorefrontPage = () => {
                   />
                   <span className={classes.gameCardTitle}>{game.title}</span>
                   <span className={classes.gameCardPrice}>
-                    {(game.price / 100).toFixed(2)}€
+                    {game.price === 0
+                      ? "FREE"
+                      : `${(game.price / 100).toFixed(2)}€`}
                   </span>
                 </div>
               </Link>
@@ -195,7 +209,9 @@ const StorefrontPage = () => {
                   />
                   <span className={classes.gameCardTitle}>{game.title}</span>
                   <span className={classes.gameCardPrice}>
-                    {(game.price / 100).toFixed(2)}€
+                    {game.price === 0
+                      ? "FREE"
+                      : `${(game.price / 100).toFixed(2)}€`}
                   </span>
                 </div>
               </Link>
