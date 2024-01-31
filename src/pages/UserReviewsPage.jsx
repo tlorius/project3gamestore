@@ -1,11 +1,10 @@
 import { useContext, useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { AuthContext } from "../providers/AuthContext";
 
 const UserReviewsPage = () => {
   const [reviews, setReviews] = useState([]);
   const { requestWithToken, userId } = useContext(AuthContext);
-  //const { userId } = useParams();
 
   const fetchReviewsByUser = async () => {
     try {
@@ -38,11 +37,6 @@ const UserReviewsPage = () => {
             );
           })}
       </div>
-      <Link to="/games/1/addreview">Add new review</Link>
-      {/*this wont work from here
-      because we dont have a game id here, either refactor 
-      to modal, or make a small selector to
-      show a list of games the user owns to add a review from here */}
     </>
   );
 };
