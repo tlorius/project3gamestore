@@ -5,18 +5,18 @@ import { UserContext } from "../providers/UserContext";
 
 const GameDevDashboardPage = () => {
   const [games, setGames] = useState([]);
-  const [revenueAllTime, setRevenueAllTime] = useState(0);
+  const [revenue, setRevenue] = useState([]);
   const { requestWithToken, userId } = useContext(AuthContext);
   const { user } = useContext(UserContext);
 
-  const fetchRevenueAllTime = async () => {
+  const fetchRevenue = async () => {
     try {
       const response = await requestWithToken(`/invoices/dev`);
       if (response.status === 200) {
         const revenues = response.data.revenues;
         if (revenues && revenues.length > 0) {
           const totalRevenueInEuros = revenues[0].sum;
-          setRevenueAllTime(totalRevenueInEuros);
+          setRevenue(totalRevenueInEuros);
         }
       }
     } catch (error) {
@@ -32,11 +32,10 @@ const GameDevDashboardPage = () => {
 
     if (userId) {
       fetchGamesByUser();
-      fetchRevenueAllTime();
+      fetchRevenue();
     }
   }, [userId]);
 
-  // Assuming you have a function to handle game purchase, call fetchRevenueAllTime after a game is purchased
   const handleGamePurchase = async (gameId) => {
     try {
       const purchaseResponse = await requestWithToken(
@@ -44,7 +43,7 @@ const GameDevDashboardPage = () => {
         "POST"
       );
       if (purchaseResponse.status === 200) {
-        fetchRevenueAllTime(); // Fetch updated revenue after a game is purchased
+        fetchRevenue();
       }
     } catch (error) {
       console.error("Error purchasing game:", error);
@@ -64,7 +63,7 @@ const GameDevDashboardPage = () => {
                 <p>Description: {game.description}</p>
                 <p>Discount: {game.discountInPercent}%</p>
                 <p>Tags: {game.tags.join(", ")}</p>
-                <h3>Revenue of All Time: {revenueAllTime.toFixed(2)}€</h3>
+                <h3>Revenue of All Time: {revenue.toFixed(2)}€</h3>
               </Link>
             </li>
           ))}

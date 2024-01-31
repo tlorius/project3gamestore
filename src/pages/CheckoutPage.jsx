@@ -6,10 +6,8 @@ import { toast } from "react-toastify";
 import { useNavigate } from "react-router";
 import { Loader } from "@mantine/core";
 
-
 const CheckoutPage = () => {
-  const { userId, requestWithToken, isAuthenticated, setTotalRevenue } =
-    useContext(AuthContext);
+  const { userId, requestWithToken, isAuthenticated } = useContext(AuthContext);
   const {
     user,
     setNeedsRefresh,
@@ -121,7 +119,6 @@ const CheckoutPage = () => {
             setNeedsRefresh(true);
             toast.success("purchase completed successfully", { theme: "dark" });
             navigate(`/profile/${userId}`);
-            setRevenueAllTime(updatedRevenueAllTime);
           }
         } catch (error) {
           console.log(error, "issue with creating invoice");
