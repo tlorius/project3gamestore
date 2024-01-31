@@ -42,6 +42,18 @@ const GameForm = ({ isUpdate = false }) => {
   const removeFromTagsArray = (tagToRemove) => {
     setTags(tags.filter((tag) => tag !== tagToRemove));
   };
+  //helper function to transform entered price into Eur
+  /*const formatPrice = (priceNum) => {
+    //cases no ,. -> price * 100
+    //, or . with 2 digits
+
+    const hasDecimals = priceNum.includes(".") || priceNum.includes(",");
+    if (hasDecimals) {
+      console.log(priceNum.slice(priceNum.indexOf(",", 1)));
+    }
+    console.log(hasDecimals);
+    return priceNum;formatPrice(price)
+  };*/
 
   const testpayload = () => {
     const payload = {
