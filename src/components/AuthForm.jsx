@@ -147,6 +147,9 @@ const AuthForm = ({ isLogin = false }) => {
           </label>
           <input type="submit" value="Submit 2FA Code" />
         </form>
+        <button type="button" onClick={() => navigate("/")}>
+          Abort Login
+        </button>
       </Modal>
     </>
   );
