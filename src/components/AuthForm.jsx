@@ -2,7 +2,7 @@ import { useContext, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../providers/AuthContext";
-import { Modal } from "@mantine/core";
+import { Modal, PinInput } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import { toast } from "react-toastify";
 
@@ -64,8 +64,8 @@ const AuthForm = ({ isLogin = false }) => {
     }
   };
 
-  const handleMFACode = async (event) => {
-    event.preventDefault();
+  const handleMFACode = async () => {
+    //event.preventDefault();
     const payload = { loginToken: tempToken, twoFactorToken: MFACode };
     try {
       const response = await axios.post(
@@ -136,17 +136,17 @@ const AuthForm = ({ isLogin = false }) => {
         centered
         closeOnClickOutside={false}
       >
-        <form onSubmit={handleMFACode}>
-          <label>
-            Please enter your 2FA code from your 2FA App to login:
-            <input
-              type="text"
-              value={MFACode}
-              onChange={(event) => setMFACode(event.target.value)}
-            />
-          </label>
-          <input type="submit" value="Submit 2FA Code" />
-        </form>
+        <label>
+          Please enter your 2FA code from your 2FA App to login:
+          <PinInput
+            size="md"
+            length={6}
+            type="number"
+            value={MFACode}
+            onChange={(value) => setMFACode(value)}
+            onComplete={handleMFACode}
+          />
+        </label>
         <button type="button" onClick={() => navigate("/")}>
           Abort Login
         </button>
