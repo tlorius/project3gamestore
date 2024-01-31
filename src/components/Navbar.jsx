@@ -13,6 +13,7 @@ const Navbar = () => {
     //content is temporary: once auth is implemented ->
     //Store - Categories - if loggedin (Profile)/ if not (Login) - if logged in: wishlist +cart
     <nav className={classes.navCtn}>
+      <h4 className={classes.title}>Vanguard</h4>
       <Link to="/">Store</Link>
 
       {isAuthenticated ? (

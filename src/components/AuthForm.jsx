@@ -39,9 +39,9 @@ const AuthForm = ({ isLogin = false }) => {
     event.preventDefault();
 
     //validate fields
-    if (!/^[a-zA-Z0-9_]+$/.test(username)) {
+    if (!isLogin && !/^[a-zA-Z0-9_]+$/.test(username)) {
       setError("Username should only contain numbers, letters or underscores");
-    } else if (password1 !== password2) {
+    } else if (!isLogin && password1 !== password2) {
       setError("Passwords do not match");
     } else {
       setError("");
