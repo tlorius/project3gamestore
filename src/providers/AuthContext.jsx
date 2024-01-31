@@ -8,8 +8,8 @@ export const AuthContext = createContext();
 
 const AuthContextProvider = ({ children }) => {
   const [token, setToken] = useState();
-  const [isAuthenticated, setIsAuthenticated] = useState();
-  const [isLoading, setIsLoading] = useState();
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const [userId, setUserId] = useState();
   const navigate = useNavigate();
 

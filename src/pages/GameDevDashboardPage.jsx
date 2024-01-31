@@ -11,11 +11,9 @@ const GameDevDashboardPage = () => {
   const fetchRevenueData = async () => {
     try {
       const response = await requestWithToken(`/invoices/dev`);
-      console.log("Response from server:", response);
 
       if (response.status === 200) {
         setRevenue(response.data);
-        console.log("Fetched revenues:", response.data);
       }
     } catch (error) {
       console.error("Error fetching revenue data:", error);

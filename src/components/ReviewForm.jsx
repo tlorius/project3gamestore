@@ -33,12 +33,6 @@ const ReviewForm = ({ reviewData = null, isUpdate = false }) => {
       const response = await requestWithToken(endpoint, method, payload);
 
       if (response.status === 201 || response.status === 200) {
-        console.log(
-          isUpdate
-            ? "Review updated successfully"
-            : "Review added successfully",
-          response.data
-        );
         navigate(`/games/${gameId}/reviews/${response.data._id}`);
       }
     } catch (error) {
