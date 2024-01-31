@@ -19,7 +19,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
             <ReviewsContextProvider>
               <MantineProvider>
                 <App />
-                <ToastContainer theme="dark" autoClose={2500} />
+                <ToastContainer theme="dark" autoClose={1500} />
               </MantineProvider>
             </ReviewsContextProvider>
           </GameContextProvider>
