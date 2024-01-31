@@ -79,7 +79,7 @@ const AuthForm = ({ isLogin = false }) => {
           navigate("/");
         }
       } catch (error) {
-        console.error(error);
+        toast.error("Invalid Login Details");
       }
     }
   };
