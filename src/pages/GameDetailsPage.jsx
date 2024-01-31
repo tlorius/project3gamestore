@@ -46,8 +46,12 @@ const GameDetailsPage = () => {
         />
         <div className={classes.gameContent}>
           <p>{game.description}</p>
-          <p>Price: {(game.price / 100).toFixed(2)}€</p>
-          {game.discountInPercent > 0 && (
+          {game.price === 0 ? (
+            <p>FREE</p>
+          ) : (
+            <p>Price: {(game.price / 100).toFixed(2)}€</p>
+          )}
+          {game.price > 0 && game.discountInPercent > 0 && (
             <p>
               Discount: {game.discountInPercent}% (Save{" "}
               {((game.price * (game.discountInPercent / 100)) / 100).toFixed(2)}
