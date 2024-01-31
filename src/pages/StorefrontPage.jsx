@@ -2,7 +2,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import classes from "../styles/StorefrontPage.module.css";
 import { GameContext } from "../providers/GameContext";
@@ -21,8 +20,6 @@ const StorefrontPage = () => {
     getAllGames,
     allGames,
   } = useContext(GameContext);
-
-  const handleToast = () => toast("Testing 🤣", { theme: "dark" });
 
   const filteredGamesByName = allGames.filter((game) =>
     game.title
@@ -204,9 +201,6 @@ const StorefrontPage = () => {
               </Link>
             ))}
       </div>
-
-      <Link to="/games/add">Add new game</Link>
-      <button onClick={handleToast}>Test Toasts!!</button>
 
       <div className={classes.bottomContainer}>
         <span onClick={() => handleMinusPageClick()}>&lt;</span>
