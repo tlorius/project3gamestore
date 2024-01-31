@@ -6,12 +6,39 @@ body {
 }
 
 .contentCtn {
-  background-color: red;
+  background-color: rgb(31, 231, 238);
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  padding: 2rem;
+  font-size: 1rem;
+  margin-left: 5rem;
+  margin-right: 5rem;
+  align-items: center;
+}
+
+.gameTitle h1 {
+  font-size: 10rem; /* Not working right now, need to find the overwriting css */
 }
 
 .gameCtn {
-  background-color: blue;
+  background-color: rgb(129, 129, 129);
   display: flex;
+  justify-content: space-between;
+  margin-left: 5rem;
+}
+
+.gameContent {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 2.5rem;
+  padding-right: 10rem;
+  align-items: flex-end;
+  width: 100%;
+  background-color: rgb(231, 113, 113);
 }
 
 .gameImage {
