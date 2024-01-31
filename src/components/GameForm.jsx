@@ -16,6 +16,7 @@ const GameForm = ({ isUpdate = false }) => {
   const [publisher, setPublisher] = useState("");
   const [releaseDate, setReleaseDate] = useState();
   const [price, setPrice] = useState(0);
+  const [discountPercent, setDiscountPercent] = useState(0);
   const [description, setDescription] = useState("");
   const [tags, setTags] = useState([]);
   const [tagField, setTagField] = useState("");
@@ -38,9 +39,23 @@ const GameForm = ({ isUpdate = false }) => {
     }, 5);
   };
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-    //image url is an array of strings, first element is the thumbnail image
+  const removeFromTagsArray = (tagToRemove) => {
+    setTags(tags.filter((tag) => tag !== tagToRemove));
+  };
+  //helper function to transform entered price into Eur
+  /*const formatPrice = (priceNum) => {
+    //cases no ,. -> price * 100
+    //, or . with 2 digits
+
+    const hasDecimals = priceNum.includes(".") || priceNum.includes(",");
+    if (hasDecimals) {
+      console.log(priceNum.slice(priceNum.indexOf(",", 1)));
+    }
+    console.log(hasDecimals);
+    return priceNum;formatPrice(price)
+  };*/
+
+  const testpayload = () => {
     const payload = {
       title,
       imageUrl,
@@ -49,8 +64,25 @@ const GameForm = ({ isUpdate = false }) => {
       releaseDate,
       price,
       description,
-      //update how tags are handled to allow for multiple tags
-      tags: [tags],
+      tags,
+      discountPercent: parseInt(discountPercent),
+    };
+    console.log(payload);
+  };
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+
+    const payload = {
+      title,
+      imageUrl,
+      developer,
+      publisher,
+      releaseDate,
+      price,
+      description,
+      tags,
+      discountPercent: parseInt(discountPercent),
     };
     try {
       const response = await requestWithToken(
@@ -132,6 +164,14 @@ const GameForm = ({ isUpdate = false }) => {
           />
         </label>
         <label>
+          Discount in %
+          <input
+            type="number"
+            value={discountPercent}
+            onChange={(event) => setDiscountPercent(event.target.value)}
+          />
+        </label>
+        <label>
           Description
           <input
             type="text"
@@ -140,31 +180,36 @@ const GameForm = ({ isUpdate = false }) => {
             onChange={(event) => setDescription(event.target.value)}
           />
         </label>
-        <label>
-          Category/Tags/change to input and handle as array
-          <input
-            type="text"
-            required
-            value={tags}
-            onChange={(event) => setTags(event.target.value)}
-          />
-        </label>
         <input type="submit" value={isUpdate ? "Update Game" : "Add Game"} />
       </form>
-      <label>
-        Tags
-        <Autocomplete
-          value={tagField}
-          onChange={(value) => setTagField(value)}
-          data={categories}
-          onOptionSubmit={(value) => handleTagSelect(value)}
-          ref={autocompleteRef}
-        />
-      </label>
-      <button type="button" onClick={() => setTagField("")}>
-        test empty field
-      </button>
-      <div>Selected Items: {tags.join(", ")}</div>
+      <div>
+        Selected Items:{" "}
+        <div className={classes.tagsCtn}>
+          {tags.map((tag) => {
+            return (
+              <div className={classes.tagsCard} key={tag}>
+                {tag}{" "}
+                <button type="button" onClick={() => removeFromTagsArray(tag)}>
+                  x
+                </button>
+              </div>
+            );
+          })}
+        </div>
+        <label>
+          Tags
+          <Autocomplete
+            value={tagField}
+            onChange={(value) => setTagField(value)}
+            data={categories}
+            onOptionSubmit={(value) => handleTagSelect(value)}
+            ref={autocompleteRef}
+          />
+        </label>
+        <button type="button" onClick={testpayload}>
+          test payload
+        </button>
+      </div>
     </>
   );
 };
