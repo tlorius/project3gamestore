@@ -1,10 +1,11 @@
-import { useContext, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import classes from "../styles/GameForm.module.css";
 import { useNavigate, useParams } from "react-router-dom";
 import { AuthContext } from "../providers/AuthContext";
 import { toast } from "react-toastify";
 import { GameContext } from "../providers/GameContext";
 import { Autocomplete } from "@mantine/core";
+import axios from "axios";
 
 const GameForm = ({ isUpdate = false }) => {
   const { requestWithToken } = useContext(AuthContext);
@@ -33,6 +34,7 @@ const GameForm = ({ isUpdate = false }) => {
     if (autocompleteRef.current) {
       autocompleteRef.current.blur();
     }
+    //refocus after clearing field to ensure accessibility
     setTimeout(() => {
       setTagField("");
       autocompleteRef.current.focus();
@@ -41,6 +43,28 @@ const GameForm = ({ isUpdate = false }) => {
 
   const removeFromTagsArray = (tagToRemove) => {
     setTags(tags.filter((tag) => tag !== tagToRemove));
+  };
+
+  const fetchGameToUpdate = async () => {
+    try {
+      const response = await axios.get(
+        `${import.meta.env.VITE_API_URL}/api/games/${gameId}`
+      );
+      if (response.status === 200) {
+        toast.success("successfully fetched game to update");
+        setTitle(response.data.title);
+        setImageUrl(response.data.imageUrl);
+        setDeveloper(response.data.developer);
+        setPublisher(response.data.publisher);
+        setReleaseDate(response.data.releaseDate);
+        setPrice((response.data.price / 100).toFixed(2));
+        setDiscountPercent(response.data.discountInPercent);
+        setDescription(response.data.description);
+        setTags(response.data.tags);
+      }
+    } catch (error) {
+      toast.error("unable to fetch game to update");
+    }
   };
 
   //helper function to transform entered price into Eur
@@ -80,7 +104,7 @@ const GameForm = ({ isUpdate = false }) => {
       price: formatPrice(price),
       description,
       tags,
-      discountPercent: parseInt(discountPercent),
+      discountInPercent: parseInt(discountPercent),
     };
     try {
       const response = await requestWithToken(
@@ -102,6 +126,10 @@ const GameForm = ({ isUpdate = false }) => {
       );
     }
   };
+
+  useEffect(() => {
+    fetchGameToUpdate();
+  }, [gameId]);
 
   return (
     <>
@@ -199,7 +227,7 @@ const GameForm = ({ isUpdate = false }) => {
           <Autocomplete
             value={tagField}
             onChange={(value) => setTagField(value)}
-            data={categories}
+            data={categories.filter((item) => !tags.includes(item))}
             onOptionSubmit={(value) => handleTagSelect(value)}
             ref={autocompleteRef}
           />
