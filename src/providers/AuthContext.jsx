@@ -2,6 +2,7 @@ import { createContext, useEffect, useState } from "react";
 import { jwtDecode } from "jwt-decode";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 export const AuthContext = createContext();
 
@@ -85,6 +86,7 @@ const AuthContextProvider = ({ children }) => {
     window.localStorage.removeItem("authToken");
     setIsAuthenticated(false);
     setUserId();
+    toast("Successfully logged out");
     navigate("/");
   };
 

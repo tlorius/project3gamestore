@@ -36,7 +36,7 @@ const StorefrontPage = () => {
   });
 
   const filteredGamesByPrice = allGames.filter((game) => {
-    return game.price >= price[0] && game.price <= price[1];
+    return game.price >= price[0] * 100 && game.price <= price[1] * 100;
   });
 
   useEffect(() => {
