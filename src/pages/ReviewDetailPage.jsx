@@ -66,7 +66,7 @@ const ReviewDetailPage = () => {
       {review && (
         <div>
           <p>{review.comment}</p>
-          <p>Recommended: {review.recommend ? "Yes" : "No"}</p>
+          <p>Recommended: {review.recommend ? "✅" : "❌"}</p>
           {game && (
             <>
               <img src={game.imageUrl} alt={game.title} />

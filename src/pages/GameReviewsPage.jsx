@@ -30,7 +30,7 @@ const GameReviewsPage = () => {
           return (
             <div key={review._id}>
               <p>Comment: {review.comment}</p>
-              <p>Recommended?: {review.recommend ? "YES" : "NO"}</p>
+              <p>Recommended?: {review.recommend ? "✅" : "❌"}</p>
             </div>
           );
         })}
