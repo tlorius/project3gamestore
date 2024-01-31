@@ -2,15 +2,25 @@ import { useContext, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../providers/AuthContext";
-import { Modal, PinInput } from "@mantine/core";
+import {
+  Modal,
+  PinInput,
+  PasswordInput,
+  Notification,
+  TextInput,
+} from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import { toast } from "react-toastify";
+import classes from "../styles/AuthForm.module.css";
 
 const AuthForm = ({ isLogin = false }) => {
   const [loginCredential, setLoginCredential] = useState("");
-  const [email, SetEmail] = useState("");
+  const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [password1, setPassword1] = useState("");
+  const [password2, setPassword2] = useState("");
+  const [error, setError] = useState("");
   const [opened, { open, close }] = useDisclosure();
   const [MFACode, setMFACode] = useState("");
   const [tempToken, setTempToken] = useState("");
@@ -27,40 +37,50 @@ const AuthForm = ({ isLogin = false }) => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    let payload;
-    if (isLogin) {
-      payload = {
-        //update this depending on backend
-        loginCredential,
-        password,
-      };
-    } else {
-      payload = {
-        email,
-        username,
-        password,
-      };
-    }
-    try {
-      const response = await axios.post(
-        `${import.meta.env.VITE_API_URL}/auth/${isLogin ? "login" : "signup"}`,
-        payload
-      );
-      if (response.status === 202) {
-        setTempToken(response.data.loginToken);
-        open();
-      }
 
-      if (response.status === 201) {
-        navigate("/login");
+    //validate fields
+    if (!/^[a-zA-Z0-9_]+$/.test(username)) {
+      setError("Username should only contain numbers, letters or underscores");
+    } else if (password1 !== password2) {
+      setError("Passwords do not match");
+    } else {
+      setError("");
+      let payload;
+      if (isLogin) {
+        payload = {
+          loginCredential,
+          password,
+        };
+      } else {
+        payload = {
+          email,
+          username,
+          password1,
+        };
       }
-      if (response.status === 200) {
-        toast.success("Login Successful", { theme: "dark" });
-        saveToken(response.data.token);
-        navigate("/");
+      try {
+        const response = await axios.post(
+          `${import.meta.env.VITE_API_URL}/auth/${
+            isLogin ? "login" : "signup"
+          }`,
+          payload
+        );
+        if (response.status === 202) {
+          setTempToken(response.data.loginToken);
+          open();
+        }
+
+        if (response.status === 201) {
+          navigate("/login");
+        }
+        if (response.status === 200) {
+          toast.success("Login Successful", { theme: "dark" });
+          saveToken(response.data.token);
+          navigate("/");
+        }
+      } catch (error) {
+        console.error(error);
       }
-    } catch (error) {
-      console.error(error);
     }
   };
 
@@ -91,43 +111,73 @@ const AuthForm = ({ isLogin = false }) => {
     <>
       <form onSubmit={handleSubmit}>
         {isLogin ? (
-          <label>
-            Username / E-Mail
-            <input
+          <>
+            <TextInput
+              className={classes.inputBox}
+              label="Username / E-Mail"
               type="text"
               value={loginCredential}
-              onChange={(event) => setLoginCredential(event.target.value)}
+              onChange={(event) =>
+                setLoginCredential(event.currentTarget.value)
+              }
+              required
             />
-          </label>
+            <PasswordInput
+              className={classes.inputBox}
+              label="Password"
+              value={password}
+              onChange={(event) => setPassword(event.currentTarget.value)}
+              required
+            />
+          </>
         ) : (
           <>
-            <label>
-              Email
-              <input
-                type="email"
-                value={email}
-                onChange={(event) => SetEmail(event.target.value)}
-              />
-            </label>
-            <label>
-              Username
-              <input
-                type="text"
-                value={username}
-                onChange={(event) => setUsername(event.target.value)}
-              />
-            </label>
+            <TextInput
+              className={classes.inputBox}
+              label="Email"
+              type="email"
+              value={email}
+              onChange={(event) => setEmail(event.currentTarget.value)}
+              required
+            />
+            <TextInput
+              className={classes.inputBox}
+              label="Username"
+              type="text"
+              value={username}
+              onChange={(event) => setUsername(event.currentTarget.value)}
+              required
+            />
+            <PasswordInput
+              className={classes.inputBox}
+              label="Password"
+              value={password1}
+              onChange={(event) => setPassword1(event.currentTarget.value)}
+              required
+              minLength={6}
+            />
+            <PasswordInput
+              className={classes.inputBox}
+              label="Confirm Password"
+              value={password2}
+              onChange={(event) => setPassword2(event.currentTarget.value)}
+              required
+              minLength={6}
+            />
+            {error && (
+              <Notification
+                className={classes.notif}
+                color="red"
+                title="Error"
+                description={error}
+                onClose={() => setError("")}
+              >
+                {error}
+              </Notification>
+            )}
           </>
         )}
 
-        <label>
-          Password
-          <input
-            type="password"
-            value={password}
-            onChange={(event) => setPassword(event.target.value)}
-          />
-        </label>
         <input type="submit" value={isLogin ? "Login" : "Sign Up"} />
       </form>
       <Modal
