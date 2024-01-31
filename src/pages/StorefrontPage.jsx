@@ -81,7 +81,7 @@ const StorefrontPage = () => {
                   <div className={classes.gameCard}>
                     <div
                       className={classes.gameCardImage}
-                      style={{ backgroundImage: `url(${game.image})` }}
+                      style={{ backgroundImage: `url(${game.imageUrl})` }}
                     />
                     <span className={classes.gameCardTitle}>{game.title}</span>
                     <span className={classes.gameCardPrice}>
@@ -98,7 +98,7 @@ const StorefrontPage = () => {
                   <div className={classes.gameCard}>
                     <div
                       className={classes.gameCardImage}
-                      style={{ backgroundImage: `url(${game.image})` }}
+                      style={{ backgroundImage: `url(${game.imageUrl})` }}
                     />
                     <span className={classes.gameCardTitle}>{game.title}</span>
                     <span className={classes.gameCardPrice}>
@@ -115,7 +115,7 @@ const StorefrontPage = () => {
                   <div className={classes.gameCard}>
                     <div
                       className={classes.gameCardImage}
-                      style={{ backgroundImage: `url(${game.image})` }}
+                      style={{ backgroundImage: `url(${game.imageUrl})` }}
                     />
                     <span className={classes.gameCardTitle}>{game.title}</span>
                     <span className={classes.gameCardPrice}>
@@ -132,7 +132,7 @@ const StorefrontPage = () => {
                   <div className={classes.gameCard}>
                     <div
                       className={classes.gameCardImage}
-                      style={{ backgroundImage: `url(${game.image})` }}
+                      style={{ backgroundImage: `url(${game.imageUrl})` }}
                     />
                     <span className={classes.gameCardTitle}>{game.title}</span>
                     <span className={classes.gameCardPrice}>
@@ -147,7 +147,7 @@ const StorefrontPage = () => {
                 <div className={classes.gameCard}>
                   <div
                     className={classes.gameCardImage}
-                    style={{ backgroundImage: `url(${game.image})` }}
+                    style={{ backgroundImage: `url(${game.imageUrl})` }}
                   />
                   <span className={classes.gameCardTitle}>{game.title}</span>
                   <span className={classes.gameCardPrice}>
@@ -162,7 +162,7 @@ const StorefrontPage = () => {
                 <div className={classes.gameCard}>
                   <div
                     className={classes.gameCardImage}
-                    style={{ backgroundImage: `url(${game.image})` }}
+                    style={{ backgroundImage: `url(${game.imageUrl})` }}
                   />
                   <span className={classes.gameCardTitle}>{game.title}</span>
                   <span className={classes.gameCardPrice}>
@@ -177,7 +177,7 @@ const StorefrontPage = () => {
                 <div className={classes.gameCard}>
                   <div
                     className={classes.gameCardImage}
-                    style={{ backgroundImage: `url(${game.image})` }}
+                    style={{ backgroundImage: `url(${game.imageUrl})` }}
                   />
                   <span className={classes.gameCardTitle}>{game.title}</span>
                   <span className={classes.gameCardPrice}>
@@ -191,7 +191,7 @@ const StorefrontPage = () => {
                 <div className={classes.gameCard}>
                   <div
                     className={classes.gameCardImage}
-                    style={{ backgroundImage: `url(${game.image})` }}
+                    style={{ backgroundImage: `url(${game.imageUrl})` }}
                   />
                   <span className={classes.gameCardTitle}>{game.title}</span>
                   <span className={classes.gameCardPrice}>
