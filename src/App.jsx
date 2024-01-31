@@ -20,6 +20,7 @@ import AdminDashboardPage from "./pages/AdminDashboardPage";
 import GameDevDashboardPage from "./pages/GameDevDashboardPage";
 import CheckoutPage from "./pages/CheckoutPage";
 import UserInvoicesPage from "./pages/UserInvoicesPage";
+import Footer from "./components/Footer";
 
 function App() {
   return (
@@ -60,6 +61,7 @@ function App() {
 
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
+      <Footer />
     </>
   );
 }
