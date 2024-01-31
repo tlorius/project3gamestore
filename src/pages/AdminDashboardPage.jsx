@@ -199,6 +199,7 @@ const AdminDashboardPage = () => {
           </label>
           <input type="submit" value={"Add Discount Code"} />
         </form>
+        <hr />
         <form onSubmit={findUserByUserName}>
           <label>
             Username:{" "}
@@ -244,6 +245,7 @@ const AdminDashboardPage = () => {
           </>
         )}
       </div>
+      <hr />
       {revenue && (
         <div>
           <h4>Revenues</h4>
@@ -254,6 +256,7 @@ const AdminDashboardPage = () => {
           </p>
         </div>
       )}
+      <hr />
       <h4>Recent Invoices</h4>
       <p>User - Items - Total - Discount</p>
       {lastInvoices &&

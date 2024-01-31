@@ -85,7 +85,6 @@ const AuthForm = ({ isLogin = false }) => {
   };
 
   const handleMFACode = async () => {
-    //event.preventDefault();
     const payload = { loginToken: tempToken, twoFactorToken: MFACode };
     try {
       const response = await axios.post(

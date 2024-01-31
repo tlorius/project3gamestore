@@ -1,24 +1,28 @@
 import { useContext } from "react";
 import { Link } from "react-router-dom";
 import { UserContext } from "../providers/UserContext";
+import { AuthContext } from "../providers/AuthContext";
+import { Loader } from "@mantine/core";
 
 const OwnedGamesPage = () => {
   const { user } = useContext(UserContext);
+  const { isAuthenticated } = useContext(AuthContext);
 
-  const userOwnedGames = user.ownedGames;
-  console.log(userOwnedGames);
-
-  return (
+  return user && isAuthenticated ? (
     <>
       <h1>Shows all games a user purchased</h1>
 
-      {userOwnedGames.map((game) => (
-        <div key={game.id}>
+      {user.ownedGames.map((game) => (
+        <div key={game._id}>
           <span>{game.title}</span>
+          <Link to={`/games/${game._id}`}>Store Page</Link>
+          <Link to={`/games/${game._id}/addreview`}>Add Review</Link>
         </div>
       ))}
-
-      <Link to="/games/1/addreview">Add a new review to this game button</Link>
+    </>
+  ) : (
+    <>
+      <Loader color="blue" size="xl" type="dots" />
     </>
   );
 };

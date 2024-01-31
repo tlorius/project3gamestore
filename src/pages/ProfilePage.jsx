@@ -5,6 +5,7 @@ import { AuthContext } from "../providers/AuthContext";
 import TwoFactorModal from "../components/TwoFactorModal";
 import { toast } from "react-toastify";
 import { Loader } from "@mantine/core";
+import classes from "../styles/ProfilePage.module.css";
 
 const ProfilePage = () => {
   const { user, setNeedsRefresh, reviewCount, gameCount, wishlistCount } =
@@ -34,14 +35,22 @@ const ProfilePage = () => {
       <h1>{user.username}s Profile</h1>
       <p>Username: {user.username}</p>
       <p>Email: {user.email}</p>
-      <Link to={`/profile/${userId}/wishlist`}>Wishlist: {wishlistCount}</Link>
-      <Link to={`/profile/${userId}/reviews`}>All Reviews: {reviewCount}</Link>
-      <Link to={`/profile/${userId}/games`}>All Games: {gameCount}</Link>
-      <Link to="/dashboard/dev">My Developer Dashboard</Link>
-      {user?.roles.includes("ADMIN") && (
-        <Link to="/dashboard/admin">My Admin Dashboard</Link>
-      )}
-      <Link to={`/profile/${userId}/invoices`}>Invoices</Link>
+      <div className={classes.linksCtn}>
+        <Link to={`/profile/${userId}/wishlist`}>
+          Wishlist: {wishlistCount}
+        </Link>
+        <Link to={`/profile/${userId}/reviews`}>
+          All Reviews: {reviewCount}
+        </Link>
+        <Link to={`/profile/${userId}/games`}>All Games: {gameCount}</Link>
+        {user?.roles.includes("GAMEDEVELOPER") && (
+          <Link to="/dashboard/dev">My Developer Dashboard</Link>
+        )}
+        {user?.roles.includes("ADMIN") && (
+          <Link to="/dashboard/admin">My Admin Dashboard</Link>
+        )}
+        <Link to={`/profile/${userId}/invoices`}>Invoices</Link>
+      </div>
 
       {user.otp_enabled ? (
         <>
