@@ -43,17 +43,17 @@ const GameForm = ({ isUpdate = false }) => {
     setTags(tags.filter((tag) => tag !== tagToRemove));
   };
   //helper function to transform entered price into Eur
-  /*const formatPrice = (priceNum) => {
+  const formatPrice = (priceNum) => {
     //cases no ,. -> price * 100
     //, or . with 2 digits
-
+    let formattedPrice;
     const hasDecimals = priceNum.includes(".") || priceNum.includes(",");
-    if (hasDecimals) {
-      console.log(priceNum.slice(priceNum.indexOf(",", 1)));
-    }
-    console.log(hasDecimals);
-    return priceNum;formatPrice(price)
-  };*/
+    if (priceNum.includes(".")) formattedPrice = priceNum.split(".");
+
+    if (priceNum.includes(",")) formattedPrice = priceNum.split(",");
+    console.log(hasDecimals, formattedPrice);
+    return priceNum;
+  };
 
   const testpayload = () => {
     const payload = {
@@ -62,7 +62,7 @@ const GameForm = ({ isUpdate = false }) => {
       developer,
       publisher,
       releaseDate,
-      price,
+      price: formatPrice(price),
       description,
       tags,
       discountPercent: parseInt(discountPercent),
@@ -79,7 +79,7 @@ const GameForm = ({ isUpdate = false }) => {
       developer,
       publisher,
       releaseDate,
-      price,
+      price: formatPrice(price),
       description,
       tags,
       discountPercent: parseInt(discountPercent),
@@ -155,7 +155,7 @@ const GameForm = ({ isUpdate = false }) => {
           />
         </label>
         <label>
-          Price in €(ex. 59.99 or 59,99)
+          Price in €(ex. 59.99 or 59,9 or 60)
           <input
             type="number"
             required
