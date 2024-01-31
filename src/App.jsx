@@ -21,6 +21,7 @@ import GameDevDashboardPage from "./pages/GameDevDashboardPage";
 import CheckoutPage from "./pages/CheckoutPage";
 import UserInvoicesPage from "./pages/UserInvoicesPage";
 import Footer from "./components/Footer";
+import PrivateRoute from "./components/PrivateRoute";
 
 function App() {
   return (
@@ -29,8 +30,22 @@ function App() {
       <Routes>
         <Route path="/" element={<StorefrontPage />} />
         <Route path="/games/:gameId" element={<GameDetailsPage />} />
-        <Route path="/games/add" element={<AddGamePage />} />
-        <Route path="/games/:gameId/update" element={<UpdateGamePage />} />
+        <Route
+          path="/games/add"
+          element={
+            <PrivateRoute>
+              <AddGamePage />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/games/:gameId/update"
+          element={
+            <PrivateRoute>
+              <UpdateGamePage />
+            </PrivateRoute>
+          }
+        />
         <Route path="/games/:gameId/addreview" element={<AddReviewPage />} />
         <Route
           path="/games/:gameId/reviews/:reviewId"
@@ -42,19 +57,72 @@ function App() {
         />
         <Route path="/games/:gameId/reviews" element={<GameReviewsPage />} />
 
-        <Route path="/profile/:userId" element={<ProfilePage />} />
-        <Route path="/profile/:userId/reviews" element={<UserReviewsPage />} />
-        <Route path="/profile/:userId/wishlist" element={<WishlistPage />} />
-        <Route path="/profile/:userId/games" element={<OwnedGamesPage />} />
+        <Route
+          path="/profile/:userId"
+          element={
+            <PrivateRoute>
+              <ProfilePage />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/profile/:userId/reviews"
+          element={
+            <PrivateRoute>
+              <UserReviewsPage />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/profile/:userId/wishlist"
+          element={
+            <PrivateRoute>
+              <WishlistPage />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/profile/:userId/games"
+          element={
+            <PrivateRoute>
+              <OwnedGamesPage />
+            </PrivateRoute>
+          }
+        />
         <Route
           path="/profile/:userId/invoices"
-          element={<UserInvoicesPage />}
+          element={
+            <PrivateRoute>
+              <UserInvoicesPage />
+            </PrivateRoute>
+          }
         />
 
-        <Route path="/checkout" element={<CheckoutPage />} />
+        <Route
+          path="/checkout"
+          element={
+            <PrivateRoute>
+              <CheckoutPage />
+            </PrivateRoute>
+          }
+        />
 
-        <Route path="/dashboard/admin" element={<AdminDashboardPage />} />
-        <Route path="/dashboard/dev" element={<GameDevDashboardPage />} />
+        <Route
+          path="/dashboard/admin"
+          element={
+            <PrivateRoute>
+              <AdminDashboardPage />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/dashboard/dev"
+          element={
+            <PrivateRoute>
+              <GameDevDashboardPage />
+            </PrivateRoute>
+          }
+        />
 
         <Route path="/signup" element={<SignupPage />} />
         <Route path="/login" element={<LoginPage />} />
