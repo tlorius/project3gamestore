@@ -7,12 +7,12 @@ import classes from "../styles/InvoiceDetailsModal.module.css";
 const InvoiceDetailsModal = ({ opened, close, invoiceId }) => {
   const { isAuthenticated, requestWithToken } = useContext(AuthContext);
   const [invoice, setInvoice] = useState();
+  const [invoiceDisplayId, setInvoiceDisplayId] = useState();
 
   const fetchInvoice = async () => {
     try {
       const response = await requestWithToken(`/invoices/user/${invoiceId}`);
       if (response.status === 200) {
-        console.log(response.data);
         setInvoice(response.data);
       }
     } catch (error) {
@@ -23,12 +23,17 @@ const InvoiceDetailsModal = ({ opened, close, invoiceId }) => {
   useEffect(() => {
     if (isAuthenticated && opened) {
       fetchInvoice();
+      setInvoiceDisplayId("VANG" + invoiceId.slice(-12).toUpperCase());
     }
   }, [isAuthenticated, opened]);
 
   return isAuthenticated ? (
     <>
-      <Modal opened={opened} onClose={close} title="Invoice Details">
+      <Modal
+        opened={opened}
+        onClose={close}
+        title={`INVOICE ${invoiceDisplayId}`}
+      >
         {invoice && (
           <div>
             {invoice.fromOrder.items.map((game) => {
