@@ -106,11 +106,10 @@ const UserContextProvider = ({ children }) => {
           theme: "dark",
           autoClose: 3000,
         });
-        console.log(error);
       }
     } else {
       //replace with actual error handling
-      console.log("please log in");
+      toast.error("Failed to add game");
     }
   };
 
