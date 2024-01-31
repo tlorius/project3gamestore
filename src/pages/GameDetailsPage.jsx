@@ -48,7 +48,8 @@ const GameDetailsPage = () => {
           {game.discountInPercent > 0 && (
             <p>
               Discount: {game.discountInPercent}% (Save{" "}
-              {((game.price * game.discountInPercent) / 100).toFixed(2)}€)
+              {((game.price * (game.discountInPercent / 100)) / 100).toFixed(2)}
+              €)
             </p>
           )}
           <Link to={`/games/${gameId}/reviews`}>

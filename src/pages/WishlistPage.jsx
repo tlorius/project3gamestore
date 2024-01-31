@@ -21,9 +21,9 @@ const WishlistPage = () => {
           user.wishlistedGames.map((game) => {
             return (
               <div key={game._id}>
-                <h3>{game.title}</h3>
+                <Link to={`/games/${game._id}`}>{game.title}</Link>
                 <p>{game.description}</p>
-                <p>Price: {game.price}</p>
+                <p>Price: {(game.price / 100).toFixed(2)}€</p>
                 <button
                   type="button"
                   onClick={() => removeGameFromAccount("wishlist", game._id)}
