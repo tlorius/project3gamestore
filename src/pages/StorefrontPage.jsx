@@ -81,7 +81,16 @@ const StorefrontPage = () => {
               .filter((game) => filteredGamesByPrice.includes(game))
               .map((game) => (
                 <Link key={game._id} to={`/games/${game._id}`}>
-                  <p>{game.title}</p>
+                  <div className={classes.gameCard}>
+                    <div
+                      className={classes.gameCardImage}
+                      style={{ backgroundImage: `url(${game.image})` }}
+                    />
+                    <span className={classes.gameCardTitle}>{game.title}</span>
+                    <span className={classes.gameCardPrice}>
+                      {(game.price / 100).toFixed(2)}€
+                    </span>
+                  </div>
                 </Link>
               ))
           : search && selectedCategory
@@ -89,7 +98,16 @@ const StorefrontPage = () => {
               .filter((game) => filteredGamesByCategory.includes(game))
               .map((game) => (
                 <Link key={game._id} to={`/games/${game._id}`}>
-                  <p>{game.title}</p>
+                  <div className={classes.gameCard}>
+                    <div
+                      className={classes.gameCardImage}
+                      style={{ backgroundImage: `url(${game.image})` }}
+                    />
+                    <span className={classes.gameCardTitle}>{game.title}</span>
+                    <span className={classes.gameCardPrice}>
+                      {(game.price / 100).toFixed(2)}€
+                    </span>
+                  </div>
                 </Link>
               ))
           : search && price
@@ -97,7 +115,16 @@ const StorefrontPage = () => {
               .filter((game) => filteredGamesByPrice.includes(game))
               .map((game) => (
                 <Link key={game._id} to={`/games/${game._id}`}>
-                  <p>{game.title}</p>
+                  <div className={classes.gameCard}>
+                    <div
+                      className={classes.gameCardImage}
+                      style={{ backgroundImage: `url(${game.image})` }}
+                    />
+                    <span className={classes.gameCardTitle}>{game.title}</span>
+                    <span className={classes.gameCardPrice}>
+                      {(game.price / 100).toFixed(2)}€
+                    </span>
+                  </div>
                 </Link>
               ))
           : selectedCategory && price
@@ -105,30 +132,75 @@ const StorefrontPage = () => {
               .filter((game) => filteredGamesByPrice.includes(game))
               .map((game) => (
                 <Link key={game._id} to={`/games/${game._id}`}>
-                  <p>{game.title}</p>
+                  <div className={classes.gameCard}>
+                    <div
+                      className={classes.gameCardImage}
+                      style={{ backgroundImage: `url(${game.image})` }}
+                    />
+                    <span className={classes.gameCardTitle}>{game.title}</span>
+                    <span className={classes.gameCardPrice}>
+                      {(game.price / 100).toFixed(2)}€
+                    </span>
+                  </div>
                 </Link>
               ))
           : search
           ? filteredGamesByName.map((game) => (
               <Link key={game._id} to={`/games/${game._id}`}>
-                <p>{game.title}</p>
+                <div className={classes.gameCard}>
+                  <div
+                    className={classes.gameCardImage}
+                    style={{ backgroundImage: `url(${game.image})` }}
+                  />
+                  <span className={classes.gameCardTitle}>{game.title}</span>
+                  <span className={classes.gameCardPrice}>
+                    {(game.price / 100).toFixed(2)}€
+                  </span>
+                </div>
               </Link>
             ))
           : selectedCategory
           ? filteredGamesByCategory.map((game) => (
               <Link key={game._id} to={`/games/${game._id}`}>
-                <p>{game.title}</p>
+                <div className={classes.gameCard}>
+                  <div
+                    className={classes.gameCardImage}
+                    style={{ backgroundImage: `url(${game.image})` }}
+                  />
+                  <span className={classes.gameCardTitle}>{game.title}</span>
+                  <span className={classes.gameCardPrice}>
+                    {(game.price / 100).toFixed(2)}€
+                  </span>
+                </div>
               </Link>
             ))
           : price
           ? filteredGamesByPrice.map((game) => (
               <Link key={game._id} to={`/games/${game._id}`}>
-                <p>{game.title}</p>
+                <div className={classes.gameCard}>
+                  <div
+                    className={classes.gameCardImage}
+                    style={{ backgroundImage: `url(${game.image})` }}
+                  />
+                  <span className={classes.gameCardTitle}>{game.title}</span>
+                  <span className={classes.gameCardPrice}>
+                    {(game.price / 100).toFixed(2)}€
+                  </span>
+                </div>
               </Link>
             ))
           : allGames.map((game) => (
               <Link key={game._id} to={`/games/${game._id}`}>
-                <p>{game.title}</p>
+                <div className={classes.gameCard}>
+                  <div
+                    className={classes.gameCardImage}
+                    style={{ backgroundImage: `url(${game.image})` }}
+                  />
+                  <span className={classes.gameCardTitle}>{game.title}</span>
+                  <span className={classes.gameCardPrice}>
+                    {(game.price / 100).toFixed(2)}€
+                  </span>
+                </div>
               </Link>
             ))}
       </div>
