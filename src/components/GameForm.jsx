@@ -42,32 +42,30 @@ const GameForm = ({ isUpdate = false }) => {
   const removeFromTagsArray = (tagToRemove) => {
     setTags(tags.filter((tag) => tag !== tagToRemove));
   };
+
   //helper function to transform entered price into Eur
   const formatPrice = (priceNum) => {
     //cases no ,. -> price * 100
     //, or . with 2 digits
     let formattedPrice;
-    const hasDecimals = priceNum.includes(".") || priceNum.includes(",");
-    if (priceNum.includes(".")) formattedPrice = priceNum.split(".");
+    let finalPrice;
+    const hasDecimals =
+      priceNum.toString().includes(".") || priceNum.toString().includes(",");
+    if (priceNum.toString().includes("."))
+      formattedPrice = priceNum.toString().split(".");
+    if (priceNum.toString().includes(","))
+      formattedPrice = priceNum.toString().split(",");
 
-    if (priceNum.includes(",")) formattedPrice = priceNum.split(",");
-    console.log(hasDecimals, formattedPrice);
-    return priceNum;
-  };
-
-  const testpayload = () => {
-    const payload = {
-      title,
-      imageUrl,
-      developer,
-      publisher,
-      releaseDate,
-      price: formatPrice(price),
-      description,
-      tags,
-      discountPercent: parseInt(discountPercent),
-    };
-    console.log(payload);
+    if (hasDecimals) {
+      if (formattedPrice[1].length === 1) {
+        finalPrice = +formattedPrice[0] * 100 + +formattedPrice[1] * 10;
+      } else {
+        finalPrice = +formattedPrice[0] * 100 + +formattedPrice[1].slice(0, 2);
+      }
+    } else {
+      finalPrice = +priceNum * 100;
+    }
+    return finalPrice;
   };
 
   const handleSubmit = async (event) => {
@@ -206,9 +204,6 @@ const GameForm = ({ isUpdate = false }) => {
             ref={autocompleteRef}
           />
         </label>
-        <button type="button" onClick={testpayload}>
-          test payload
-        </button>
       </div>
     </>
   );
