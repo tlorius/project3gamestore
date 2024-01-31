@@ -4,6 +4,7 @@ import { AuthContext } from "../providers/AuthContext";
 import axios from "axios";
 import { UserContext } from "../providers/UserContext";
 import { Loader } from "@mantine/core";
+import classes from "../styles/GameDetails.module.css";
 
 const GameDetailsPage = () => {
   const { userId, isAuthenticated } = useContext(AuthContext);
@@ -23,72 +24,74 @@ const GameDetailsPage = () => {
     }
   };
 
-  //fetching game and refetching user details
+  // Fetch the game details when the component mounts
   useEffect(() => {
     fetchGame();
     setNeedsRefresh(true);
   }, [gameId]);
 
   return game ? (
-    <>
-      <h1>{game.title}</h1>
-      <p>{game.description}</p>
-      <Link to={`/games/${gameId}/reviews`}>
-        Reviews: {game.reviews.length}
-      </Link>
-      {/* conditionally render buttons/links depending if the user is logged in/ already has the game on any list*/}
+    <div className={classes.contentCtn}>
+      <Link to={`/games/${gameId}/update`}>Update Game</Link>
+      <div className={classes.gameCtn}>
+        <h1>{game.title}</h1>
+        <img
+          className={classes.gameImage}
+          src={game.imageUrl}
+          alt={game.title}
+        />
+        <p>{game.description}</p>
+        <p>Price: {(game.price / 100).toFixed(2)}€</p>
+        {game.discountInPercent > 0 && (
+          <p>
+            Discount: {game.discountInPercent}% (Save{" "}
+            {((game.price * game.discountInPercent) / 100).toFixed(2)}€)
+          </p>
+        )}
+        <Link to={`/games/${gameId}/reviews`}>
+          Reviews: {game.reviews.length}
+        </Link>
+        {game.reviewScorePercent && (
+          <p>Review Score: {game.reviewScorePercent}%</p>
+        )}
+        <p>Publisher: {game.publisher}</p>
+        <p>Developer: {game.developer}</p>
+        <p>Tags: {game.tags.join(", ")}</p>
+      </div>
+      {/* Conditionally render buttons/links depending on user authentication and game ownership */}
       {isAuthenticated && (
         <>
-          {!user?.ownedGames.some((game) => game._id == gameId) &&
-            game.price === 0 && (
-              <button
-                type="button"
-                onClick={() => addGameToAccount("buyfree", gameId)}
-              >
-                Add Free Game to your Account
-              </button>
-            )}
-          {!user?.ownedGames.some((game) => game._id == gameId) &&
-            (!user?.wishlistedGames.some((game) => game._id == gameId) ? (
-              <button
-                type="button"
-                onClick={() => addGameToAccount("wishlist", gameId)}
-              >
-                Add to Wishlist
-              </button>
-            ) : (
-              <button
-                type="button"
-                onClick={() => removeGameFromAccount("wishlist", gameId)}
-              >
-                Remove from Wishlist
-              </button>
-            ))}
-          {!user?.ownedGames.some((game) => game._id == gameId) &&
-            (!user?.cart.some((game) => game._id == gameId) ? (
-              <button
-                type="button"
-                onClick={() => addGameToAccount("cart", gameId)}
-              >
-                Add to Cart
-              </button>
-            ) : (
-              <button
-                type="button"
-                onClick={() => removeGameFromAccount("cart", gameId)}
-              >
-                Remove from Cart
-              </button>
-            ))}
-          {user?.ownedGames.some((game) => game._id == gameId) && (
-            <Link to={`/games/${gameId}/addReview`}>Add new review</Link>
-          )}
+          <button
+            type="button"
+            onClick={() => addGameToAccount("cart", gameId)}
+          >
+            Add to Cart
+          </button>
 
-          {/*might remove the update button or make it conditional */}
-          <Link to={`/games/${gameId}/update`}>Update Game</Link>
+          {user?.ownedGames.some((ownedGame) => ownedGame._id === gameId) && (
+            <Link to={`/games/${gameId}/addReview`}>Add Review</Link>
+          )}
+          {user?.isAdmin && (
+            <Link to={`/games/${gameId}/update`}>Update Game</Link>
+          )}
+          {!user?.wishlistedGames.some((game) => game._id === gameId) ? (
+            <button
+              type="button"
+              onClick={() => addGameToAccount("wishlist", gameId)}
+            >
+              Add to Wishlist
+            </button>
+          ) : (
+            <button
+              type="button"
+              onClick={() => removeGameFromAccount("wishlist", gameId)}
+            >
+              Remove from Wishlist
+            </button>
+          )}
         </>
       )}
-    </>
+    </div>
   ) : (
     <>
       <Loader color="blue" size="xl" type="dots" />

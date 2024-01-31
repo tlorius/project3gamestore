@@ -1,0 +1,19 @@
+*,
+body {
+  padding: 0;
+  margin: 0;
+  gap: 0;
+}
+
+.contentCtn {
+  background-color: red;
+}
+
+.gameCtn {
+  background-color: blue;
+  display: flex;
+}
+
+.gameImage {
+  height: 30rem;
+}
