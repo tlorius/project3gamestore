@@ -34,7 +34,9 @@ const GameDetailsPage = () => {
     <div className={classes.contentCtn}>
       <div className={classes.header}>
         <h1 className={classes.gameTitle}>{game.title}</h1>
-        <Link to={`/games/${gameId}/update`}>Update Game</Link>
+        {game.createdBy == userId && (
+          <Link to={`/games/${gameId}/update`}>Update Game</Link>
+        )}
       </div>
       <div className={classes.gameCtn}>
         <img
