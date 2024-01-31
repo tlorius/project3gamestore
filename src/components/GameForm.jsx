@@ -51,7 +51,6 @@ const GameForm = ({ isUpdate = false }) => {
         `${import.meta.env.VITE_API_URL}/api/games/${gameId}`
       );
       if (response.status === 200) {
-        toast.success("successfully fetched game to update");
         setTitle(response.data.title);
         setImageUrl(response.data.imageUrl);
         setDeveloper(response.data.developer);
@@ -128,7 +127,7 @@ const GameForm = ({ isUpdate = false }) => {
   };
 
   useEffect(() => {
-    fetchGameToUpdate();
+    if (isUpdate) fetchGameToUpdate();
   }, [gameId]);
 
   return (
@@ -232,6 +231,16 @@ const GameForm = ({ isUpdate = false }) => {
             ref={autocompleteRef}
           />
         </label>
+        {
+          <button
+            type="button"
+            onClick={() =>
+              navigate(`${isUpdate ? `/games/${gameId}` : "/dashboard/dev"}`)
+            }
+          >
+            Cancel
+          </button>
+        }
       </div>
     </>
   );
