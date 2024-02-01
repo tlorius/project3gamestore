@@ -1,0 +1,100 @@
+.wishListPageContainer{
+    min-height: 100vh;
+    
+    display: flex;
+    flex-direction: column;
+
+    align-items: center;
+    justify-content: flex-start;
+
+    margin-top: 100px;
+}
+.wishListTitle{
+    color: var(--primary-white);
+
+    font-weight: bolder;
+    font-size: 42px;
+}
+.gameCard{
+  width: 600px;
+  height: 140px;
+
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+
+  gap: 15px;
+
+  background-color: var(--primary-blue);
+}
+
+.gameCardInfo{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+
+  gap: 20px;
+}
+.gameCardImage{
+  width: 200px;
+  height: 100%;
+
+  background-size: cover;
+  background-position: center;
+}
+.gameCardTitle{
+  color: var(--primary-white);
+}
+.gameCardPrice{
+  font-size: 14px;
+
+  padding: 8px;
+
+  background-color:rgba(0, 0, 0, 0.5);
+
+  color: var(--primary-white);
+
+  border-radius: 4px 0 0 4px;
+}
+.gameCardBtn{
+  border: none;
+  outline: none;
+
+  background-color: #4c6b22;
+
+  padding: 10px;
+
+  border-radius: 0px 4px 4px 0;
+
+  color: white;
+
+  cursor: pointer;
+
+  transition: 0.3s ;
+
+  text-decoration: none;
+}
+.gameCardBtn:hover{
+  background-color: #6d9930;
+
+  transition: 0.3s ;
+}
+.gameCardTags{
+  display: flex;
+  flex-direction: row;
+
+  gap: 2px;
+}
+.gameCardTag{
+  font-size: 12px;
+
+  color: var(--primary-white);
+
+  padding: 5px;
+
+  background-color: rgba(0, 0, 0, 0.5);
+
+  border-radius: 4px;
+}
