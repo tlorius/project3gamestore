@@ -5,6 +5,7 @@ import { useDisclosure } from "@mantine/hooks";
 import { Modal } from "@mantine/core";
 import { useContext, useEffect, useState } from "react";
 import { toast } from "react-toastify";
+import classes from "../styles/ProfilePage.module.css";
 
 const TwoFactorModal = () => {
   const { authRequestWithToken } = useContext(AuthContext);
@@ -104,7 +105,11 @@ const TwoFactorModal = () => {
         </form>
         <button onClick={close}>Close</button>
       </Modal>
-      <button type="button" onClick={generateTwoFactor}>
+      <button
+        className={classes.greenButton}
+        type="button"
+        onClick={generateTwoFactor}
+      >
         Enable 2FA
       </button>
     </>

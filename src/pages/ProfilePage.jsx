@@ -31,42 +31,68 @@ const ProfilePage = () => {
   }, []);
 
   return user && userId ? (
-    <>
-      <h1>{user.username}s Profile</h1>
-      <p>Username: {user.username}</p>
-      <p>Email: {user.email}</p>
-      <div className={classes.linksCtn}>
-        <Link to={`/profile/${userId}/wishlist`}>
-          Wishlist: {wishlistCount}
+    <div className={classes.pageCtn}>
+      <div className={classes.profileCtn}>
+        <h1 className={classes.profileTag}>{user.username}'s PROFILE</h1>
+        <Link className={classes.invoices} to={`/profile/${userId}/invoices`}>
+          <span className={classes.highlightedSpan}>Invoices</span>
         </Link>
-        <Link to={`/profile/${userId}/reviews`}>
-          All Reviews: {reviewCount}
-        </Link>
-        <Link to={`/profile/${userId}/games`}>All Games: {gameCount}</Link>
-        {user?.roles.includes("GAMEDEVELOPER") && (
-          <Link to="/dashboard/dev">My Developer Dashboard</Link>
-        )}
-        {user?.roles.includes("ADMIN") && (
-          <Link to="/dashboard/admin">My Admin Dashboard</Link>
-        )}
-        <Link to={`/profile/${userId}/invoices`}>Invoices</Link>
-      </div>
+        <div className={classes.innerCtn}>
+          <div>
+            <p className={classes.subTitle}>DETAILS</p>
+            <p className={classes.username}>{user.username}</p>
+            <p className={classes.userEmail}>Email: {user.email}</p>
 
-      {user.otp_enabled ? (
-        <>
-          <p>2FA: ✅enabled</p>
-          <button type="button" onClick={disableTwoFactor}>
-            Disable 2FA
-          </button>
-        </>
-      ) : (
-        <TwoFactorModal />
-      )}
-    </>
+            <p className={classes.subTitle}>SECURITY</p>
+            <p className={classes.twoFactorText}>
+              Two Factor Authentification:{" "}
+              {user.otp_enabled ? "Enabled ✅" : "Disabled ❌"}
+            </p>
+            {user.otp_enabled ? (
+              <button
+                className={`${classes.authenticationBtn} ${classes.redButton}`}
+                type="button"
+                onClick={disableTwoFactor}
+              >
+                Disable 2FA
+              </button>
+            ) : (
+              <TwoFactorModal />
+            )}
+          </div>
+          <div className={classes.linksCtn}>
+            <Link className={classes.links} to={`/profile/${userId}/wishlist`}>
+              <span className={classes.highlightedSpan}>Wishlist:</span>{" "}
+              {wishlistCount}
+            </Link>
+            <Link className={classes.links} to={`/profile/${userId}/reviews`}>
+              <span className={classes.highlightedSpan}>All Reviews:</span>{" "}
+              {reviewCount}
+            </Link>
+            <Link className={classes.links} to={`/profile/${userId}/games`}>
+              <span className={classes.highlightedSpan}>All Games:</span>{" "}
+              {gameCount}
+            </Link>
+            {user?.roles.includes("GAMEDEVELOPER") && (
+              <Link className={classes.links} to="/dashboard/dev">
+                <span className={classes.highlightedSpan}>
+                  My Developer Dashboard
+                </span>
+              </Link>
+            )}
+            {user?.roles.includes("ADMIN") && (
+              <Link className={classes.links} to="/dashboard/admin">
+                <span className={classes.highlightedSpan}>
+                  My Admin Dashboard
+                </span>
+              </Link>
+            )}
+          </div>
+        </div>
+      </div>
+    </div>
   ) : (
-    <>
-      <Loader color="blue" size="xl" type="dots" />
-    </>
+    <Loader color="blue" size="xl" type="dots" />
   );
 };
 

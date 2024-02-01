@@ -1,5 +1,125 @@
+.pageCtn {
+  background-color: #25394b;
+  display: flex;
+  justify-content: center;
+}
+
+.profileCtn {
+  width: 50%;
+  background-color: var(--primary-blue);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 3rem;
+}
+
+.profileTag {
+  margin-bottom: 4rem;
+  font-size: 3rem;
+  font-weight: bold;
+  color: white;
+  text-transform: uppercase;
+}
+
+.innerCtn {
+  width: 100%;
+  height: auto;
+  display: flex;
+  justify-content: space-between;
+  background-color: var(--secondary-blue);
+  color: white;
+  padding: 3rem;
+}
+
+.username {
+  margin-bottom: 1rem;
+  font-weight: bold;
+  margin-left: 1rem;
+}
+
+.userEmail {
+  margin-bottom: 3rem;
+  margin-left: 1rem;
+}
+
+.subTitle {
+  opacity: 40%;
+  font-size: 2rem;
+  margin-bottom: 2rem;
+  font-weight: bold;
+}
+
+.twoFactorText {
+  margin-left: 1rem;
+}
+
+.authenticationBtn {
+  height: 2rem;
+  width: 10em;
+  margin-top: 1rem;
+  color: white;
+  font-size: 0.8rem;
+  font-weight: bold;
+  background-color: var(
+    --default-button-color
+  ); /* Default color for the button */
+  border: none;
+  opacity: 60%;
+  cursor: pointer;
+}
+
+.authenticationBtn:hover {
+  opacity: 100%;
+}
+
+.redButton {
+  background-color: red;
+  margin-top: 1rem;
+  margin-left: 0.8rem;
+}
+
 .linksCtn {
   display: flex;
   flex-direction: column;
+  align-items: flex-end;
   gap: 1rem;
+}
+
+.links {
+  text-decoration: none;
+  color: white;
+  padding-top: 2rem;
+}
+
+.highlightedSpan {
+  color: var(--highlighting-color);
+}
+
+.greenButton {
+  margin-top: 1rem;
+  margin-left: 0.8rem;
+  height: 2rem;
+  width: 8rem;
+  text-align: center;
+  font-weight: bold;
+  background-color: rgb(48, 128, 74);
+  color: white;
+  border: none;
+}
+
+.greenButton:hover {
+  cursor: pointer;
+  background-color: rgb(68, 204, 113);
+}
+
+.invoices {
+  width: 100%;
+  font-size: 1.3rem;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  text-decoration: none;
+  margin-bottom: 0.5rem;
+  padding-right: 0.2rem;
 }
