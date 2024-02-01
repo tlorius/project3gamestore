@@ -8,6 +8,8 @@
     justify-content: flex-start;
 
     margin-top: 100px;
+
+    gap: 30px;
 }
 .wishListTitle{
     color: var(--primary-white);
@@ -15,9 +17,15 @@
     font-weight: bolder;
     font-size: 42px;
 }
+.gamesCnt{
+    display: flex;
+    flex-direction: column;
+
+    gap: 30px;
+}
 .gameCard{
   width: 600px;
-  height: 140px;
+  height: 180px;
 
   display: flex;
   flex-direction: row;
@@ -98,3 +106,33 @@
 
   border-radius: 4px;
 }
+.wishListButton{
+    width: 180px;
+  
+    text-decoration: none;
+  
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  
+    background-color: rgba(0, 0, 0, 0.507);
+  
+    padding: 10px;
+  
+    border: none;
+    outline: none;
+  
+    color: #66c0f4;
+  
+    border-radius: 8px;
+  
+    cursor: pointer;
+  
+    transition: 0.3s;
+  }
+  .wishListButton:hover{
+    background-color: #447d9e;
+    
+
+    transition: 0.3s;
+  }

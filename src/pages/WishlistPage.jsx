@@ -20,16 +20,11 @@ const WishlistPage = () => {
       <h1 className={classes.wishListTitle}>
         Wishlist Page of <strong>{user && user.username}</strong>
       </h1>
-      <div>
+      <div className={classes.gamesCnt}>
         {user.wishlistedGames.length !== 0 ? (
           user.wishlistedGames.map((game) => {
             return (
               <>
-                <div key={game._id}>
-                  <Link to={`/games/${game._id}`}>{game.title}</Link>
-                  <p>{game.description}</p>
-                  <p>Price: {(game.price / 100).toFixed(2)}€</p>
-                </div>
                 <div className={classes.gameCard}>
                   <div
                     className={classes.gameCardImage}
@@ -55,15 +50,22 @@ const WishlistPage = () => {
                           : `${(game.price / 100).toFixed(2)}€`}
                       </span>
 
-                      <button
-                        type="button"
-                        onClick={() =>
-                          removeGameFromAccount("wishlist", game._id)
-                        }
+                      <Link
+                        to={`/games/${game._id}`}
+                        className={classes.gameCardBtn}
                       >
-                        Remove from Wishlist
-                      </button>
+                        + Infos
+                      </Link>
                     </div>
+                    <button
+                      className={classes.wishListButton}
+                      type="button"
+                      onClick={() =>
+                        removeGameFromAccount("wishlist", game._id)
+                      }
+                    >
+                      Remove from Wishlist
+                    </button>
                   </div>
                 </div>
               </>
