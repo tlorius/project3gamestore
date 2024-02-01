@@ -45,7 +45,7 @@ const GameDetailsPage = () => {
           <p className={classes.gameTitle}>{game.title}</p>
           <p className={classes.gameDescription}>{game.description}</p>
           {game.price === 0 ? (
-            <p>FREE</p>
+            <p className={classes.smallP}>FREE</p>
           ) : (
             <p className={classes.smallP}>
               Price: <strong>{(game.price / 100).toFixed(2)}€</strong>
@@ -89,15 +89,17 @@ const GameDetailsPage = () => {
               {!user?.ownedGames.some((game) => game._id == gameId) &&
                 game.price === 0 && (
                   <button
+                    className={classes.cartButton}
                     type="button"
                     onClick={() => addGameToAccount("buyfree", gameId)}
                   >
-                    Add Free Game to your Account
+                    Get game
                   </button>
                 )}
 
               {!user?.ownedGames.some((game) => game._id == gameId) &&
-                (!user?.cart.some((game) => game._id == gameId) ? (
+                (!user?.cart.some((game) => game._id == gameId) &&
+                game.price ? (
                   <button
                     className={classes.cartButton}
                     type="button"
@@ -105,7 +107,7 @@ const GameDetailsPage = () => {
                   >
                     Add to Cart
                   </button>
-                ) : (
+                ) : game.price ? (
                   <button
                     className={classes.cartButton}
                     type="button"
@@ -113,6 +115,8 @@ const GameDetailsPage = () => {
                   >
                     Remove from Cart
                   </button>
+                ) : (
+                  false
                 ))}
               {!user?.ownedGames.some((game) => game._id == gameId) &&
                 (!user?.wishlistedGames.some((game) => game._id == gameId) ? (
