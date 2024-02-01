@@ -223,8 +223,11 @@ const AdminDashboardPage = () => {
             </form>
             {userIdToUpdate && (
               <>
-                <h4>Username: {userNameToDisplay}</h4>
-                <p>ID: {userIdToUpdate}</p>
+                <div className={classes.permissionNameCtn}>
+                  <h4>Username: {userNameToDisplay}</h4>
+                  <p>ID: {userIdToUpdate}</p>
+                </div>
+
                 <form className={classes.roleForm} onSubmit={updateRolesOfUser}>
                   <label>
                     <input
