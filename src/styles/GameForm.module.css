@@ -1,16 +1,35 @@
-.formCtn {
+.gameFormCtn {
   display: flex;
   flex-direction: column;
-  row-gap: 1rem;
+  row-gap: 1.5rem;
   width: fit-content;
+  margin: 5rem auto;
+  text-align: right;
+  color: var(--primary-white);
+}
+.gameFormCtn input {
+  margin-left: 5rem;
+}
+
+.releaseInput {
+  width: 12.6rem;
+}
+
+.submitBtn {
+  border-radius: var(--border-radius);
+  width: 20rem;
+  padding: 0.5rem 1rem;
+  margin-top: 10rem;
 }
 
 .tagsCard {
-  border: 1px solid black;
-  border-radius: 5px;
-  padding: 0.2rem;
   width: fit-content;
-  font-size: 0.7rem;
+  font-size: 14px;
+  padding: 5px;
+  background-color: var(--primary-blue);
+  color: #66c0f4;
+  margin-right: 4px;
+  border-radius: 4px;
 }
 
 .tagsCtn {
@@ -18,4 +37,31 @@
   flex-direction: row;
   flex-wrap: wrap;
   gap: 0.5rem;
+  justify-content: center;
+  color: var(--primary-white);
+  margin-top: -17rem;
+}
+
+.formHeader {
+  margin: 1rem 0;
+  font-size: var(--title-two);
+  text-align: center;
+  color: var(--primary-white);
+}
+
+.autoCompleteInput {
+  width: 10rem;
+}
+
+.removeTagBtn {
+  border: none;
+  background: none;
+  cursor: pointer;
+  color: white;
+  transition: transform 0.2s;
+}
+
+.removeTagBtn:hover {
+  color: red;
+  transform: scale(1.5);
 }
