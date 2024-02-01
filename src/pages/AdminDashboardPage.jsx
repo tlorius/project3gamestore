@@ -159,7 +159,7 @@ const AdminDashboardPage = () => {
         <h1 className={classes.adminDashTitle}>Admin Dashboard</h1>
         <div className={classes.dashBodyCtn}>
           <div className={classes.discountDashCtn}>
-            <h3>Discount Codes</h3>
+            <h3 className={classes.sectionHeader}>Discount Codes</h3>
             <p>
               name - discount % - applies to already discounted games? - delete
             </p>{" "}
@@ -209,6 +209,7 @@ const AdminDashboardPage = () => {
             </form>
           </div>
           <div className={classes.roleDashCtn}>
+            <h4 className={classes.sectionHeader}>Permission Manager</h4>
             <form onSubmit={findUserByUserName}>
               <label>
                 Username:{" "}
@@ -224,30 +225,30 @@ const AdminDashboardPage = () => {
               <>
                 <h4>Username: {userNameToDisplay}</h4>
                 <p>ID: {userIdToUpdate}</p>
-                <form onSubmit={updateRolesOfUser}>
+                <form className={classes.roleForm} onSubmit={updateRolesOfUser}>
                   <label>
-                    ENDUSER{" "}
                     <input
                       type="checkbox"
                       checked={enduserRole}
                       onChange={(event) => setEnduserRole(event.target.checked)}
-                    />
+                    />{" "}
+                    ENDUSER
                   </label>
                   <label>
-                    GAMEDEVELOPER{" "}
                     <input
                       type="checkbox"
                       checked={gameDevRole}
                       onChange={(event) => setGameDevRole(event.target.checked)}
-                    />
+                    />{" "}
+                    GAMEDEVELOPER
                   </label>
                   <label>
-                    ADMIN{" "}
                     <input
                       type="checkbox"
                       checked={adminRole}
                       onChange={(event) => setAdminRole(event.target.checked)}
-                    />
+                    />{" "}
+                    ADMIN
                   </label>
                   <input type="submit" value={"Update Roles"} />
                 </form>
@@ -257,7 +258,7 @@ const AdminDashboardPage = () => {
           <div className={classes.revenueDashCtn}>
             {revenue && (
               <div>
-                <h4>Revenues</h4>
+                <h4 className={classes.sectionHeader}>Revenues</h4>
                 <p>Total Revenue: {(revenue.sumAllTime / 100).toFixed(2)}€</p>
                 <p>
                   Revenue in the last 30 days:{" "}
@@ -267,7 +268,7 @@ const AdminDashboardPage = () => {
             )}
           </div>
           <div className={classes.invoicesDashCtn}>
-            <h4>Recent Invoices</h4>
+            <h4 className={classes.sectionHeader}>Recent Invoices</h4>
             <p>User - Items - Total - Discount</p>
             {lastInvoices &&
               lastInvoices.map((invoice) => (
