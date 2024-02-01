@@ -68,7 +68,7 @@
   border: none;
   background: none;
   cursor: pointer;
-  color: white;
+  color: var(--primary-white);
   transition: transform 0.2s;
 }
 
