@@ -262,9 +262,14 @@ const AdminDashboardPage = () => {
             {revenue && (
               <div>
                 <h4 className={classes.sectionHeader}>Revenues</h4>
-                <p>Total Revenue: {(revenue.sumAllTime / 100).toFixed(2)}€</p>
-                <p>
-                  Revenue in the last 30 days:{" "}
+                <p className={classes.revTxt}>
+                  <span className={classes.boldTxt}>Total Revenue: </span>
+                  {(revenue.sumAllTime / 100).toFixed(2)}€
+                </p>
+                <p className={classes.revTxt}>
+                  <span className={classes.boldTxt}>
+                    Revenue in the last 30 days:
+                  </span>{" "}
                   {(revenue.sumThirtyDays / 100).toFixed(2)}€
                 </p>
               </div>
@@ -272,15 +277,21 @@ const AdminDashboardPage = () => {
           </div>
           <div className={classes.invoicesDashCtn}>
             <h4 className={classes.sectionHeader}>Recent Invoices</h4>
-            <p>User - Items - Total - Discount</p>
+            <p className={classes.invHeader}>
+              <span>User</span>
+              <span>Items</span>
+              <span>Total</span>
+              <span>Discount</span>
+            </p>
             {lastInvoices &&
               lastInvoices.map((invoice) => (
-                <div key={invoice._id}>
-                  <p>
-                    {invoice.createdBy} - {invoice.items} -{" "}
-                    {(invoice.totalInEuroCentAfterDiscount / 100).toFixed(2)}€ -{" "}
-                    {invoice.discountCodePercentage}%
-                  </p>
+                <div className={classes.invItem} key={invoice._id}>
+                  <span> {invoice.createdBy}</span>
+                  <span>{invoice.items}</span>
+                  <span>
+                    {(invoice.totalInEuroCentAfterDiscount / 100).toFixed(2)}€
+                  </span>
+                  <span>{invoice.discountCodePercentage}%</span>
                 </div>
               ))}
           </div>

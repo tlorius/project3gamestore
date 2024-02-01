@@ -58,3 +58,22 @@
 .permissionNameCtn {
   margin-top: 1rem;
 }
+
+.boldTxt {
+  font-weight: 600;
+}
+
+.revTxt {
+  text-align: center;
+}
+
+.invItem,
+.invHeader {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: 1fr;
+}
+
+.invHeader {
+  margin-bottom: 1rem;
+}
