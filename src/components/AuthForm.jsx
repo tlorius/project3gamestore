@@ -209,7 +209,11 @@ const AuthForm = ({ isLogin = false }) => {
             onComplete={handleMFACode}
           />
         </label>
-        <button type="button" onClick={() => navigate("/")}>
+        <button
+          className={classes.abortMFABtn}
+          type="button"
+          onClick={() => navigate("/")}
+        >
           Abort Login
         </button>
       </Modal>
