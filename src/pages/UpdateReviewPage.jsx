@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import { useParams } from "react-router-dom";
 import ReviewForm from "../components/ReviewForm";
 import { AuthContext } from "../providers/AuthContext";
+import classes from "../styles/updateReviews.module.css";
 
 const UpdateReviewPage = () => {
   const { gameId, reviewId } = useParams();
@@ -27,10 +28,13 @@ const UpdateReviewPage = () => {
   }, [gameId, reviewId, requestWithToken]);
 
   return (
-    <div>
-      <h1>Update Review</h1>
+    <div className={classes.pageCtn}>
       {reviewData ? (
-        <ReviewForm reviewData={reviewData} isUpdate={true} />
+        <ReviewForm
+          className={classes.reviewCommentBox}
+          reviewData={reviewData}
+          isUpdate={true}
+        />
       ) : (
         <p>Loading...</p>
       )}

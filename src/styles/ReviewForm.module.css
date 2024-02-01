@@ -1,0 +1,58 @@
+.pageCtn {
+  background-color: var(--primary-blue);
+  color: white;
+  padding-top: 0.2rem;
+  padding-left: 2rem;
+  padding-right: 2rem;
+  height: 45vw;
+}
+
+.reviewTitle {
+  font-weight: bold;
+  margin-bottom: 2rem;
+}
+
+.formCtn {
+  margin-top: 2rem;
+  padding-top: 2rem;
+  padding-left: 2rem;
+  width: 40%;
+  background-color: var(--secondary-blue);
+  display: flex;
+  flex-direction: column;
+}
+
+.textArea {
+  width: 30rem;
+  height: 20rem;
+  background-color: black;
+  opacity: 50%;
+  color: white;
+}
+
+.addUpdateButton {
+  height: 2rem;
+  width: 10em;
+  color: white;
+  font-size: 0.8rem;
+  font-weight: bold;
+  background-color: var(--highlighting-color);
+  border: none;
+  border-radius: var(--border-radius);
+  opacity: 60%;
+}
+
+.addUpdateButton:hover {
+  opacity: 100%;
+  cursor: pointer;
+}
+
+.bottomText {
+  margin-top: 1rem;
+  margin-bottom: 2rem;
+  width: 30rem;
+  gap: 8rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

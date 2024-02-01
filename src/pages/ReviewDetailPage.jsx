@@ -10,6 +10,7 @@ const ReviewDetailPage = () => {
   const { requestWithToken } = useContext(AuthContext);
   const [game, setGame] = useState({});
   const navigate = useNavigate();
+  const [isCommentExpanded, setIsCommentExpanded] = useState(false);
 
   useEffect(() => {
     const fetchReview = async () => {
@@ -61,6 +62,10 @@ const ReviewDetailPage = () => {
     }
   };
 
+  const toggleCommentDisplay = () => {
+    setIsCommentExpanded(!isCommentExpanded);
+  };
+
   return (
     <div className={classes.pageCtn}>
       <h1 className={classes.pageTitle}>YOUR REVIEW</h1>
@@ -98,22 +103,31 @@ const ReviewDetailPage = () => {
               Recommended: {review.recommend ? "✅" : "❌"}
             </p>
             <div className={classes.reviewComment}>
-              <span>{review.comment}</span>
+              {review.comment ? (
+                isCommentExpanded ? (
+                  <span>{review.comment}</span>
+                ) : (
+                  <span>
+                    {review.comment.length > 200
+                      ? review.comment.substring(0, 200) + "..."
+                      : review.comment}
+                  </span>
+                )
+              ) : (
+                <span>Loading comment...</span>
+              )}
             </div>
-          </div>
-          <div className={classes.reviewActionButton}>
-            {game && (
-              <>
-                {" "}
-                <Link
-                  className={classes.gameDetailsButton}
-                  to={`/games/${game._id}`}
-                >
-                  View Game Details
-                </Link>
-              </>
+            {/* Toggle button for showing more or less */}
+            {review.comment && review.comment.length > 200 && (
+              <button
+                onClick={toggleCommentDisplay}
+                className={classes.readMoreButton}
+              >
+                {isCommentExpanded ? "Show Less" : "Read More"}
+              </button>
             )}
           </div>
+          <div className={classes.reviewActionButton}></div>
         </div>
       )}
     </div>

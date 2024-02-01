@@ -41,29 +41,34 @@ const ReviewForm = ({ reviewData = null, isUpdate = false }) => {
   };
 
   return (
-    <div>
-      <h2>Form to {isUpdate ? "update" : "add"} review</h2>
+    <div className={classes.pageCtn}>
       <form onSubmit={handleSubmit} className={classes.formCtn}>
         <label>
-          Review Content
+          <h2 className={classes.reviewTitle}>
+            {isUpdate ? "Update" : "Add"} your review
+          </h2>
           <textarea
+            className={classes.textArea}
             required
             value={content}
             onChange={(event) => setContent(event.target.value)}
           />
         </label>
-        <label>
-          Recommend this game?
+        <div className={classes.bottomText}>
+          <label>
+            Recommend this game?
+            <input
+              type="checkbox"
+              checked={isRecommended}
+              onChange={() => setIsRecommended(!isRecommended)}
+            />
+          </label>
           <input
-            type="checkbox"
-            checked={isRecommended}
-            onChange={() => setIsRecommended(!isRecommended)}
+            className={classes.addUpdateButton}
+            type="submit"
+            value={isUpdate ? "Update Review" : "Add Review"}
           />
-        </label>
-        <input
-          type="submit"
-          value={isUpdate ? "Update Review" : "Add Review"}
-        />
+        </div>
       </form>
     </div>
   );

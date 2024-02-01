@@ -1,12 +1,12 @@
 .reviewCtn {
-  width: 90%;
+  width: 70%;
   height: auto;
   display: flex;
   flex-direction: row;
   margin-top: 2rem;
   margin-left: 2rem;
   padding-bottom: 4rem;
-  background-color: #293f52;
+  background-color: #25394b;
   padding-top: 4rem;
   margin-bottom: 10rem;
   padding-left: 2rem;
@@ -15,16 +15,13 @@
 
 .pageCtn {
   background-color: var(--primary-blue);
-  width: 90%;
+  width: 100%;
   display: flex;
   flex-direction: column;
-  translate: 5rem;
-  margin-top: 2rem;
 }
 
 .pageTitle {
   font-size: 4rem;
-  opacity: 80%;
   padding-left: 3rem;
   padding-top: 3rem;
   color: white;
@@ -40,7 +37,7 @@
 
 img {
   width: auto;
-  height: 15rem;
+  height: 20rem;
 }
 
 .reviewContent {
@@ -98,7 +95,7 @@ img {
 
 .deleteReviewButton:hover {
   opacity: 100%;
-  cursor: grab;
+  cursor: pointer;
 }
 
 .updateReviewButton {
@@ -115,7 +112,7 @@ img {
 
 .updateReviewButton:hover {
   opacity: 100%;
-  cursor: grab;
+  cursor: pointer;
 }
 
 .reviewComment {
@@ -123,4 +120,21 @@ img {
   max-width: 40rem;
   word-break: break-word;
   overflow-wrap: break-word;
+}
+
+.readMoreButton {
+  height: 1.5rem;
+  width: 5rem;
+  color: white;
+  font-size: 0.7rem;
+  background-color: unset;
+  border-radius: var(--border-radius);
+  justify-content: flex-end;
+  margin-top: 0rem;
+  margin-left: -0.7rem;
+  border: unset;
+  opacity: 40%;
+}
+.readMoreButton:hover {
+  cursor: pointer;
 }
