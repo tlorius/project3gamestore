@@ -8,3 +8,19 @@
   font-size: var(--title-two);
   text-align: center;
 }
+
+.dashBodyCtn {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  border: 1px solid white; /*remove after*/
+  gap: 1rem;
+}
+
+.discountDashCtn {
+  border: white solid 1px;
+}
+
+.roleDashCtn {
+  border: white solid 1px;
+}

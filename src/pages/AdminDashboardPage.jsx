@@ -156,7 +156,13 @@ const AdminDashboardPage = () => {
   return isAuthenticated ? (
     <>
       <div className={classes.adminPageCtn}>
-        <h1>Admin Dashboard</h1>
+        <h1 className={classes.adminDashTitle}>Admin Dashboard</h1>
+        <div className={classes.dashBodyCtn}>
+          <div className={classes.discountDashCtn}>TL</div>
+          <div className={classes.roleDashCtn}>TR</div>
+          <div>BL</div>
+          <div>BR</div>
+        </div>
         <h3>Discount Codes</h3>
         <p>name - discount % - applies to already discounted games? - delete</p>
         <div>
