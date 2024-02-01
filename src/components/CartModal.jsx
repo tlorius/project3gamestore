@@ -32,8 +32,8 @@ const CartModal = () => {
             className={classes.cartBtnImg}
             src={shoppingcart}
             alt="shopping cart"
-          />
-          CART [{cartCount}]
+          />{" "}
+          <span className={classes.cartBtnText}>[{cartCount}]</span>
         </button>
       )}
       <Modal opened={opened} onClose={close} title="Cart">

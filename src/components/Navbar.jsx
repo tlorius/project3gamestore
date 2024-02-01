@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import classes from "../styles/Navbar.module.css";
 import { useContext } from "react";
 import { AuthContext } from "../providers/AuthContext";
@@ -8,12 +8,15 @@ import CartModal from "./CartModal";
 const Navbar = () => {
   const { isAuthenticated, logout, userId } = useContext(AuthContext);
   const { wishlistCount } = useContext(UserContext);
+  const navigate = useNavigate();
 
   return (
     //content is temporary: once auth is implemented ->
     //Store - Categories - if loggedin (Profile)/ if not (Login) - if logged in: wishlist +cart
     <nav className={classes.navCtn}>
-      <h4 className={classes.title}>Vanguard</h4>
+      <h4 onClick={() => navigate("/")} className={classes.title}>
+        Vanguard
+      </h4>
       <Link className={classes.navLink} to="/">
         Store
       </Link>
@@ -27,14 +30,14 @@ const Navbar = () => {
             Wishlist [{wishlistCount}]
           </Link>
           <CartModal />
-          <button className={classes.logoutBtn} type="button" onClick={logout}>
+          <button className={classes.authBtn} type="button" onClick={logout}>
             Logout
           </button>
         </>
       ) : (
-        <Link className={classes.navLink} to="/login">
+        <button onClick={() => navigate("/login")} className={classes.authBtn}>
           Login
-        </Link>
+        </button>
       )}
     </nav>
   );
