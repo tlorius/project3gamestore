@@ -2,6 +2,7 @@
   background-color: #25394b;
   display: flex;
   justify-content: center;
+  min-height: 90svh;
 }
 
 .profileCtn {
