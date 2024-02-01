@@ -41,10 +41,11 @@ const StorefrontPage = () => {
   }, [page]);
 
   return (
-    <>
+    <div className={classes.storeFrontContainer}>
       <div className={classes.topContainer}>
-        <h1>ALL GAMES</h1>
+        <span>FILTER BY</span>
         <input
+          placeholder="Name"
           value={search}
           type="text"
           onChange={(event) => {
@@ -52,7 +53,7 @@ const StorefrontPage = () => {
           }}
         />
         <select onChange={(event) => setSelectedCategory(event.target.value)}>
-          <option value="">Any</option>
+          <option value="">Genre</option>
           {categories.map((category, index) => (
             <option value={category} key={index}>
               {category}
@@ -61,7 +62,8 @@ const StorefrontPage = () => {
         </select>
 
         <RangeSlider
-          style={{ width: `20%` }}
+          className={classes.slider}
+          color={`var(--primary-color)`}
           marks={[
             { value: 0, label: "€0" },
             { value: 50, label: "€50" },
@@ -77,144 +79,320 @@ const StorefrontPage = () => {
               .filter((game) => filteredGamesByCategory.includes(game))
               .filter((game) => filteredGamesByPrice.includes(game))
               .map((game) => (
-                <Link key={game._id} to={`/games/${game._id}`}>
+                <div key={game._id}>
                   <div className={classes.gameCard}>
                     <div
                       className={classes.gameCardImage}
                       style={{ backgroundImage: `url(${game.imageUrl})` }}
                     />
-                    <span className={classes.gameCardTitle}>{game.title}</span>
-                    <span className={classes.gameCardPrice}>
-                      {game.price === 0
-                        ? "FREE"
-                        : `${(game.price / 100).toFixed(2)}€`}
-                    </span>
+                    <div className={classes.gameCardInfo}>
+                      <span className={classes.gameCardTitle}>
+                        {game.title.toUpperCase()}
+                      </span>
+                      <section className={classes.gameCardTags}>
+                        {game.tags.map((tag, index) => {
+                          return (
+                            <span className={classes.gameCardTag} key={index}>
+                              {tag}
+                            </span>
+                          );
+                        })}
+                      </section>
+                      <div className={classes.gameCardPriceContainer}>
+                        <span className={classes.gameCardPrice}>
+                          {game.price === 0
+                            ? "FREE"
+                            : `${(game.price / 100).toFixed(2)}€`}
+                        </span>
+
+                        <Link
+                          to={`/games/${game._id}`}
+                          className={classes.gameCardBtn}
+                        >
+                          + Infos
+                        </Link>
+                      </div>
+                    </div>
                   </div>
-                </Link>
+                </div>
               ))
           : search && selectedCategory
           ? filteredGamesByName
               .filter((game) => filteredGamesByCategory.includes(game))
               .map((game) => (
-                <Link key={game._id} to={`/games/${game._id}`}>
+                <div key={game._id}>
                   <div className={classes.gameCard}>
                     <div
                       className={classes.gameCardImage}
                       style={{ backgroundImage: `url(${game.imageUrl})` }}
                     />
-                    <span className={classes.gameCardTitle}>{game.title}</span>
-                    <span className={classes.gameCardPrice}>
-                      {game.price === 0
-                        ? "FREE"
-                        : `${(game.price / 100).toFixed(2)}€`}
-                    </span>
+                    <div className={classes.gameCardInfo}>
+                      <span className={classes.gameCardTitle}>
+                        {game.title.toUpperCase()}
+                      </span>
+                      <section className={classes.gameCardTags}>
+                        {game.tags.map((tag, index) => {
+                          return (
+                            <span className={classes.gameCardTag} key={index}>
+                              {tag}
+                            </span>
+                          );
+                        })}
+                      </section>
+                      <div className={classes.gameCardPriceContainer}>
+                        <span className={classes.gameCardPrice}>
+                          {game.price === 0
+                            ? "FREE"
+                            : `${(game.price / 100).toFixed(2)}€`}
+                        </span>
+
+                        <Link
+                          to={`/games/${game._id}`}
+                          className={classes.gameCardBtn}
+                        >
+                          + info
+                        </Link>
+                      </div>
+                    </div>
                   </div>
-                </Link>
+                </div>
               ))
           : search && price
           ? filteredGamesByName
               .filter((game) => filteredGamesByPrice.includes(game))
               .map((game) => (
-                <Link key={game._id} to={`/games/${game._id}`}>
+                <div key={game._id}>
                   <div className={classes.gameCard}>
                     <div
                       className={classes.gameCardImage}
                       style={{ backgroundImage: `url(${game.imageUrl})` }}
                     />
-                    <span className={classes.gameCardTitle}>{game.title}</span>
-                    <span className={classes.gameCardPrice}>
-                      {game.price === 0
-                        ? "FREE"
-                        : `${(game.price / 100).toFixed(2)}€`}
-                    </span>
+                    <div className={classes.gameCardInfo}>
+                      <span className={classes.gameCardTitle}>
+                        {game.title.toUpperCase()}
+                      </span>
+                      <section className={classes.gameCardTags}>
+                        {game.tags.map((tag, index) => {
+                          return (
+                            <span className={classes.gameCardTag} key={index}>
+                              {tag}
+                            </span>
+                          );
+                        })}
+                      </section>
+                      <div className={classes.gameCardPriceContainer}>
+                        <span className={classes.gameCardPrice}>
+                          {game.price === 0
+                            ? "FREE"
+                            : `${(game.price / 100).toFixed(2)}€`}
+                        </span>
+
+                        <Link
+                          to={`/games/${game._id}`}
+                          className={classes.gameCardBtn}
+                        >
+                          + info
+                        </Link>
+                      </div>
+                    </div>
                   </div>
-                </Link>
+                </div>
               ))
           : selectedCategory && price
           ? filteredGamesByCategory
               .filter((game) => filteredGamesByPrice.includes(game))
               .map((game) => (
-                <Link key={game._id} to={`/games/${game._id}`}>
+                <div key={game._id}>
                   <div className={classes.gameCard}>
                     <div
                       className={classes.gameCardImage}
                       style={{ backgroundImage: `url(${game.imageUrl})` }}
                     />
-                    <span className={classes.gameCardTitle}>{game.title}</span>
-                    <span className={classes.gameCardPrice}>
-                      {game.price === 0
-                        ? "FREE"
-                        : `${(game.price / 100).toFixed(2)}€`}
-                    </span>
+                    <div className={classes.gameCardInfo}>
+                      <span className={classes.gameCardTitle}>
+                        {game.title.toUpperCase()}
+                      </span>
+                      <section className={classes.gameCardTags}>
+                        {game.tags.map((tag, index) => {
+                          return (
+                            <span className={classes.gameCardTag} key={index}>
+                              {tag}
+                            </span>
+                          );
+                        })}
+                      </section>
+                      <div className={classes.gameCardPriceContainer}>
+                        <span className={classes.gameCardPrice}>
+                          {game.price === 0
+                            ? "FREE"
+                            : `${(game.price / 100).toFixed(2)}€`}
+                        </span>
+
+                        <Link
+                          to={`/games/${game._id}`}
+                          className={classes.gameCardBtn}
+                        >
+                          + info
+                        </Link>
+                      </div>
+                    </div>
                   </div>
-                </Link>
+                </div>
               ))
           : search
           ? filteredGamesByName.map((game) => (
-              <Link key={game._id} to={`/games/${game._id}`}>
+              <div key={game._id}>
                 <div className={classes.gameCard}>
                   <div
                     className={classes.gameCardImage}
                     style={{ backgroundImage: `url(${game.imageUrl})` }}
                   />
-                  <span className={classes.gameCardTitle}>{game.title}</span>
-                  <span className={classes.gameCardPrice}>
-                    {game.price === 0
-                      ? "FREE"
-                      : `${(game.price / 100).toFixed(2)}€`}
-                  </span>
+                  <div className={classes.gameCardInfo}>
+                    <span className={classes.gameCardTitle}>
+                      {game.title.toUpperCase()}
+                    </span>
+                    <section className={classes.gameCardTags}>
+                      {game.tags.map((tag, index) => {
+                        return (
+                          <span className={classes.gameCardTag} key={index}>
+                            {tag}
+                          </span>
+                        );
+                      })}
+                    </section>
+                    <div className={classes.gameCardPriceContainer}>
+                      <span className={classes.gameCardPrice}>
+                        {game.price === 0
+                          ? "FREE"
+                          : `${(game.price / 100).toFixed(2)}€`}
+                      </span>
+
+                      <Link
+                        to={`/games/${game._id}`}
+                        className={classes.gameCardBtn}
+                      >
+                        + info
+                      </Link>
+                    </div>
+                  </div>
                 </div>
-              </Link>
+              </div>
             ))
           : selectedCategory
           ? filteredGamesByCategory.map((game) => (
-              <Link key={game._id} to={`/games/${game._id}`}>
+              <div key={game._id}>
                 <div className={classes.gameCard}>
                   <div
                     className={classes.gameCardImage}
                     style={{ backgroundImage: `url(${game.imageUrl})` }}
                   />
-                  <span className={classes.gameCardTitle}>{game.title}</span>
-                  <span className={classes.gameCardPrice}>
-                    {game.price === 0
-                      ? "FREE"
-                      : `${(game.price / 100).toFixed(2)}€`}
-                  </span>
+                  <div className={classes.gameCardInfo}>
+                    <span className={classes.gameCardTitle}>
+                      {game.title.toUpperCase()}
+                    </span>
+                    <section className={classes.gameCardTags}>
+                      {game.tags.map((tag, index) => {
+                        return (
+                          <span className={classes.gameCardTag} key={index}>
+                            {tag}
+                          </span>
+                        );
+                      })}
+                    </section>
+                    <div className={classes.gameCardPriceContainer}>
+                      <span className={classes.gameCardPrice}>
+                        {game.price === 0
+                          ? "FREE"
+                          : `${(game.price / 100).toFixed(2)}€`}
+                      </span>
+
+                      <Link
+                        to={`/games/${game._id}`}
+                        className={classes.gameCardBtn}
+                      >
+                        + info
+                      </Link>
+                    </div>
+                  </div>
                 </div>
-              </Link>
+              </div>
             ))
           : price
           ? filteredGamesByPrice.map((game) => (
-              <Link key={game._id} to={`/games/${game._id}`}>
+              <div key={game._id}>
                 <div className={classes.gameCard}>
                   <div
                     className={classes.gameCardImage}
                     style={{ backgroundImage: `url(${game.imageUrl})` }}
                   />
-                  <span className={classes.gameCardTitle}>{game.title}</span>
-                  <span className={classes.gameCardPrice}>
-                    {game.price === 0
-                      ? "FREE"
-                      : `${(game.price / 100).toFixed(2)}€`}
-                  </span>
+                  <div className={classes.gameCardInfo}>
+                    <span className={classes.gameCardTitle}>
+                      {game.title.toUpperCase()}
+                    </span>
+                    <section className={classes.gameCardTags}>
+                      {game.tags.map((tag, index) => {
+                        return (
+                          <span className={classes.gameCardTag} key={index}>
+                            {tag}
+                          </span>
+                        );
+                      })}
+                    </section>
+                    <div className={classes.gameCardPriceContainer}>
+                      <span className={classes.gameCardPrice}>
+                        {game.price === 0
+                          ? "FREE"
+                          : `${(game.price / 100).toFixed(2)}€`}
+                      </span>
+
+                      <Link
+                        to={`/games/${game._id}`}
+                        className={classes.gameCardBtn}
+                      >
+                        + info
+                      </Link>
+                    </div>
+                  </div>
                 </div>
-              </Link>
+              </div>
             ))
           : allGames.map((game) => (
-              <Link key={game._id} to={`/games/${game._id}`}>
+              <div key={game._id}>
                 <div className={classes.gameCard}>
                   <div
                     className={classes.gameCardImage}
                     style={{ backgroundImage: `url(${game.imageUrl})` }}
                   />
-                  <span className={classes.gameCardTitle}>{game.title}</span>
-                  <span className={classes.gameCardPrice}>
-                    {game.price === 0
-                      ? "FREE"
-                      : `${(game.price / 100).toFixed(2)}€`}
-                  </span>
+                  <div className={classes.gameCardInfo}>
+                    <span className={classes.gameCardTitle}>
+                      {game.title.toUpperCase()}
+                    </span>
+                    <section className={classes.gameCardTags}>
+                      {game.tags.map((tag, index) => {
+                        return (
+                          <span className={classes.gameCardTag} key={index}>
+                            {tag}
+                          </span>
+                        );
+                      })}
+                    </section>
+                    <div className={classes.gameCardPriceContainer}>
+                      <span className={classes.gameCardPrice}>
+                        {game.price === 0
+                          ? "FREE"
+                          : `${(game.price / 100).toFixed(2)}€`}
+                      </span>
+
+                      <Link
+                        to={`/games/${game._id}`}
+                        className={classes.gameCardBtn}
+                      >
+                        + info
+                      </Link>
+                    </div>
+                  </div>
                 </div>
-              </Link>
+              </div>
             ))}
       </div>
 
@@ -223,7 +401,7 @@ const StorefrontPage = () => {
         <p>{page}</p>
         <span onClick={() => handlePlusPageClick()}>&gt;</span>
       </div>
-    </>
+    </div>
   );
 };
 
