@@ -41,7 +41,7 @@ const UserInvoicesPage = () => {
 
   return isAuthenticated ? (
     <>
-      <h1>All invoices of a user</h1>
+      <h1 className={classes.invoicePgTitle}>All Your Invoices</h1>
       {invoices &&
         invoices.map((invoice) => {
           return (
@@ -50,13 +50,17 @@ const UserInvoicesPage = () => {
               className={classes.invoiceCtn}
               onClick={() => openModal(invoice._id)}
             >
-              <p>
-                Date: {formatDate(invoice.createdAt)} - Items:{" "}
-                {invoice.fromOrder.items.length} - Total Paid:{" "}
-                {(invoice.fromOrder.totalInEuroCentAfterDiscount / 100).toFixed(
-                  2
-                )}
-                €
+              <p className={classes.invoiceCtnText}>
+                <span>{"VANG" + invoice._id.slice(-12).toUpperCase()}</span>
+                <span>Date: {formatDate(invoice.createdAt)}</span>
+                <span>Items: {invoice.fromOrder.items.length}</span>
+                <span>
+                  Total Paid:{" "}
+                  {(
+                    invoice.fromOrder.totalInEuroCentAfterDiscount / 100
+                  ).toFixed(2)}
+                  €
+                </span>
               </p>
             </div>
           );

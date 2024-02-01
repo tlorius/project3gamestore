@@ -1,17 +1,17 @@
-:root{
-    --primary-color: #171a21;
-    --primary-blue: #25394B;
-    --secondary-blue: #293f52;
-    
-    --primary-grey: #474346;
-    --primary-white: #c7d5e0;
-    --primary-black: #1b2838;
+:root {
+  --primary-color: #171a21;
+  --primary-blue: #25394b;
+  --secondary-blue: #293f52;
 
-    --border-radius: 1rem;
+  --primary-grey: #474346;
+  --primary-white: #c7d5e0;
+  --primary-black: #1b2838;
 
-    --title-one: 3rem;
-    --title-two: 2rem;
-    --title-three: 1rem;
+  --border-radius: 1rem;
 
-    font-family: 'Roboto', sans-serif;
+  --title-one: 3rem;
+  --title-two: 2rem;
+  --title-three: 1rem;
+
+  font-family: "Roboto", sans-serif;
 }
