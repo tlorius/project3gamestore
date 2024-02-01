@@ -61,9 +61,7 @@
   color: white;
   font-size: 0.8rem;
   font-weight: bold;
-  background-color: var(
-    --default-button-color
-  ); /* Default color for the button */
+  background-color: var(--default-button-color);
   border: none;
   opacity: 60%;
   cursor: pointer;
