@@ -74,8 +74,10 @@ const WishlistPage = () => {
           })
         ) : (
           <div>
-            <h2>You have no games wishlisted right now.</h2>
-            <Link to="/">
+            <h2 className={classes.noGamesText}>
+              You have no games wishlisted right now.
+            </h2>
+            <Link className={classes.noGamesLink} to="/">
               In the store you can wishlist your favorite games!
             </Link>
           </div>
