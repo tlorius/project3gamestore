@@ -1,6 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../providers/AuthContext";
+import classes from "../styles/UserReviews.module.css";
 
 const UserReviewsPage = () => {
   const [reviews, setReviews] = useState([]);
@@ -20,24 +21,31 @@ const UserReviewsPage = () => {
   }, [userId]);
 
   return (
-    <>
-      <h1>Show all reviews a user has done</h1>
-      <div>
+    <div className={classes.pageCtn}>
+      <h1 className={classes.titleText}>ALL YOUR REVIEWS</h1>
+      <div className={classes.reviewCtn}>
         {reviews &&
           reviews.map((review) => {
             return (
               <Link
+                className={classes.oneReview}
                 to={`/games/${review.game._id}/reviews/${review._id}`}
                 key={review._id}
               >
-                <p>Game: {review.game.title}</p>
-                <p>Comment: {review.comment}</p>
-                <p>Recommended?: {review.recommend ? "✅" : "❌"}</p>
+                <div className={classes.oneReview}>
+                  {" "}
+                  <p>Game: {review.game.title}</p>
+                  <div>
+                    {" "}
+                    <p>Recommended?: {review.recommend ? "✅" : "❌"}</p>
+                    <p>Comment: {review.comment}</p>{" "}
+                  </div>
+                </div>
               </Link>
             );
           })}
-      </div>
-    </>
+      </div>{" "}
+    </div>
   );
 };
 

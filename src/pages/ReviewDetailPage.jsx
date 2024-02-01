@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { AuthContext } from "../providers/AuthContext";
 import axios from "axios";
+import classes from "../styles/ReviewDetails.module.css";
 
 const ReviewDetailPage = () => {
   const [review, setReview] = useState({});
@@ -9,6 +10,7 @@ const ReviewDetailPage = () => {
   const { requestWithToken } = useContext(AuthContext);
   const [game, setGame] = useState({});
   const navigate = useNavigate();
+  const [isCommentExpanded, setIsCommentExpanded] = useState(false);
 
   useEffect(() => {
     const fetchReview = async () => {
@@ -60,24 +62,72 @@ const ReviewDetailPage = () => {
     }
   };
 
+  const toggleCommentDisplay = () => {
+    setIsCommentExpanded(!isCommentExpanded);
+  };
+
   return (
-    <div>
-      <h1>Review Details</h1>
+    <div className={classes.pageCtn}>
+      <h1 className={classes.pageTitle}>YOUR REVIEW</h1>
       {review && (
-        <div>
-          <p>{review.comment}</p>
-          <p>Recommended: {review.recommend ? "✅" : "❌"}</p>
-          {game && (
-            <>
-              <img src={game.imageUrl} alt={game.title} />
-              <h2>{game.title}</h2>
-              <Link to={`/games/${game._id}`}>View Game Details</Link>
-            </>
-          )}
-          <Link to={`/games/${game._id}/updatereview/${reviewId}`}>
-            Update review
+        <div className={classes.reviewCtn}>
+          <Link to={`/games/${game._id}`}>
+            <img src={game.imageUrl} alt={game.title} />
           </Link>
-          <button onClick={handleDeleteReview}>Delete Review</button>
+          <div className={classes.reviewContent}>
+            <div className={classes.createrInfo}>
+              <div className={classes.titleHeader}>
+                <h2 className={classes.reviewGameTitle}>{game.title}</h2>
+                <button
+                  className={classes.deleteReviewButton}
+                  onClick={handleDeleteReview}
+                >
+                  Delete Review
+                </button>
+                <Link to={`/games/${game._id}/updatereview/${reviewId}`}>
+                  <button className={classes.updateReviewButton}>
+                    Update review{" "}
+                  </button>
+                </Link>
+              </div>
+              <p>
+                Publisher:{" "}
+                <span className={classes.highlighted}>{game.publisher} </span>
+              </p>
+              <p>
+                Developer:{" "}
+                <span className={classes.highlighted}>{game.developer}</span>
+              </p>
+            </div>
+            <p className={classes.recommended}>
+              Recommended: {review.recommend ? "✅" : "❌"}
+            </p>
+            <div className={classes.reviewComment}>
+              {review.comment ? (
+                isCommentExpanded ? (
+                  <span>{review.comment}</span>
+                ) : (
+                  <span>
+                    {review.comment.length > 200
+                      ? review.comment.substring(0, 200) + "..."
+                      : review.comment}
+                  </span>
+                )
+              ) : (
+                <span>Loading comment...</span>
+              )}
+            </div>
+            {/* Toggle button for showing more or less */}
+            {review.comment && review.comment.length > 200 && (
+              <button
+                onClick={toggleCommentDisplay}
+                className={classes.readMoreButton}
+              >
+                {isCommentExpanded ? "Show Less" : "Read More"}
+              </button>
+            )}
+          </div>
+          <div className={classes.reviewActionButton}></div>
         </div>
       )}
     </div>
