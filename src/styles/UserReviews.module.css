@@ -1,0 +1,30 @@
+.pageCtn {
+  background-color: var(--primary-blue);
+  height: 45vw;
+  padding-left: 3rem;
+  padding-top: 3rem;
+}
+
+.titleText {
+  color: white;
+  font-size: 4rem;
+  font-weight: bold;
+}
+
+.oneReview {
+  text-decoration: none;
+  color: white;
+}
+
+.reviewCtn {
+  width: 80%;
+  background-color: var(--secondary-blue);
+  word-break: break-word;
+  overflow-wrap: break-word;
+  text-decoration: none;
+}
+
+.oneReview {
+  margin-top: 2rem;
+  padding: 2rem;
+}

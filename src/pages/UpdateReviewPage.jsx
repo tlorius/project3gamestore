@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import { useParams } from "react-router-dom";
 import ReviewForm from "../components/ReviewForm";
 import { AuthContext } from "../providers/AuthContext";
-import classes from "../styles/updateReviews.module.css";
+import classes from "../styles/ReviewForm.module.css";
 
 const UpdateReviewPage = () => {
   const { gameId, reviewId } = useParams();
