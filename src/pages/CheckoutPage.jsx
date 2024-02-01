@@ -5,6 +5,7 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router";
 import { Loader } from "@mantine/core";
+import classes from "../styles/CheckoutPage.module.css";
 
 const CheckoutPage = () => {
   const { userId, requestWithToken, isAuthenticated } = useContext(AuthContext);
@@ -131,44 +132,69 @@ const CheckoutPage = () => {
 
   return isAuthenticated && user ? (
     <>
-      <h1>Checkout</h1>
-      <div>
-        {user.cart.map((item) => (
-          <div key={item._id}>
-            <h4>
-              {item.title} -{" "}
-              {(
-                (item.price * (1 - item.discountInPercent / 100)) /
-                100
-              ).toFixed(2)}
-              €
-            </h4>
-            <button onClick={() => handleRemoveFromCart(item._id)}>x</button>
-          </div>
-        ))}
-      </div>
-      <form onSubmit={validateDiscountCode}>
-        <label>
-          Enter Discount Code:{" "}
+      <div className={classes.checkoutCtn}>
+        <h1 className={classes.checkoutHeader}>Checkout</h1>
+        <div>
+          {user.cart.map((item) => (
+            <div className={classes.itemInCheckout} key={item._id}>
+              <h4>
+                {item.title} -{" "}
+                {(
+                  (item.price * (1 - item.discountInPercent / 100)) /
+                  100
+                ).toFixed(2)}
+                €
+              </h4>
+              <button
+                className={classes.removeCartBtn}
+                onClick={() => handleRemoveFromCart(item._id)}
+              >
+                x
+              </button>
+            </div>
+          ))}
+        </div>
+        <form className={classes.discountForm} onSubmit={validateDiscountCode}>
+          <label>
+            Enter Discount Code:{" "}
+            <input
+              className={classes.discountInput}
+              type="text"
+              value={discountCode}
+              onChange={(event) => setDiscountCode(event.target.value)}
+            />
+          </label>
+
           <input
-            type="text"
-            value={discountCode}
-            onChange={(event) => setDiscountCode(event.target.value)}
+            className={classes.discountBtn}
+            type="submit"
+            value={"Apply Code"}
           />
-        </label>
-        {displayError && <div>{errorMessage}</div>}
-        <input type="submit" value={"Apply Code"} />
-      </form>
-      <h4>Total: {(cartTotalBeforeDiscount / 100).toFixed(2)}€</h4>
-      {appliedCode && (
-        <>
-          <p>Currently applied discount: {appliedCode.discountInPercent}%</p>
-          <h4>Total after discount: {(finalTotalPrice / 100).toFixed(2)}€</h4>
-        </>
-      )}
-      <button type="button" onClick={handlePurchase}>
-        COMPLETE ORDER
-      </button>
+        </form>
+        {displayError && (
+          <div className={classes.discountError}>{errorMessage}</div>
+        )}
+        <div className={classes.btmCtn}>
+          <h4>Total: {(cartTotalBeforeDiscount / 100).toFixed(2)}€</h4>
+          {appliedCode && (
+            <>
+              <p>
+                Currently applied discount: {appliedCode.discountInPercent}%
+              </p>
+              <h4>
+                Total after discount: {(finalTotalPrice / 100).toFixed(2)}€
+              </h4>
+            </>
+          )}
+          <button
+            className={classes.orderBtn}
+            type="button"
+            onClick={handlePurchase}
+          >
+            COMPLETE ORDER
+          </button>
+        </div>
+      </div>
     </>
   ) : (
     <>
