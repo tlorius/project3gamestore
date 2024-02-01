@@ -1,0 +1,76 @@
+.pageCtn {
+  background-color: var(--primary-blue);
+  height: auto;
+  padding-left: 3rem;
+  padding-top: 3rem;
+}
+
+.titleText {
+  color: white;
+  font-size: 4rem;
+  font-weight: bold;
+}
+
+.oneReview {
+  text-decoration: none;
+  color: white;
+  margin-top: 3rem;
+  margin-left: 2rem;
+  margin-right: 2rem;
+  padding: 4rem;
+  margin-bottom: 3rem;
+  border: solid;
+  border-width: 1px;
+  border-color: var(--primary-blue);
+}
+
+.reviewCtn {
+  width: 90rem;
+  background-color: var(--secondary-blue);
+  word-break: break-word;
+  overflow-wrap: break-word;
+  text-decoration: none;
+  border: 1px solid var(--primary-blue);
+}
+
+.imageContainer img {
+  height: auto;
+  max-height: 15rem;
+}
+
+.reviewDetails {
+  margin-left: 2rem;
+  flex-direction: column;
+  text-decoration: none;
+}
+
+.gameTitle {
+  font-size: 2rem;
+  font-weight: bold;
+  color: white;
+  text-decoration: none;
+}
+
+.reviewStats {
+  margin-top: 1rem;
+  text-decoration: none;
+}
+
+.recommended {
+  margin-bottom: 1rem;
+  color: var(--highlighting-color);
+}
+
+.commentTag {
+  opacity: 50%;
+  margin-bottom: 1rem;
+}
+.readMoreButton {
+  color: var(--highlighting-color);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.5rem;
+  font-size: 1rem;
+  margin-top: 1rem;
+}
