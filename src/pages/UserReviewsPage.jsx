@@ -5,6 +5,7 @@ import classes from "../styles/UserReviews.module.css";
 
 const UserReviewsPage = () => {
   const [reviews, setReviews] = useState([]);
+  const [expandedComments, setExpandedComments] = useState({});
   const { requestWithToken, userId } = useContext(AuthContext);
 
   const fetchReviewsByUser = async () => {
@@ -20,31 +21,69 @@ const UserReviewsPage = () => {
     fetchReviewsByUser();
   }, [userId]);
 
+  const toggleCommentDisplay = (reviewId) => {
+    setExpandedComments((prevExpandedComments) => ({
+      ...prevExpandedComments,
+      [reviewId]: !prevExpandedComments[reviewId],
+    }));
+  };
+
   return (
     <div className={classes.pageCtn}>
       <h1 className={classes.titleText}>ALL YOUR REVIEWS</h1>
       <div className={classes.reviewCtn}>
         {reviews &&
-          reviews.map((review) => {
-            return (
-              <Link
-                className={classes.oneReview}
-                to={`/games/${review.game._id}/reviews/${review._id}`}
-                key={review._id}
-              >
-                <div className={classes.oneReview}>
-                  {" "}
-                  <p>Game: {review.game.title}</p>
-                  <div>
-                    {" "}
-                    <p>Recommended?: {review.recommend ? "✅" : "❌"}</p>
-                    <p>Comment: {review.comment}</p>{" "}
-                  </div>
+          reviews.map((review) => (
+            <div key={review._id} className={classes.oneReview}>
+              <Link to={`/games/${review.game._id}/reviews/${review._id}`}>
+                <div className={classes.imageContainer}>
+                  {review.game.imageUrl && (
+                    <img
+                      src={review.game.imageUrl}
+                      alt={`Image for ${review.game.title}`}
+                      className={classes.gameImage}
+                    />
+                  )}
                 </div>
               </Link>
-            );
-          })}
-      </div>{" "}
+              <div className={classes.reviewDetails}>
+                <Link
+                  className={classes.gameTitle}
+                  to={`/games/${review.game._id}/reviews/${review._id}`}
+                >
+                  <span>{review.game.title}</span>
+                </Link>
+                <div className={classes.reviewStats}>
+                  <p className={classes.recommended}>
+                    Recommended?: {review.recommend ? "✅" : "❌"}
+                  </p>
+                  <div>
+                    {expandedComments[review._id] ? (
+                      <p className={classes.reviewComment}>{review.comment}</p>
+                    ) : (
+                      <p className={classes.reviewComment}>
+                        {/* Change 100 to 200 or any number you prefer */}
+                        {review.comment.length > 800
+                          ? review.comment.substring(0, 800) + "..."
+                          : review.comment}
+                      </p>
+                    )}
+                    {review.comment && review.comment.length > 800 && (
+                      <button
+                        onClick={() => toggleCommentDisplay(review._id)}
+                        className={classes.readMoreButton}
+                      >
+                        {expandedComments[review._id]
+                          ? "Show Less"
+                          : "Read More"}
+                      </button>
+                    )}
+                  </div>
+                </div>
+              </div>
+            </div>
+          ))}
+      </div>
     </div>
   );
 };
