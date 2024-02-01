@@ -160,7 +160,7 @@ const AdminDashboardPage = () => {
         <div className={classes.dashBodyCtn}>
           <div className={classes.discountDashCtn}>TL</div>
           <div className={classes.roleDashCtn}>TR</div>
-          <div>BL</div>
+          <div className={classes.revenueDashCtn}>BL</div>
           <div>BR</div>
         </div>
         <h3>Discount Codes</h3>
