@@ -1,0 +1,138 @@
+.ownedGamesContainer{
+    min-height: 90vh;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+
+    margin-top: 100px;
+    margin-bottom: 100px;
+
+    gap: 30px;
+}
+
+.ownedGamesTitle{
+    font-size: 42px;
+    font-weight: bolder;
+
+    color: var(--primary-white);
+}
+
+.gameCard{
+    width: 600px;
+    height: 180px;
+  
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+  
+    gap: 15px;
+  
+    background-color: var(--primary-blue);
+  }
+  
+  .gameCardInfo{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+  
+    gap: 20px;
+  }
+  .gameCardImage{
+    width: 200px;
+    height: 100%;
+  
+    background-size: cover;
+    background-position: center;
+  }
+  .gameCardTitle{
+    color: var(--primary-white);
+  }
+  .gameCardPriceContainer{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+
+    gap: 10px
+  }
+  .gameCardBtn{
+    width: 150px;
+    
+    display: flex;
+    align-items: center;
+    justify-content: center;
+      
+    border: none;
+    outline: none;
+  
+    background-color: #4c6b22;
+  
+    padding: 10px;
+  
+    border-radius: 4px;
+  
+    color: white;
+  
+    cursor: pointer;
+  
+    transition: 0.3s ;
+  
+    text-decoration: none;
+  }
+  .gameCardBtn:hover{
+    background-color: #6d9930;
+  
+    transition: 0.3s ;
+  }
+  .gameCardTags{
+    display: flex;
+    flex-direction: row;
+  
+    gap: 2px;
+  }
+  .gameCardTag{
+    font-size: 12px;
+  
+    color: var(--primary-white);
+  
+    padding: 5px;
+  
+    background-color: rgba(0, 0, 0, 0.5);
+  
+    border-radius: 4px;
+  }
+
+  .wishListButton{
+    width: 150px;
+  
+    text-decoration: none;
+  
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  
+    background-color: rgba(0, 0, 0, 0.507);
+  
+    padding: 10px;
+  
+    border: none;
+    outline: none;
+  
+    color: #66c0f4;
+  
+    border-radius: 8px;
+  
+    cursor: pointer;
+  
+    transition: 0.3s;
+  }
+  .wishListButton:hover{
+    background-color: #447d9e;
+    
+
+    transition: 0.3s;
+  }
