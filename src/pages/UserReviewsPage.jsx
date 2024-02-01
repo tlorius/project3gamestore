@@ -62,7 +62,7 @@ const UserReviewsPage = () => {
                       <p className={classes.reviewComment}>{review.comment}</p>
                     ) : (
                       <p className={classes.reviewComment}>
-                        {/* Change 100 to 200 or any number you prefer */}
+
                         {review.comment.length > 800
                           ? review.comment.substring(0, 800) + "..."
                           : review.comment}
