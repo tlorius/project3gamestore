@@ -7,29 +7,34 @@ import CartModal from "./CartModal";
 
 const Navbar = () => {
   const { isAuthenticated, logout, userId } = useContext(AuthContext);
-  const { user, wishlistCount } = useContext(UserContext);
+  const { wishlistCount } = useContext(UserContext);
 
   return (
     //content is temporary: once auth is implemented ->
     //Store - Categories - if loggedin (Profile)/ if not (Login) - if logged in: wishlist +cart
     <nav className={classes.navCtn}>
       <h4 className={classes.title}>Vanguard</h4>
-      <Link to="/">Store</Link>
+      <Link className={classes.navLink} to="/">
+        Store
+      </Link>
 
       {isAuthenticated ? (
         <>
-          <Link to={`/profile/${userId}`}>Profile</Link>
-          <Link to={`/profile/${userId}/wishlist`}>
+          <Link className={classes.navLink} to={`/profile/${userId}`}>
+            Profile
+          </Link>
+          <Link className={classes.navLink} to={`/profile/${userId}/wishlist`}>
             Wishlist [{wishlistCount}]
           </Link>
-          {/*replace this by icon later and fix link once site exists */}
           <CartModal />
-          <button type="button" onClick={logout}>
+          <button className={classes.logoutBtn} type="button" onClick={logout}>
             Logout
           </button>
         </>
       ) : (
-        <Link to="/login">Login</Link>
+        <Link className={classes.navLink} to="/login">
+          Login
+        </Link>
       )}
     </nav>
   );

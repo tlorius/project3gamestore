@@ -2,8 +2,11 @@ import { useContext } from "react";
 import { AuthContext } from "../providers/AuthContext";
 import { UserContext } from "../providers/UserContext";
 import { useDisclosure } from "@mantine/hooks";
-import { Loader, Modal } from "@mantine/core";
+import { Modal } from "@mantine/core";
 import { useNavigate } from "react-router-dom";
+import classes from "../styles/CartModal.module.css";
+
+import shoppingcart from "../assets/shoppingcart.svg";
 
 const CartModal = () => {
   const { isAuthenticated } = useContext(AuthContext);
@@ -24,7 +27,12 @@ const CartModal = () => {
       {cartCount === 0 ? (
         <></>
       ) : (
-        <button type="button" onClick={open}>
+        <button type="button" onClick={open} className={classes.cartBtn}>
+          <img
+            className={classes.cartBtnImg}
+            src={shoppingcart}
+            alt="shopping cart"
+          />
           CART [{cartCount}]
         </button>
       )}

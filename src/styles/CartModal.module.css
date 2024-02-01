@@ -1,0 +1,9 @@
+.cartBtn {
+  text-align: center;
+  color: var(--primary-color);
+  height: 2rem;
+}
+
+.cartBtnImg {
+  height: 1.5rem;
+}
