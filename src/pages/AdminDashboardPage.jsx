@@ -208,59 +208,56 @@ const AdminDashboardPage = () => {
               <input type="submit" value={"Add Discount Code"} />
             </form>
           </div>
-          <div className={classes.roleDashCtn}></div>
+          <div className={classes.roleDashCtn}>
+            <form onSubmit={findUserByUserName}>
+              <label>
+                Username:{" "}
+                <input
+                  type="text"
+                  value={userNameToFind}
+                  onChange={(event) => setUserNameToFind(event.target.value)}
+                />
+              </label>
+              <input type="submit" value={"Find user"} />
+            </form>
+            {userIdToUpdate && (
+              <>
+                <h4>Username: {userNameToDisplay}</h4>
+                <p>ID: {userIdToUpdate}</p>
+                <form onSubmit={updateRolesOfUser}>
+                  <label>
+                    ENDUSER{" "}
+                    <input
+                      type="checkbox"
+                      checked={enduserRole}
+                      onChange={(event) => setEnduserRole(event.target.checked)}
+                    />
+                  </label>
+                  <label>
+                    GAMEDEVELOPER{" "}
+                    <input
+                      type="checkbox"
+                      checked={gameDevRole}
+                      onChange={(event) => setGameDevRole(event.target.checked)}
+                    />
+                  </label>
+                  <label>
+                    ADMIN{" "}
+                    <input
+                      type="checkbox"
+                      checked={adminRole}
+                      onChange={(event) => setAdminRole(event.target.checked)}
+                    />
+                  </label>
+                  <input type="submit" value={"Update Roles"} />
+                </form>
+              </>
+            )}
+          </div>
           <div className={classes.revenueDashCtn}>BL</div>
           <div className={classes.invoicesDashCtn}>BR</div>
         </div>
 
-        <div>
-          <hr />
-          <form onSubmit={findUserByUserName}>
-            <label>
-              Username:{" "}
-              <input
-                type="text"
-                value={userNameToFind}
-                onChange={(event) => setUserNameToFind(event.target.value)}
-              />
-            </label>
-            <input type="submit" value={"Find user"} />
-          </form>
-          {userIdToUpdate && (
-            <>
-              <h4>Username: {userNameToDisplay}</h4>
-              <p>ID: {userIdToUpdate}</p>
-              <form onSubmit={updateRolesOfUser}>
-                <label>
-                  ENDUSER{" "}
-                  <input
-                    type="checkbox"
-                    checked={enduserRole}
-                    onChange={(event) => setEnduserRole(event.target.checked)}
-                  />
-                </label>
-                <label>
-                  GAMEDEVELOPER{" "}
-                  <input
-                    type="checkbox"
-                    checked={gameDevRole}
-                    onChange={(event) => setGameDevRole(event.target.checked)}
-                  />
-                </label>
-                <label>
-                  ADMIN{" "}
-                  <input
-                    type="checkbox"
-                    checked={adminRole}
-                    onChange={(event) => setAdminRole(event.target.checked)}
-                  />
-                </label>
-                <input type="submit" value={"Update Roles"} />
-              </form>
-            </>
-          )}
-        </div>
-        <hr />
         {revenue && (
           <div>
             <h4>Revenues</h4>
