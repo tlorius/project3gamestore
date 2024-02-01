@@ -20,6 +20,8 @@
   width: 20rem;
   padding: 0.5rem 1rem;
   margin-top: 10rem;
+  align-self: flex-end;
+  border: none;
 }
 
 .tagsCard {
@@ -53,6 +55,15 @@
   width: 10rem;
 }
 
+.tagsLabel {
+  display: flex;
+  justify-content: center;
+  color: var(--primary-white);
+  margin-top: 2rem;
+  margin-left: 15rem;
+  gap: 5rem;
+}
+
 .removeTagBtn {
   border: none;
   background: none;
@@ -64,4 +75,23 @@
 .removeTagBtn:hover {
   color: red;
   transform: scale(1.5);
+}
+
+.marginBottom {
+  margin-bottom: 13rem;
+}
+
+.cancelBtn {
+  border-radius: var(--border-radius);
+  width: 8rem;
+  height: 2rem;
+  padding: 0.5rem 1rem;
+  border: none;
+  align-self: flex-end;
+}
+
+.bottomBtns {
+  display: flex;
+  width: 30svw;
+  justify-content: space-between;
 }
