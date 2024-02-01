@@ -121,3 +121,59 @@
   margin-bottom: 0.5rem;
   padding-right: 0.2rem;
 }
+
+.mfaTitle {
+  text-align: center;
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+}
+
+.mfaList {
+  list-style: numeric;
+  margin: 1rem 1rem;
+  font-size: 0.8rem;
+}
+.scanCode {
+  text-align: center;
+  font-size: 1.2rem;
+  margin: 1rem 0;
+}
+.mfaImg {
+  height: 15rem;
+}
+
+.mfaImgCenter {
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+}
+
+.mfaModalCtn {
+  margin: 1rem;
+}
+
+.enterCodeText {
+  font-size: 0.8rem;
+}
+
+.verifyMfaForm {
+  margin-top: 1rem;
+  font-size: 0.9rem;
+}
+
+.verifyMfaBtnCtn {
+  display: flex;
+  justify-content: space-around;
+}
+
+.verifyMfaFormBtns {
+  margin-top: 1rem;
+  border-radius: var(--border-radius);
+  border: 1px var(--primary-black) solid;
+  background: white;
+  color: var(--primary-black);
+  padding: 0.3rem 0.5rem;
+  font-weight: bold;
+  cursor: pointer;
+  margin-left: 4rem;
+}
