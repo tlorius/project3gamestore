@@ -2,10 +2,12 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import { Loader } from "@mantine/core";
+import classes from "../styles/GameReviews.module.css";
 
 const GameReviewsPage = () => {
   const { gameId } = useParams();
   const [reviews, setReviews] = useState();
+  const [expandedComments, setExpandedComments] = useState({}); // State to track expanded/collapsed comments
 
   const fetchReviews = async () => {
     try {
@@ -22,15 +24,48 @@ const GameReviewsPage = () => {
     fetchReviews();
   }, [gameId]);
 
+  const toggleCommentDisplay = (reviewId) => {
+    setExpandedComments((prevExpandedComments) => ({
+      ...prevExpandedComments,
+      [reviewId]: !prevExpandedComments[reviewId],
+    }));
+  };
+
   return reviews ? (
     <>
-      <h1>Shows all reviews for a game</h1>
-      <div>
+      <div className={classes.pageCtn}>
         {reviews.map((review) => {
           return (
             <div key={review._id}>
-              <p>Comment: {review.comment}</p>
-              <p>Recommended?: {review.recommend ? "✅" : "❌"}</p>
+              <div>
+                <div className={classes.reviewCtn}>
+                  <div className={classes.oneReview}>
+                    <p className={classes.recommended}>
+                      Recommended?: {review.recommend ? "✅" : "❌"}
+                    </p>
+                    <p className={classes.commentTag}>Comment:</p>
+                    {expandedComments[review._id] ? (
+                      <p className={classes.reviewComments}>{review.comment}</p>
+                    ) : (
+                      <p className={classes.reviewComments}>
+                        {review.comment.length > 800
+                          ? review.comment.substring(0, 800) + "..."
+                          : review.comment}
+                      </p>
+                    )}
+                    {review.comment && review.comment.length > 800 && (
+                      <button
+                        onClick={() => toggleCommentDisplay(review._id)}
+                        className={classes.readMoreButton}
+                      >
+                        {expandedComments[review._id]
+                          ? "Show Less"
+                          : "Read More"}
+                      </button>
+                    )}
+                  </div>
+                </div>
+              </div>
             </div>
           );
         })}
