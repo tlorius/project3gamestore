@@ -132,8 +132,8 @@ const GameForm = ({ isUpdate = false }) => {
 
   return (
     <>
-      <h2>Form to {isUpdate ? "update" : "add"} game</h2>
-      <form onSubmit={handleSubmit} className={classes.formCtn}>
+      <h1 className={classes.formHeader}>{isUpdate ? "Update" : "Add"} game</h1>
+      <form onSubmit={handleSubmit} className={classes.gameFormCtn}>
         <label>
           Title
           <input
@@ -141,6 +141,15 @@ const GameForm = ({ isUpdate = false }) => {
             required
             value={title}
             onChange={(event) => setTitle(event.target.value)}
+          />
+        </label>
+        <label>
+          Description
+          <input
+            type="text"
+            required
+            value={description}
+            onChange={(event) => setDescription(event.target.value)}
           />
         </label>
         <label>
@@ -175,6 +184,7 @@ const GameForm = ({ isUpdate = false }) => {
           <input
             type="date"
             required
+            className={classes.releaseInput}
             value={releaseDate}
             onChange={(event) => setReleaseDate(event.target.value)}
           />
@@ -196,43 +206,15 @@ const GameForm = ({ isUpdate = false }) => {
             onChange={(event) => setDiscountPercent(event.target.value)}
           />
         </label>
-        <label>
-          Description
+        <div className={classes.bottomBtns}>
+          {" "}
           <input
-            type="text"
-            required
-            value={description}
-            onChange={(event) => setDescription(event.target.value)}
+            className={classes.submitBtn}
+            type="submit"
+            value={isUpdate ? "Update Game" : "Add Game"}
           />
-        </label>
-        <input type="submit" value={isUpdate ? "Update Game" : "Add Game"} />
-      </form>
-      <div>
-        Selected Items:{" "}
-        <div className={classes.tagsCtn}>
-          {tags.map((tag) => {
-            return (
-              <div className={classes.tagsCard} key={tag}>
-                {tag}{" "}
-                <button type="button" onClick={() => removeFromTagsArray(tag)}>
-                  x
-                </button>
-              </div>
-            );
-          })}
-        </div>
-        <label>
-          Tags
-          <Autocomplete
-            value={tagField}
-            onChange={(value) => setTagField(value)}
-            data={categories.filter((item) => !tags.includes(item))}
-            onOptionSubmit={(value) => handleTagSelect(value)}
-            ref={autocompleteRef}
-          />
-        </label>
-        {
           <button
+            className={classes.cancelBtn}
             type="button"
             onClick={() =>
               navigate(`${isUpdate ? `/games/${gameId}` : "/dashboard/dev"}`)
@@ -240,7 +222,37 @@ const GameForm = ({ isUpdate = false }) => {
           >
             Cancel
           </button>
-        }
+        </div>
+      </form>
+      <div className={classes.marginBottom}>
+        <div className={classes.tagsCtn}>
+          {tags.map((tag) => {
+            return (
+              <div className={classes.tagsCard} key={tag}>
+                {tag}{" "}
+                <button
+                  className={classes.removeTagBtn}
+                  type="button"
+                  onClick={() => removeFromTagsArray(tag)}
+                >
+                  x
+                </button>
+              </div>
+            );
+          })}
+        </div>
+        <label className={classes.tagsLabel}>
+          Tags
+          <div className={classes.autoCompleteInput}>
+            <Autocomplete
+              value={tagField}
+              onChange={(value) => setTagField(value)}
+              data={categories.filter((item) => !tags.includes(item))}
+              onOptionSubmit={(value) => handleTagSelect(value)}
+              ref={autocompleteRef}
+            />
+          </div>
+        </label>
       </div>
     </>
   );
