@@ -79,7 +79,11 @@ const AuthForm = ({ isLogin = false }) => {
           navigate("/");
         }
       } catch (error) {
-        toast.error("Invalid Login Details");
+        if (isLogin) {
+          toast.error("Invalid Login Details");
+        } else {
+          toast.error("Try using a different username and/or email");
+        }
       }
     }
   };
