@@ -4,6 +4,8 @@ import { UserContext } from "../providers/UserContext";
 import { Link } from "react-router-dom";
 import { Loader } from "@mantine/core";
 
+import classes from "../styles/WishList.module.css";
+
 const WishlistPage = () => {
   const { userId, isAuthenticated } = useContext(AuthContext);
   const { user, setNeedsRefresh, removeGameFromAccount } =
@@ -14,23 +16,57 @@ const WishlistPage = () => {
   }, [userId]);
 
   return isAuthenticated && user ? (
-    <>
-      <h1>Wishlist Page of {user && user.username}</h1>
+    <div className={classes.wishListPageContainer}>
+      <h1 className={classes.wishListTitle}>
+        Wishlist Page of <strong>{user && user.username}</strong>
+      </h1>
       <div>
         {user.wishlistedGames.length !== 0 ? (
           user.wishlistedGames.map((game) => {
             return (
-              <div key={game._id}>
-                <Link to={`/games/${game._id}`}>{game.title}</Link>
-                <p>{game.description}</p>
-                <p>Price: {(game.price / 100).toFixed(2)}€</p>
-                <button
-                  type="button"
-                  onClick={() => removeGameFromAccount("wishlist", game._id)}
-                >
-                  Remove from Wishlist
-                </button>
-              </div>
+              <>
+                <div key={game._id}>
+                  <Link to={`/games/${game._id}`}>{game.title}</Link>
+                  <p>{game.description}</p>
+                  <p>Price: {(game.price / 100).toFixed(2)}€</p>
+                </div>
+                <div className={classes.gameCard}>
+                  <div
+                    className={classes.gameCardImage}
+                    style={{ backgroundImage: `url(${game.imageUrl})` }}
+                  />
+                  <div className={classes.gameCardInfo}>
+                    <span className={classes.gameCardTitle}>
+                      {game.title.toUpperCase()}
+                    </span>
+                    <section className={classes.gameCardTags}>
+                      {game.tags.map((tag, index) => {
+                        return (
+                          <span className={classes.gameCardTag} key={index}>
+                            {tag}
+                          </span>
+                        );
+                      })}
+                    </section>
+                    <div className={classes.gameCardPriceContainer}>
+                      <span className={classes.gameCardPrice}>
+                        {game.price === 0
+                          ? "FREE"
+                          : `${(game.price / 100).toFixed(2)}€`}
+                      </span>
+
+                      <button
+                        type="button"
+                        onClick={() =>
+                          removeGameFromAccount("wishlist", game._id)
+                        }
+                      >
+                        Remove from Wishlist
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </>
             );
           })
         ) : (
@@ -42,7 +78,7 @@ const WishlistPage = () => {
           </div>
         )}
       </div>
-    </>
+    </div>
   ) : (
     <Loader color="blue" size="xl" type="dots" />
   );

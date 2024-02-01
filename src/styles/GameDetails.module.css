@@ -1,7 +1,3 @@
-.contentCtn {
-  background-color: rgb(31, 231, 238);
-}
-
 .header {
   display: flex;
   justify-content: space-between;
@@ -12,28 +8,145 @@
   align-items: center;
 }
 
-.gameTitle h1 {
-  font-size: 10rem; /* Not working right now, need to find the overwriting css */
-}
+.gameImage{
+  background-size: cover;
+  background-position: center;
 
+  width: 50%;
+  height: 100%;
+}
+.gameTitle{
+  font-size: 42px;
+  font-weight: bolder;
+
+  color: var(--primary-white);
+}
+.gameDescription{
+  color: white;
+
+  width: 300px;
+}
 .gameCtn {
-  background-color: rgb(129, 129, 129);
   display: flex;
-  justify-content: space-between;
-  margin-left: 5rem;
+
+  justify-content: flex-start;
+  align-items: center;
+
+  gap: 30px;
+
+  height: 90vh;
+  width: 100%;
 }
 
 .gameContent {
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  gap: 2.5rem;
-  padding-right: 10rem;
-  align-items: flex-end;
-  width: 100%;
-  background-color: rgb(231, 113, 113);
+
+  align-items: flex-start;
+  justify-self: center;
+
+  gap: 20px;
 }
 
-.gameImage {
-  height: 30rem;
+.wishListButton{
+  width: 180px;
+
+  background-color: var(--primary-blue);
+
+  padding: 10px;
+
+  border: none;
+  outline: none;
+
+  color: #66c0f4;
+
+  border-radius: 8px;
+
+  cursor: pointer;
+
+  transition: 0.3s;
+}
+.wishListButton:hover{
+  background-color: #447d9e;
+  
+  transition: 0.3s;
+}
+
+.cartButton{
+  width: 180px;
+
+  background-color: #6d9930;
+
+  padding: 10px;
+
+  border: none;
+  outline: none;
+
+  color: white;
+
+  border-radius: 8px;
+
+  cursor: pointer;
+
+  transition: 0.3s;
+
+  margin-top: 30px;
+}
+.cartButton:hover{
+  background-color: #4b6920;
+  
+  transition: 0.3s;
+}
+
+.review{
+  text-decoration: none;
+
+  color: #66c0f4;
+}
+
+strong {
+  color: #66c0f4;
+}
+.tag{
+  font-size: 14px;
+
+  padding: 5px;
+  background-color: var(--primary-blue);
+
+  margin-right: 4px;
+
+  border-radius: 4px;
+}
+.smallP {
+  color: grey;
+}
+
+.reviewButton{
+  text-decoration: none;
+
+  width: 160px;
+
+  background-color: var(--primary-blue);
+
+  padding: 10px;
+
+  border: none;
+  outline: none;
+
+  color: #66c0f4;
+
+  border-radius: 8px;
+
+  cursor: pointer;
+
+  transition: 0.3s;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.reviewButton:hover{
+  background-color: #447d9e;
+  
+  transition: 0.3s;
 }
