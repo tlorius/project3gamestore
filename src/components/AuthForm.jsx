@@ -1,6 +1,6 @@
 import { useContext, useState } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../providers/AuthContext";
 import {
   Modal,
@@ -180,9 +180,18 @@ const AuthForm = ({ isLogin = false }) => {
             )}
           </>
         )}
-
-        <input type="submit" value={isLogin ? "Login" : "Sign Up"} />
+        {isLogin && (
+          <Link className={classes.signUpLink} to="/signup">
+            I dont have an account yet
+          </Link>
+        )}
+        <input
+          className={classes.submitBtn}
+          type="submit"
+          value={isLogin ? "Login" : "Sign Up"}
+        />
       </form>
+
       <Modal
         opened={opened}
         withCloseButton={false}
@@ -200,7 +209,11 @@ const AuthForm = ({ isLogin = false }) => {
             onComplete={handleMFACode}
           />
         </label>
-        <button type="button" onClick={() => navigate("/")}>
+        <button
+          className={classes.abortMFABtn}
+          type="button"
+          onClick={() => navigate("/")}
+        >
           Abort Login
         </button>
       </Modal>

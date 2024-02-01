@@ -1,0 +1,14 @@
+.authFormCtn {
+  margin-top: 2rem;
+  display: flex;
+  justify-content: flex-start;
+  gap: 2rem;
+  flex-direction: column;
+  align-items: center;
+  color: var(--primary-white);
+  min-height: 87svh;
+}
+
+.loginHeader {
+  font-size: var(--title-two);
+}

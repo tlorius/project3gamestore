@@ -1,12 +1,15 @@
-import AuthForm from "../components/AuthForm"
+import AuthForm from "../components/AuthForm";
+import classes from "../styles/SignupPage.module.css";
 
 const SignupPage = () => {
   return (
     <>
-      <h1>Signup</h1>
-      <AuthForm />
+      <div className={classes.authFormCtn}>
+        <h1 className={classes.signupHeader}>Sign Up</h1>
+        <AuthForm />
+      </div>
     </>
-  )
-}
+  );
+};
 
-export default SignupPage
+export default SignupPage;

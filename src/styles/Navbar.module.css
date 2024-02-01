@@ -7,6 +7,7 @@
   min-height: fit-content;
   background: var(--primary-color);
   color: var(--primary-white);
+  margin-top: 0.2rem;
 }
 
 .title {

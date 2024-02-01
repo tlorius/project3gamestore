@@ -1,0 +1,72 @@
+.checkoutCtn {
+  min-height: 90svh;
+  color: var(--primary-white);
+}
+
+.orderBtn {
+  border-radius: var(--border-radius);
+  border: 1px var(--primary-black) solid;
+  background: white;
+  color: var(--primary-black);
+  padding: 0.5rem 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  margin-left: 4rem;
+}
+
+.discountInput {
+  margin-left: 4rem;
+}
+
+.discountForm {
+  margin: 3rem auto;
+  display: flex;
+  justify-content: center;
+}
+.discountError {
+  color: red;
+  text-align: center;
+}
+
+.discountBtn {
+  border-radius: var(--border-radius);
+  border: 1px var(--primary-black) solid;
+  background: white;
+  color: var(--primary-black);
+  padding: 0.5rem 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  margin-left: 4rem;
+}
+
+.btmCtn {
+  margin-top: 3rem;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  font-weight: bold;
+}
+
+.itemInCheckout {
+  margin: 1rem auto;
+  display: flex;
+  justify-content: space-around;
+  max-width: 50svh;
+}
+.checkoutHeader {
+  text-align: center;
+  margin: 2rem 0;
+  font-size: var(--title-two);
+}
+
+.removeCartBtn {
+  cursor: pointer;
+  border-radius: 100%;
+  border: none;
+  background: none;
+  font-weight: bold;
+  color: var(--primary-white);
+}
+.removeCartBtn:hover {
+  color: red;
+}

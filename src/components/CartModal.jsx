@@ -36,27 +36,39 @@ const CartModal = () => {
           <span className={classes.cartBtnText}>[{cartCount}]</span>
         </button>
       )}
-      <Modal opened={opened} onClose={close} title="Cart">
+      <Modal opened={opened} onClose={close} title="Shopping Cart">
         <h2>Total Items: {cartCount}</h2>
+        <hr />
         <div>
           {user.cart.map((item) => (
-            <div key={item._id}>
-              <h4>
-                {item.title} -{" "}
+            <div className={classes.cartItem} key={item._id}>
+              <h4>{item.title} </h4>
+              <span>
                 {(
                   (item.price * (1 - item.discountInPercent / 100)) /
                   100
                 ).toFixed(2)}
-                €
-              </h4>
-              <button onClick={() => removeGameFromAccount("cart", item._id)}>
-                x
-              </button>
+                €{" "}
+                <button
+                  className={classes.removeCartBtn}
+                  onClick={() => removeGameFromAccount("cart", item._id)}
+                >
+                  x
+                </button>
+              </span>
             </div>
           ))}
         </div>
-        <h4>Total: {(cartTotalBeforeDiscount / 100).toFixed(2)}€</h4>
-        <button onClick={handleCheckoutRedirect}>CHECKOUT</button>
+        <hr />
+        <div className={classes.bottomCtn}>
+          <h4>Total: {(cartTotalBeforeDiscount / 100).toFixed(2)}€</h4>
+          <button
+            className={classes.checkoutBtn}
+            onClick={handleCheckoutRedirect}
+          >
+            CHECKOUT
+          </button>
+        </div>
       </Modal>
     </>
   ) : (
