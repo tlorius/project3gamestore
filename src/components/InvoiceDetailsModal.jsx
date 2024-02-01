@@ -32,31 +32,40 @@ const InvoiceDetailsModal = ({ opened, close, invoiceId }) => {
       <Modal
         opened={opened}
         onClose={close}
-        title={`INVOICE ${invoiceDisplayId}`}
+        title={`Details for: INVOICE ${invoiceDisplayId}`}
+        centered
       >
         {invoice && (
-          <div>
+          <div className={classes.modalCtn}>
+            <p className={classes.gameListItem}>
+              <span className={classes.bold}>Purchased Title:</span>
+              <span className={classes.bold}>Price</span>
+            </p>
             {invoice.fromOrder.items.map((game) => {
               return (
-                <p key={game._id}>
-                  {game.gameId.title}:{" "}
-                  {game.defaultPriceInEuroCent === game.finalItemPrice ? (
-                    `${(game.finalItemPrice / 100).toFixed(2)}€`
-                  ) : (
-                    <>
-                      <span className={classes.crossText}>
-                        {(game.defaultPriceInEuroCent / 100).toFixed(2)}€
-                      </span>{" "}
-                      {(game.finalItemPrice / 100).toFixed(2)}€
-                    </>
-                  )}
+                <p className={classes.gameListItem} key={game._id}>
+                  <span className={classes.gameName}>{game.gameId.title} </span>
+                  <span>
+                    {game.defaultPriceInEuroCent === game.finalItemPrice ? (
+                      `${(game.finalItemPrice / 100).toFixed(2)}€`
+                    ) : (
+                      <>
+                        <span className={classes.crossText}>
+                          {(game.defaultPriceInEuroCent / 100).toFixed(2)}€
+                        </span>{" "}
+                        {(game.finalItemPrice / 100).toFixed(2)}€
+                      </>
+                    )}
+                  </span>
                 </p>
               );
             })}
 
             {/*only show discount if there was a code used, show price difference if discount was applied */}
             {invoice.fromOrder.discountCodePercentage > 0 && (
-              <p>Discount: {invoice.fromOrder.discountCodePercentage}%</p>
+              <p className={classes.discount}>
+                Discount: {invoice.fromOrder.discountCodePercentage}%
+              </p>
             )}
             {invoice.fromOrder.totalInEuroCentBeforeDiscount ===
             invoice.fromOrder.totalInEuroCentAfterDiscount ? (

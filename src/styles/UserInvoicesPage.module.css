@@ -1,4 +1,20 @@
 .invoiceCtn {
-  border: solid 1px black;
-  margin: 1rem;
+  border: solid 0.15rem;
+  margin: 2rem 20svw;
+  color: var(--primary-white);
+  padding: 1rem 5rem;
+  border-radius: 1rem;
+  cursor: pointer;
+}
+
+.invoiceCtnText {
+  display: flex;
+  justify-content: space-around;
+}
+
+.invoicePgTitle {
+  color: var(--primary-white);
+  text-align: center;
+  margin: 2rem 0;
+  font-size: var(--title-two);
 }

@@ -1,12 +1,90 @@
-.gamesCtn {
-  font-size: 1rem;
+.storeFrontContainer{
+  width: 100%;
+  min-height: 100vh;
+
+  display: flex;
+
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  gap: 20px;
+
+  margin-top: 30px;
 }
 .topContainer{
   display: flex;
   flex-direction: row;
 
+  width: auto;
+  height: 100px;
+
   align-items: center;
   justify-content: space-evenly;
+
+  gap: 50px;
+
+  padding: 20px;
+
+  background-color: var(--primary-blue);
+  border: 1px solid var(--secondary-blue);
+  border-radius: var(--border-radius);
+}
+.topContainer > span {
+  font-size: 16px;
+  font-weight: bolder;
+
+  color: var(--primary-white);
+}
+.topContainer > input {
+  width: 200px;
+  height: 30px;
+  background-color: transparent;
+
+  border: 1px solid var(--primary-color);
+  padding: 5px;
+
+  border-radius: 8px;
+
+  outline: none;
+  
+  color: var(--primary-white);
+
+
+  font-size: 14px;
+}
+.topContainer > input::placeholder {
+  color: var(--primary-white);
+}
+.topContainer > select {
+  width: 200px;
+  background-color: transparent;
+
+  border: 1px solid var(--primary-color);;
+  padding: 5px;
+
+  border-radius: 8px;
+
+  outline: none;
+  
+  color: var(--primary-white);
+
+}
+.topContainer > select > option{
+  width: 200px;
+  background-color: var(--primary-color);
+
+  border: 1px solid var(--secondary-blue);
+  padding: 5px;
+
+  border-radius: 8px;
+
+  outline: none;
+  
+  color: var(--primary-white);
+}
+.slider{
+  width: 200px;
 }
 .bottomContainer{
   display: flex;
@@ -18,25 +96,120 @@
   margin-top: 20px;
 
   gap: 10px;
+  
+  margin-bottom: 50px;
 }
 .bottomContainer > span{
   font-size: 20px;
   font-weight: bolder;
 
-  border: 2px solid black;
+  background-color: var(--primary-blue);
 
-  padding: 5px;
+  padding: 10px;
 
   cursor: pointer;
+
+  color: var(--primary-white);
+
+  border-radius: 8px
+}
+.bottomContainer > p {
+ color: var(--primary-white);
+}
+.gamesCtn{
+  display: flex;
+  flex-direction: column;
+  
+  gap: 10px;
+
+  font-size: 1rem;
+
+  min-height: 100vh;
+
+}
+.gamesCtn > a {
+  text-decoration: none;
 }
 .gameCard{
-  width: 300px;
+  width: 600px;
+  height: 140px;
+
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+
+  gap: 15px;
+
+  background-color: var(--primary-blue);
+}
+
+.gameCardInfo{
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   justify-content: center;
 
-  padding: 20px;
+  gap: 20px;
+}
+.gameCardImage{
+  width: 200px;
+  height: 100%;
 
-  border: 1px solid black;
+  background-size: cover;
+  background-position: center;
+}
+.gameCardTitle{
+  color: var(--primary-white);
+}
+.gameCardPrice{
+  font-size: 14px;
+
+  padding: 8px;
+
+  background-color:rgba(0, 0, 0, 0.5);
+
+  color: var(--primary-white);
+
+  border-radius: 4px 0 0 4px;
+}
+.gameCardBtn{
+  border: none;
+  outline: none;
+
+  background-color: #4c6b22;
+
+  padding: 10px;
+
+  border-radius: 0px 4px 4px 0;
+
+  color: white;
+
+  cursor: pointer;
+
+  transition: 0.3s ;
+
+  text-decoration: none;
+}
+.gameCardBtn:hover{
+  background-color: #6d9930;
+
+  transition: 0.3s ;
+}
+.gameCardTags{
+  display: flex;
+  flex-direction: row;
+
+  gap: 2px;
+}
+.gameCardTag{
+  font-size: 12px;
+
+  color: var(--primary-white);
+
+  padding: 5px;
+
+  background-color: rgba(0, 0, 0, 0.5);
+
+  border-radius: 4px;
 }
