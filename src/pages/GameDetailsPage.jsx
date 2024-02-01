@@ -53,8 +53,13 @@ const GameDetailsPage = () => {
           )}
           {game.price > 0 && game.discountInPercent > 0 && (
             <p>
-              Discount: {game.discountInPercent}% (Save{" "}
-              {((game.price * (game.discountInPercent / 100)) / 100).toFixed(2)}
+              Discount:{" "}
+              <strong className={classes.smallP}>
+                {game.discountInPercent}% (Save{" "}
+                {((game.price * (game.discountInPercent / 100)) / 100).toFixed(
+                  2
+                )}
+              </strong>
               €)
             </p>
           )}
