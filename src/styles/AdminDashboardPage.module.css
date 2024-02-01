@@ -1,0 +1,10 @@
+.adminPageCtn {
+  color: var(--primary-white);
+  min-height: 80svh;
+  margin: 1rem;
+}
+
+.adminDashTitle {
+  font-size: var(--title-two);
+  text-align: center;
+}

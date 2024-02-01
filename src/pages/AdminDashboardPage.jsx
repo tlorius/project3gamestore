@@ -2,6 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../providers/AuthContext";
 import { toast } from "react-toastify";
 import { Loader } from "@mantine/core";
+import classes from "../styles/AdminDashboardPage.module.css";
 
 const AdminDashboardPage = () => {
   const { isAuthenticated, requestWithToken } = useContext(AuthContext);
@@ -154,121 +155,123 @@ const AdminDashboardPage = () => {
   }, [isAuthenticated]);
   return isAuthenticated ? (
     <>
-      <h1>Admin Dashboard</h1>
-      <h3>Discount Codes</h3>
-      <p>name - discount % - applies to already discounted games? - delete</p>
-      <div>
-        {couponCodes &&
-          couponCodes.map((dcode) => {
-            return (
-              <div key={dcode._id}>
-                {dcode.code} - {dcode.discountInPercent}% -{" - "}
-                {dcode.appliesToAlreadyDiscountedGames ? "✅" : "❌"}
-                <button type="button" onClick={() => deleteCoupon(dcode._id)}>
-                  x
-                </button>
-              </div>
-            );
-          })}
-        <form onSubmit={createCode}>
-          <label>
-            Code:{" "}
-            <input
-              type="text"
-              value={code}
-              onChange={(event) => setCode(event.target.value)}
-            />
-          </label>
-          <label>
-            Percent off:{" "}
-            <input
-              type="number"
-              value={discountInPercent}
-              onChange={(event) => setDiscountInPercent(event.target.value)}
-            />
-          </label>
-          <label>
-            Should apply to already discounted Games:
-            <input
-              type="checkbox"
-              checked={appliesToAlreadyDiscountedGames}
-              onChange={(event) =>
-                setAppliesToAlreadyDiscountedGames(event.target.checked)
-              }
-            />
-          </label>
-          <input type="submit" value={"Add Discount Code"} />
-        </form>
-        <hr />
-        <form onSubmit={findUserByUserName}>
-          <label>
-            Username:{" "}
-            <input
-              type="text"
-              value={userNameToFind}
-              onChange={(event) => setUserNameToFind(event.target.value)}
-            />
-          </label>
-          <input type="submit" value={"Find user"} />
-        </form>
-        {userIdToUpdate && (
-          <>
-            <h4>Username: {userNameToDisplay}</h4>
-            <p>ID: {userIdToUpdate}</p>
-            <form onSubmit={updateRolesOfUser}>
-              <label>
-                ENDUSER{" "}
-                <input
-                  type="checkbox"
-                  checked={enduserRole}
-                  onChange={(event) => setEnduserRole(event.target.checked)}
-                />
-              </label>
-              <label>
-                GAMEDEVELOPER{" "}
-                <input
-                  type="checkbox"
-                  checked={gameDevRole}
-                  onChange={(event) => setGameDevRole(event.target.checked)}
-                />
-              </label>
-              <label>
-                ADMIN{" "}
-                <input
-                  type="checkbox"
-                  checked={adminRole}
-                  onChange={(event) => setAdminRole(event.target.checked)}
-                />
-              </label>
-              <input type="submit" value={"Update Roles"} />
-            </form>
-          </>
-        )}
-      </div>
-      <hr />
-      {revenue && (
+      <div className={classes.adminPageCtn}>
+        <h1>Admin Dashboard</h1>
+        <h3>Discount Codes</h3>
+        <p>name - discount % - applies to already discounted games? - delete</p>
         <div>
-          <h4>Revenues</h4>
-          <p>Total Revenue: {(revenue.sumAllTime / 100).toFixed(2)}€</p>
-          <p>
-            Revenue in the last 30 days:{" "}
-            {(revenue.sumThirtyDays / 100).toFixed(2)}€
-          </p>
+          {couponCodes &&
+            couponCodes.map((dcode) => {
+              return (
+                <div key={dcode._id}>
+                  {dcode.code} - {dcode.discountInPercent}% -{" - "}
+                  {dcode.appliesToAlreadyDiscountedGames ? "✅" : "❌"}
+                  <button type="button" onClick={() => deleteCoupon(dcode._id)}>
+                    x
+                  </button>
+                </div>
+              );
+            })}
+          <form onSubmit={createCode}>
+            <label>
+              Code:{" "}
+              <input
+                type="text"
+                value={code}
+                onChange={(event) => setCode(event.target.value)}
+              />
+            </label>
+            <label>
+              Percent off:{" "}
+              <input
+                type="number"
+                value={discountInPercent}
+                onChange={(event) => setDiscountInPercent(event.target.value)}
+              />
+            </label>
+            <label>
+              Should apply to already discounted Games:
+              <input
+                type="checkbox"
+                checked={appliesToAlreadyDiscountedGames}
+                onChange={(event) =>
+                  setAppliesToAlreadyDiscountedGames(event.target.checked)
+                }
+              />
+            </label>
+            <input type="submit" value={"Add Discount Code"} />
+          </form>
+          <hr />
+          <form onSubmit={findUserByUserName}>
+            <label>
+              Username:{" "}
+              <input
+                type="text"
+                value={userNameToFind}
+                onChange={(event) => setUserNameToFind(event.target.value)}
+              />
+            </label>
+            <input type="submit" value={"Find user"} />
+          </form>
+          {userIdToUpdate && (
+            <>
+              <h4>Username: {userNameToDisplay}</h4>
+              <p>ID: {userIdToUpdate}</p>
+              <form onSubmit={updateRolesOfUser}>
+                <label>
+                  ENDUSER{" "}
+                  <input
+                    type="checkbox"
+                    checked={enduserRole}
+                    onChange={(event) => setEnduserRole(event.target.checked)}
+                  />
+                </label>
+                <label>
+                  GAMEDEVELOPER{" "}
+                  <input
+                    type="checkbox"
+                    checked={gameDevRole}
+                    onChange={(event) => setGameDevRole(event.target.checked)}
+                  />
+                </label>
+                <label>
+                  ADMIN{" "}
+                  <input
+                    type="checkbox"
+                    checked={adminRole}
+                    onChange={(event) => setAdminRole(event.target.checked)}
+                  />
+                </label>
+                <input type="submit" value={"Update Roles"} />
+              </form>
+            </>
+          )}
         </div>
-      )}
-      <hr />
-      <h4>Recent Invoices</h4>
-      <p>User - Items - Total - Discount</p>
-      {lastInvoices &&
-        lastInvoices.map((invoice) => (
-          <div key={invoice._id}>
+        <hr />
+        {revenue && (
+          <div>
+            <h4>Revenues</h4>
+            <p>Total Revenue: {(revenue.sumAllTime / 100).toFixed(2)}€</p>
             <p>
-              {invoice.createdBy} - {invoice.items} -{" "}
-              {(invoice.totalInEuroCentAfterDiscount / 100).toFixed(2)}€ -{" "}
-              {invoice.discountCodePercentage}%
+              Revenue in the last 30 days:{" "}
+              {(revenue.sumThirtyDays / 100).toFixed(2)}€
             </p>
           </div>
-        ))}
+        )}
+        <hr />
+        <h4>Recent Invoices</h4>
+        <p>User - Items - Total - Discount</p>
+        {lastInvoices &&
+          lastInvoices.map((invoice) => (
+            <div key={invoice._id}>
+              <p>
+                {invoice.createdBy} - {invoice.items} -{" "}
+                {(invoice.totalInEuroCentAfterDiscount / 100).toFixed(2)}€ -{" "}
+                {invoice.discountCodePercentage}%
+              </p>
+            </div>
+          ))}
+      </div>
     </>
   ) : (
     <>
