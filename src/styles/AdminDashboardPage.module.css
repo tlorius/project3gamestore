@@ -1,6 +1,6 @@
 .adminPageCtn {
   color: var(--primary-white);
-  min-height: 80svh;
+  min-height: 85svh;
   margin: 1rem;
 }
 
@@ -12,8 +12,7 @@
 .dashBodyCtn {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  grid-template-rows: 1fr 1fr;
-  border: 1px solid white; /*remove after*/
+  grid-template-rows: 1fr 1fr 1fr;
   gap: 2rem;
 }
 
