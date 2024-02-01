@@ -1,6 +1,6 @@
 import { useContext, useState } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../providers/AuthContext";
 import {
   Modal,
@@ -180,9 +180,10 @@ const AuthForm = ({ isLogin = false }) => {
             )}
           </>
         )}
-
+        {isLogin && <Link to="/signup">I dont have an account yet</Link>}
         <input type="submit" value={isLogin ? "Login" : "Sign Up"} />
       </form>
+
       <Modal
         opened={opened}
         withCloseButton={false}

@@ -1,0 +1,14 @@
+.authFormCtn {
+  margin-top: 2rem;
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: column;
+  gap: 2rem;
+  align-items: center;
+  min-height: 87svh;
+  color: var(--primary-white);
+}
+
+.signupHeader {
+  font-size: var(--title-two);
+}

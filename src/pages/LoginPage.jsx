@@ -1,14 +1,16 @@
-import { Link } from "react-router-dom"
-import AuthForm from "../components/AuthForm"
+import { Link } from "react-router-dom";
+import AuthForm from "../components/AuthForm";
+import classes from "../styles/LoginPage.module.css";
 
 const LoginPage = () => {
   return (
     <>
-      <h1>Login</h1>
-      <AuthForm isLogin />
-      <Link to="/signup">I dont have an account yet</Link>
+      <div className={classes.authFormCtn}>
+        <h1 className={classes.loginHeader}>Login</h1>
+        <AuthForm isLogin />
+      </div>
     </>
-  )
-}
+  );
+};
 
-export default LoginPage
+export default LoginPage;
