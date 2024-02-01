@@ -1,9 +1,21 @@
 .footerCtn {
   font-size: 1rem;
-  border-top: 1px black solid;
+  border-top: 0.2rem var(--primary-white) solid;
   padding-left: 1rem;
   display: flex;
   justify-content: center;
+  color: var(--primary-white);
   gap: 1rem;
+  height: 5svh;
   align-items: center;
+}
+
+.ghImg {
+  height: 1rem;
+}
+
+.linkCtn {
+  text-decoration: none;
+  cursor: pointer;
+  color: var(--primary-white);
 }
