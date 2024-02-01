@@ -34,12 +34,6 @@ const GameDetailsPage = () => {
 
   return game ? (
     <div className={classes.contentCtn}>
-      {/* <div className={classes.header}>
-        <h1 className={classes.gameTitle}>{game.title}</h1>
-        {game.createdBy == userId && (
-          <Link to={`/games/${gameId}/update`}>Update Game</Link>
-        )}
-      </div> */}
       <div className={classes.gameCtn}>
         <div
           style={{ backgroundImage: `url(${game.imageUrl})` }}
@@ -144,6 +138,14 @@ const GameDetailsPage = () => {
                   to={`/games/${gameId}/addReview`}
                 >
                   Add new review
+                </Link>
+              )}
+              {game.createdBy == userId && (
+                <Link
+                  className={classes.wishListButton}
+                  to={`/games/${gameId}/update`}
+                >
+                  Update Game
                 </Link>
               )}
             </>
