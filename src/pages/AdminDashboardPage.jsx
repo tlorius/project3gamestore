@@ -160,21 +160,29 @@ const AdminDashboardPage = () => {
         <div className={classes.dashBodyCtn}>
           <div className={classes.discountDashCtn}>
             <h3 className={classes.sectionHeader}>Discount Codes</h3>
-            <p>
-              name - discount % - applies to already discounted games? - delete
-            </p>{" "}
+            <p className={classes.discListTitle}>
+              <span>Name</span>
+              <span>Discount in %</span>
+              <span>Applies to already discounted games?</span>
+              <span>Delete</span>
+            </p>
             {couponCodes &&
               couponCodes.map((dcode) => {
                 return (
-                  <div key={dcode._id}>
-                    {dcode.code} - {dcode.discountInPercent}% -{" - "}
-                    {dcode.appliesToAlreadyDiscountedGames ? "✅" : "❌"}
-                    <button
-                      type="button"
-                      onClick={() => deleteCoupon(dcode._id)}
-                    >
-                      x
-                    </button>
+                  <div className={classes.discListItem} key={dcode._id}>
+                    <span>{dcode.code}</span>
+                    <span>{dcode.discountInPercent}%</span>
+                    <span className={classes.revTxt}>
+                      {dcode.appliesToAlreadyDiscountedGames ? "✅" : "❌"}
+                    </span>
+                    <span>
+                      <button
+                        type="button"
+                        onClick={() => deleteCoupon(dcode._id)}
+                      >
+                        x
+                      </button>
+                    </span>
                   </div>
                 );
               })}
