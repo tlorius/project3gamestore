@@ -254,33 +254,33 @@ const AdminDashboardPage = () => {
               </>
             )}
           </div>
-          <div className={classes.revenueDashCtn}>BL</div>
-          <div className={classes.invoicesDashCtn}>BR</div>
-        </div>
-
-        {revenue && (
-          <div>
-            <h4>Revenues</h4>
-            <p>Total Revenue: {(revenue.sumAllTime / 100).toFixed(2)}€</p>
-            <p>
-              Revenue in the last 30 days:{" "}
-              {(revenue.sumThirtyDays / 100).toFixed(2)}€
-            </p>
+          <div className={classes.revenueDashCtn}>
+            {revenue && (
+              <div>
+                <h4>Revenues</h4>
+                <p>Total Revenue: {(revenue.sumAllTime / 100).toFixed(2)}€</p>
+                <p>
+                  Revenue in the last 30 days:{" "}
+                  {(revenue.sumThirtyDays / 100).toFixed(2)}€
+                </p>
+              </div>
+            )}
           </div>
-        )}
-        <hr />
-        <h4>Recent Invoices</h4>
-        <p>User - Items - Total - Discount</p>
-        {lastInvoices &&
-          lastInvoices.map((invoice) => (
-            <div key={invoice._id}>
-              <p>
-                {invoice.createdBy} - {invoice.items} -{" "}
-                {(invoice.totalInEuroCentAfterDiscount / 100).toFixed(2)}€ -{" "}
-                {invoice.discountCodePercentage}%
-              </p>
-            </div>
-          ))}
+          <div className={classes.invoicesDashCtn}>
+            <h4>Recent Invoices</h4>
+            <p>User - Items - Total - Discount</p>
+            {lastInvoices &&
+              lastInvoices.map((invoice) => (
+                <div key={invoice._id}>
+                  <p>
+                    {invoice.createdBy} - {invoice.items} -{" "}
+                    {(invoice.totalInEuroCentAfterDiscount / 100).toFixed(2)}€ -{" "}
+                    {invoice.discountCodePercentage}%
+                  </p>
+                </div>
+              ))}
+          </div>
+        </div>
       </div>
     </>
   ) : (
