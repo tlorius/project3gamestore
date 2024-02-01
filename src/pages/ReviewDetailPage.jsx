@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { AuthContext } from "../providers/AuthContext";
 import axios from "axios";
+import classes from "../styles/ReviewDetails.module.css";
 
 const ReviewDetailPage = () => {
   const [review, setReview] = useState({});
@@ -61,23 +62,58 @@ const ReviewDetailPage = () => {
   };
 
   return (
-    <div>
-      <h1>Review Details</h1>
+    <div className={classes.pageCtn}>
+      <h1 className={classes.pageTitle}>YOUR REVIEW</h1>
       {review && (
-        <div>
-          <p>{review.comment}</p>
-          <p>Recommended: {review.recommend ? "✅" : "❌"}</p>
-          {game && (
-            <>
-              <img src={game.imageUrl} alt={game.title} />
-              <h2>{game.title}</h2>
-              <Link to={`/games/${game._id}`}>View Game Details</Link>
-            </>
-          )}
-          <Link to={`/games/${game._id}/updatereview/${reviewId}`}>
-            Update review
+        <div className={classes.reviewCtn}>
+          <Link to={`/games/${game._id}`}>
+            <img src={game.imageUrl} alt={game.title} />
           </Link>
-          <button onClick={handleDeleteReview}>Delete Review</button>
+          <div className={classes.reviewContent}>
+            <div className={classes.createrInfo}>
+              <div className={classes.titleHeader}>
+                <h2 className={classes.reviewGameTitle}>{game.title}</h2>
+                <button
+                  className={classes.deleteReviewButton}
+                  onClick={handleDeleteReview}
+                >
+                  Delete Review
+                </button>
+                <Link to={`/games/${game._id}/updatereview/${reviewId}`}>
+                  <button className={classes.updateReviewButton}>
+                    Update review{" "}
+                  </button>
+                </Link>
+              </div>
+              <p>
+                Publisher:{" "}
+                <span className={classes.highlighted}>{game.publisher} </span>
+              </p>
+              <p>
+                Developer:{" "}
+                <span className={classes.highlighted}>{game.developer}</span>
+              </p>
+            </div>
+            <p className={classes.recommended}>
+              Recommended: {review.recommend ? "✅" : "❌"}
+            </p>
+            <div className={classes.reviewComment}>
+              <span>{review.comment}</span>
+            </div>
+          </div>
+          <div className={classes.reviewActionButton}>
+            {game && (
+              <>
+                {" "}
+                <Link
+                  className={classes.gameDetailsButton}
+                  to={`/games/${game._id}`}
+                >
+                  View Game Details
+                </Link>
+              </>
+            )}
+          </div>
         </div>
       )}
     </div>
