@@ -88,3 +88,11 @@
   grid-template-columns: 1fr 1fr 2fr 1fr;
   grid-template-rows: 1fr;
 }
+
+.createCodeForm {
+  margin-top: 1rem;
+  display: flex;
+  flex-direction: column;
+  width: fit-content;
+  row-gap: 0.7rem;
+}

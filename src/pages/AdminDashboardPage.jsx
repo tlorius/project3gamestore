@@ -186,7 +186,7 @@ const AdminDashboardPage = () => {
                   </div>
                 );
               })}
-            <form onSubmit={createCode}>
+            <form className={classes.createCodeForm} onSubmit={createCode}>
               <label>
                 Code:{" "}
                 <input
