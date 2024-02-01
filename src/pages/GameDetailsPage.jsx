@@ -52,7 +52,7 @@ const GameDetailsPage = () => {
             </p>
           )}
           {game.price > 0 && game.discountInPercent > 0 && (
-            <p>
+            <p style={{ color: "grey" }}>
               Discount:{" "}
               <strong className={classes.smallP}>
                 {game.discountInPercent}% (Save{" "}
