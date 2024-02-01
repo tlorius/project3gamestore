@@ -13,28 +13,13 @@
   display: grid;
   margin-top: 2rem;
   grid-template-columns: 1fr 1fr;
-  grid-template-rows: 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
   gap: 2rem;
 }
 
-.discountDashCtn {
-  border: white solid 1px;
-  margin: 1rem;
-  padding: 1rem;
-}
-
-.roleDashCtn {
-  border: white solid 1px;
-  margin: 1rem;
-  padding: 1rem;
-}
-
-.revenueDashCtn {
-  border: white solid 1px;
-  margin: 1rem;
-  padding: 1rem;
-}
-
+.discountDashCtn,
+.roleDashCtn,
+.revenueDashCtn,
 .invoicesDashCtn {
   border: white solid 1px;
   margin: 1rem;
