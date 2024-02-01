@@ -6,3 +6,19 @@
   max-width: 20rem;
   margin: 1rem 1rem;
 }
+
+.submitBtn {
+  border-radius: var(--border-radius);
+  border: none;
+  background: white;
+  color: var(--primary-black);
+  padding: 0.5rem 1rem;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.signUpLink {
+  text-decoration: none;
+  color: var(--primary-white);
+  margin-right: 4rem;
+}

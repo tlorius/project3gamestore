@@ -180,8 +180,16 @@ const AuthForm = ({ isLogin = false }) => {
             )}
           </>
         )}
-        {isLogin && <Link to="/signup">I dont have an account yet</Link>}
-        <input type="submit" value={isLogin ? "Login" : "Sign Up"} />
+        {isLogin && (
+          <Link className={classes.signUpLink} to="/signup">
+            I dont have an account yet
+          </Link>
+        )}
+        <input
+          className={classes.submitBtn}
+          type="submit"
+          value={isLogin ? "Login" : "Sign Up"}
+        />
       </form>
 
       <Modal
