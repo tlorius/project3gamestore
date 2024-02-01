@@ -158,55 +158,62 @@ const AdminDashboardPage = () => {
       <div className={classes.adminPageCtn}>
         <h1 className={classes.adminDashTitle}>Admin Dashboard</h1>
         <div className={classes.dashBodyCtn}>
-          <div className={classes.discountDashCtn}>TL</div>
-          <div className={classes.roleDashCtn}>TR</div>
+          <div className={classes.discountDashCtn}>
+            <h3>Discount Codes</h3>
+            <p>
+              name - discount % - applies to already discounted games? - delete
+            </p>{" "}
+            {couponCodes &&
+              couponCodes.map((dcode) => {
+                return (
+                  <div key={dcode._id}>
+                    {dcode.code} - {dcode.discountInPercent}% -{" - "}
+                    {dcode.appliesToAlreadyDiscountedGames ? "✅" : "❌"}
+                    <button
+                      type="button"
+                      onClick={() => deleteCoupon(dcode._id)}
+                    >
+                      x
+                    </button>
+                  </div>
+                );
+              })}
+            <form onSubmit={createCode}>
+              <label>
+                Code:{" "}
+                <input
+                  type="text"
+                  value={code}
+                  onChange={(event) => setCode(event.target.value)}
+                />
+              </label>
+              <label>
+                Percent off:{" "}
+                <input
+                  type="number"
+                  value={discountInPercent}
+                  onChange={(event) => setDiscountInPercent(event.target.value)}
+                />
+              </label>
+              <label>
+                Should apply to already discounted Games:
+                <input
+                  type="checkbox"
+                  checked={appliesToAlreadyDiscountedGames}
+                  onChange={(event) =>
+                    setAppliesToAlreadyDiscountedGames(event.target.checked)
+                  }
+                />
+              </label>
+              <input type="submit" value={"Add Discount Code"} />
+            </form>
+          </div>
+          <div className={classes.roleDashCtn}></div>
           <div className={classes.revenueDashCtn}>BL</div>
-          <div>BR</div>
+          <div className={classes.invoicesDashCtn}>BR</div>
         </div>
-        <h3>Discount Codes</h3>
-        <p>name - discount % - applies to already discounted games? - delete</p>
+
         <div>
-          {couponCodes &&
-            couponCodes.map((dcode) => {
-              return (
-                <div key={dcode._id}>
-                  {dcode.code} - {dcode.discountInPercent}% -{" - "}
-                  {dcode.appliesToAlreadyDiscountedGames ? "✅" : "❌"}
-                  <button type="button" onClick={() => deleteCoupon(dcode._id)}>
-                    x
-                  </button>
-                </div>
-              );
-            })}
-          <form onSubmit={createCode}>
-            <label>
-              Code:{" "}
-              <input
-                type="text"
-                value={code}
-                onChange={(event) => setCode(event.target.value)}
-              />
-            </label>
-            <label>
-              Percent off:{" "}
-              <input
-                type="number"
-                value={discountInPercent}
-                onChange={(event) => setDiscountInPercent(event.target.value)}
-              />
-            </label>
-            <label>
-              Should apply to already discounted Games:
-              <input
-                type="checkbox"
-                checked={appliesToAlreadyDiscountedGames}
-                onChange={(event) =>
-                  setAppliesToAlreadyDiscountedGames(event.target.checked)
-                }
-              />
-            </label>
-            <input type="submit" value={"Add Discount Code"} />
-          </form>
           <hr />
           <form onSubmit={findUserByUserName}>
             <label>
