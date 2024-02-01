@@ -1,5 +1,5 @@
 .crossText {
-  color: grey;
+  color: var(--primary-grey);
   text-decoration: line-through;
   font-size: 0.9rem;
 }
