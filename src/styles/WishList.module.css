@@ -1,29 +1,29 @@
-.wishListPageContainer{
-    min-height: 100vh;
-    
-    display: flex;
-    flex-direction: column;
+.wishListPageContainer {
+  min-height: 100vh;
 
-    align-items: center;
-    justify-content: flex-start;
+  display: flex;
+  flex-direction: column;
 
-    margin-top: 100px;
+  align-items: center;
+  justify-content: flex-start;
 
-    gap: 30px;
+  margin-top: 100px;
+
+  gap: 30px;
 }
-.wishListTitle{
-    color: var(--primary-white);
+.wishListTitle {
+  color: var(--primary-white);
 
-    font-weight: bolder;
-    font-size: 42px;
+  font-weight: bolder;
+  font-size: 42px;
 }
-.gamesCnt{
-    display: flex;
-    flex-direction: column;
+.gamesCnt {
+  display: flex;
+  flex-direction: column;
 
-    gap: 30px;
+  gap: 30px;
 }
-.gameCard{
+.gameCard {
   width: 600px;
   height: 180px;
 
@@ -37,7 +37,7 @@
   background-color: var(--primary-blue);
 }
 
-.gameCardInfo{
+.gameCardInfo {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -45,28 +45,28 @@
 
   gap: 20px;
 }
-.gameCardImage{
+.gameCardImage {
   width: 200px;
   height: 100%;
 
   background-size: cover;
   background-position: center;
 }
-.gameCardTitle{
+.gameCardTitle {
   color: var(--primary-white);
 }
-.gameCardPrice{
+.gameCardPrice {
   font-size: 14px;
 
   padding: 8px;
 
-  background-color:rgba(0, 0, 0, 0.5);
+  background-color: rgba(0, 0, 0, 0.5);
 
   color: var(--primary-white);
 
   border-radius: 4px 0 0 4px;
 }
-.gameCardBtn{
+.gameCardBtn {
   border: none;
   outline: none;
 
@@ -80,22 +80,22 @@
 
   cursor: pointer;
 
-  transition: 0.3s ;
+  transition: 0.3s;
 
   text-decoration: none;
 }
-.gameCardBtn:hover{
+.gameCardBtn:hover {
   background-color: #6d9930;
 
-  transition: 0.3s ;
+  transition: 0.3s;
 }
-.gameCardTags{
+.gameCardTags {
   display: flex;
   flex-direction: row;
 
   gap: 2px;
 }
-.gameCardTag{
+.gameCardTag {
   font-size: 12px;
 
   color: var(--primary-white);
@@ -106,33 +106,44 @@
 
   border-radius: 4px;
 }
-.wishListButton{
-    width: 180px;
-  
-    text-decoration: none;
-  
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  
-    background-color: rgba(0, 0, 0, 0.507);
-  
-    padding: 10px;
-  
-    border: none;
-    outline: none;
-  
-    color: #66c0f4;
-  
-    border-radius: 8px;
-  
-    cursor: pointer;
-  
-    transition: 0.3s;
-  }
-  .wishListButton:hover{
-    background-color: #447d9e;
-    
+.wishListButton {
+  width: 180px;
 
-    transition: 0.3s;
-  }
+  text-decoration: none;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background-color: rgba(0, 0, 0, 0.507);
+
+  padding: 10px;
+
+  border: none;
+  outline: none;
+
+  color: #66c0f4;
+
+  border-radius: 8px;
+
+  cursor: pointer;
+
+  transition: 0.3s;
+}
+.wishListButton:hover {
+  background-color: #447d9e;
+
+  transition: 0.3s;
+}
+
+.noGamesText {
+  color: var(--primary-white);
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.noGamesLink {
+  text-align: center;
+  text-decoration: none;
+  color: var(--highlighting-color);
+}

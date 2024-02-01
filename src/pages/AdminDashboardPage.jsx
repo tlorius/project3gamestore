@@ -2,6 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../providers/AuthContext";
 import { toast } from "react-toastify";
 import { Loader } from "@mantine/core";
+import classes from "../styles/AdminDashboardPage.module.css";
 
 const AdminDashboardPage = () => {
   const { isAuthenticated, requestWithToken } = useContext(AuthContext);
@@ -154,121 +155,156 @@ const AdminDashboardPage = () => {
   }, [isAuthenticated]);
   return isAuthenticated ? (
     <>
-      <h1>Admin Dashboard</h1>
-      <h3>Discount Codes</h3>
-      <p>name - discount % - applies to already discounted games? - delete</p>
-      <div>
-        {couponCodes &&
-          couponCodes.map((dcode) => {
-            return (
-              <div key={dcode._id}>
-                {dcode.code} - {dcode.discountInPercent}% -{" - "}
-                {dcode.appliesToAlreadyDiscountedGames ? "✅" : "❌"}
-                <button type="button" onClick={() => deleteCoupon(dcode._id)}>
-                  x
-                </button>
-              </div>
-            );
-          })}
-        <form onSubmit={createCode}>
-          <label>
-            Code:{" "}
-            <input
-              type="text"
-              value={code}
-              onChange={(event) => setCode(event.target.value)}
-            />
-          </label>
-          <label>
-            Percent off:{" "}
-            <input
-              type="number"
-              value={discountInPercent}
-              onChange={(event) => setDiscountInPercent(event.target.value)}
-            />
-          </label>
-          <label>
-            Should apply to already discounted Games:
-            <input
-              type="checkbox"
-              checked={appliesToAlreadyDiscountedGames}
-              onChange={(event) =>
-                setAppliesToAlreadyDiscountedGames(event.target.checked)
-              }
-            />
-          </label>
-          <input type="submit" value={"Add Discount Code"} />
-        </form>
-        <hr />
-        <form onSubmit={findUserByUserName}>
-          <label>
-            Username:{" "}
-            <input
-              type="text"
-              value={userNameToFind}
-              onChange={(event) => setUserNameToFind(event.target.value)}
-            />
-          </label>
-          <input type="submit" value={"Find user"} />
-        </form>
-        {userIdToUpdate && (
-          <>
-            <h4>Username: {userNameToDisplay}</h4>
-            <p>ID: {userIdToUpdate}</p>
-            <form onSubmit={updateRolesOfUser}>
-              <label>
-                ENDUSER{" "}
-                <input
-                  type="checkbox"
-                  checked={enduserRole}
-                  onChange={(event) => setEnduserRole(event.target.checked)}
-                />
-              </label>
-              <label>
-                GAMEDEVELOPER{" "}
-                <input
-                  type="checkbox"
-                  checked={gameDevRole}
-                  onChange={(event) => setGameDevRole(event.target.checked)}
-                />
-              </label>
-              <label>
-                ADMIN{" "}
-                <input
-                  type="checkbox"
-                  checked={adminRole}
-                  onChange={(event) => setAdminRole(event.target.checked)}
-                />
-              </label>
-              <input type="submit" value={"Update Roles"} />
-            </form>
-          </>
-        )}
-      </div>
-      <hr />
-      {revenue && (
-        <div>
-          <h4>Revenues</h4>
-          <p>Total Revenue: {(revenue.sumAllTime / 100).toFixed(2)}€</p>
-          <p>
-            Revenue in the last 30 days:{" "}
-            {(revenue.sumThirtyDays / 100).toFixed(2)}€
-          </p>
-        </div>
-      )}
-      <hr />
-      <h4>Recent Invoices</h4>
-      <p>User - Items - Total - Discount</p>
-      {lastInvoices &&
-        lastInvoices.map((invoice) => (
-          <div key={invoice._id}>
-            <p>
-              {invoice.createdBy} - {invoice.items} -{" "}
-              {(invoice.totalInEuroCentAfterDiscount / 100).toFixed(2)}€ -{" "}
-              {invoice.discountCodePercentage}%
+      <div className={classes.adminPageCtn}>
+        <h1 className={classes.adminDashTitle}>Admin Dashboard</h1>
+        <div className={classes.dashBodyCtn}>
+          <div className={classes.discountDashCtn}>
+            <h3 className={classes.sectionHeader}>Discount Codes</h3>
+            <p className={classes.discListTitle}>
+              <span>Name</span>
+              <span>Discount in %</span>
+              <span>Applies to already discounted games?</span>
+              <span>Delete</span>
             </p>
+            {couponCodes &&
+              couponCodes.map((dcode) => {
+                return (
+                  <div className={classes.discListItem} key={dcode._id}>
+                    <span>{dcode.code}</span>
+                    <span>{dcode.discountInPercent}%</span>
+                    <span className={classes.revTxt}>
+                      {dcode.appliesToAlreadyDiscountedGames ? "✅" : "❌"}
+                    </span>
+                    <span>
+                      <button
+                        type="button"
+                        onClick={() => deleteCoupon(dcode._id)}
+                      >
+                        x
+                      </button>
+                    </span>
+                  </div>
+                );
+              })}
+            <form className={classes.createCodeForm} onSubmit={createCode}>
+              <label>
+                Code:{" "}
+                <input
+                  type="text"
+                  value={code}
+                  onChange={(event) => setCode(event.target.value)}
+                />
+              </label>
+              <label>
+                Percent off:{" "}
+                <input
+                  type="number"
+                  value={discountInPercent}
+                  onChange={(event) => setDiscountInPercent(event.target.value)}
+                />
+              </label>
+              <label>
+                Should apply to already discounted Games:
+                <input
+                  type="checkbox"
+                  checked={appliesToAlreadyDiscountedGames}
+                  onChange={(event) =>
+                    setAppliesToAlreadyDiscountedGames(event.target.checked)
+                  }
+                />
+              </label>
+              <input type="submit" value={"Add Discount Code"} />
+            </form>
           </div>
-        ))}
+          <div className={classes.roleDashCtn}>
+            <h4 className={classes.sectionHeader}>Permission Manager</h4>
+            <form onSubmit={findUserByUserName}>
+              <label>
+                Username:{" "}
+                <input
+                  type="text"
+                  value={userNameToFind}
+                  onChange={(event) => setUserNameToFind(event.target.value)}
+                />
+              </label>
+              <input type="submit" value={"Find user"} />
+            </form>
+            {userIdToUpdate && (
+              <>
+                <div className={classes.permissionNameCtn}>
+                  <h4>Username: {userNameToDisplay}</h4>
+                  <p>ID: {userIdToUpdate}</p>
+                </div>
+
+                <form className={classes.roleForm} onSubmit={updateRolesOfUser}>
+                  <label>
+                    <input
+                      type="checkbox"
+                      checked={enduserRole}
+                      onChange={(event) => setEnduserRole(event.target.checked)}
+                    />{" "}
+                    ENDUSER
+                  </label>
+                  <label>
+                    <input
+                      type="checkbox"
+                      checked={gameDevRole}
+                      onChange={(event) => setGameDevRole(event.target.checked)}
+                    />{" "}
+                    GAMEDEVELOPER
+                  </label>
+                  <label>
+                    <input
+                      type="checkbox"
+                      checked={adminRole}
+                      onChange={(event) => setAdminRole(event.target.checked)}
+                    />{" "}
+                    ADMIN
+                  </label>
+                  <input type="submit" value={"Update Roles"} />
+                </form>
+              </>
+            )}
+          </div>
+          <div className={classes.revenueDashCtn}>
+            {revenue && (
+              <div>
+                <h4 className={classes.sectionHeader}>Revenues</h4>
+                <p className={classes.revTxt}>
+                  <span className={classes.boldTxt}>Total Revenue: </span>
+                  {(revenue.sumAllTime / 100).toFixed(2)}€
+                </p>
+                <p className={classes.revTxt}>
+                  <span className={classes.boldTxt}>
+                    Revenue in the last 30 days:
+                  </span>{" "}
+                  {(revenue.sumThirtyDays / 100).toFixed(2)}€
+                </p>
+              </div>
+            )}
+          </div>
+          <div className={classes.invoicesDashCtn}>
+            <h4 className={classes.sectionHeader}>Recent Invoices</h4>
+            <p className={classes.invHeader}>
+              <span>User</span>
+              <span>Items</span>
+              <span>Total</span>
+              <span>Discount</span>
+            </p>
+            {lastInvoices &&
+              lastInvoices.map((invoice) => (
+                <div className={classes.invItem} key={invoice._id}>
+                  <span> {invoice.createdBy}</span>
+                  <span>{invoice.items}</span>
+                  <span>
+                    {(invoice.totalInEuroCentAfterDiscount / 100).toFixed(2)}€
+                  </span>
+                  <span>{invoice.discountCodePercentage}%</span>
+                </div>
+              ))}
+          </div>
+        </div>
+      </div>
     </>
   ) : (
     <>
