@@ -1,0 +1,17 @@
+:root{
+    --primary-color: #171a21;
+    --primary-blue: #66c0f4;
+    --secondary-blue: #2a475e;
+    
+    --primary-grey: #474346;
+    --primary-white: #c7d5e0;
+    --primary-black: #1b2838;
+
+    --border-radius: 1rem;
+
+    --title-one: 3rem;
+    --title-two: 2rem;
+    --title-three: 1rem;
+
+    font-family: 'Roboto', sans-serif;
+}

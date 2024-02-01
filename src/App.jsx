@@ -23,6 +23,7 @@ import UserInvoicesPage from "./pages/UserInvoicesPage";
 import Footer from "./components/Footer";
 import PrivateRoute from "./components/PrivateRoute";
 import "./index.css";
+import "./styles/globalStyle.css";
 
 function App() {
   return (
