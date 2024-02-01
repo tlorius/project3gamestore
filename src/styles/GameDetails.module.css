@@ -51,6 +51,12 @@
 .wishListButton{
   width: 180px;
 
+  text-decoration: none;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
   background-color: var(--primary-blue);
 
   padding: 10px;
