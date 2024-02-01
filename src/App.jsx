@@ -22,6 +22,7 @@ import CheckoutPage from "./pages/CheckoutPage";
 import UserInvoicesPage from "./pages/UserInvoicesPage";
 import Footer from "./components/Footer";
 import PrivateRoute from "./components/PrivateRoute";
+import "./index.css";
 
 function App() {
   return (
