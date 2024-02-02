@@ -69,7 +69,7 @@ const AdminDashboardPage = () => {
         );
         if (response.status === 201) {
           await getCouponCodes();
-          toast.success("successfully added code");
+          toast.success("💸Successfully added code");
           clearInputs();
         }
       } catch (error) {
@@ -86,10 +86,10 @@ const AdminDashboardPage = () => {
       );
       if (response.status === 204) {
         await getCouponCodes();
-        toast.success("successfully deleted code");
+        toast.success("🔥Successfully deleted code");
       }
     } catch (error) {
-      toast.error("failed to delete code", { theme: "dark" });
+      toast.error("Failed to delete code", { theme: "dark" });
     }
   };
 
@@ -103,11 +103,11 @@ const AdminDashboardPage = () => {
         setUserIdToUpdate(response.data.id);
         setUserNameToDisplay(response.data.username);
         assignRoleCheckboxes(response.data.roles);
-        toast.success("successfully retrieved userdata");
+        toast.success("Successfully retrieved userdata");
       }
     } catch (error) {
       toast.error(
-        "failed to fetch user - you may still edit the previously fetched user"
+        "Failed to fetch user - you may still edit the previously fetched user"
       );
     }
   };
@@ -133,10 +133,10 @@ const AdminDashboardPage = () => {
       );
       if (response.status === 200) {
         assignRoleCheckboxes(response.data);
-        toast.success("Updated users roles");
+        toast.success("😎👍Updated users roles");
       }
     } catch (error) {
-      toast.error("unable to udpate roles");
+      toast.error("🥶 Unable to udpate roles");
     }
   };
 
