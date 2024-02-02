@@ -24,13 +24,13 @@ const TwoFactorModal = () => {
       });
       if (response.status === 200) {
         setNeedsRefresh(true);
-        toast.success("Two-Factor Auth Enabled Successfully", {
+        toast.success("🔒Two-Factor Auth Enabled Successfully", {
           theme: "dark",
         });
         close();
       }
     } catch (error) {
-      toast.error("Unable to enable Two-Factor Authentication");
+      toast.error("Unable to verify your provided Code. Please try again!");
     }
   };
 
