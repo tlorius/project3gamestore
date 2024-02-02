@@ -3,6 +3,7 @@
   height: auto;
   padding-left: 3rem;
   padding-top: 3rem;
+  min-height: 90svh;
 }
 
 .titleText {

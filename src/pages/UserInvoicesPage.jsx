@@ -41,35 +41,37 @@ const UserInvoicesPage = () => {
 
   return isAuthenticated ? (
     <>
-      <h1 className={classes.invoicePgTitle}>All Your Invoices</h1>
-      {invoices &&
-        invoices.map((invoice) => {
-          return (
-            <div
-              key={invoice._id}
-              className={classes.invoiceCtn}
-              onClick={() => openModal(invoice._id)}
-            >
-              <p className={classes.invoiceCtnText}>
-                <span>{"VANG" + invoice._id.slice(-12).toUpperCase()}</span>
-                <span>Date: {formatDate(invoice.createdAt)}</span>
-                <span>Items: {invoice.fromOrder.items.length}</span>
-                <span>
-                  Total Paid:{" "}
-                  {(
-                    invoice.fromOrder.totalInEuroCentAfterDiscount / 100
-                  ).toFixed(2)}
-                  €
-                </span>
-              </p>
-            </div>
-          );
-        })}
-      <InvoiceDetailsModal
-        opened={opened}
-        close={close}
-        invoiceId={invoiceId}
-      />
+      <div className={classes.userInvoicesPageCtn}>
+        <h1 className={classes.invoicePgTitle}>All Your Invoices</h1>
+        {invoices &&
+          invoices.map((invoice) => {
+            return (
+              <div
+                key={invoice._id}
+                className={classes.invoiceCtn}
+                onClick={() => openModal(invoice._id)}
+              >
+                <p className={classes.invoiceCtnText}>
+                  <span>{"VANG" + invoice._id.slice(-12).toUpperCase()}</span>
+                  <span>Date: {formatDate(invoice.createdAt)}</span>
+                  <span>Items: {invoice.fromOrder.items.length}</span>
+                  <span>
+                    Total Paid:{" "}
+                    {(
+                      invoice.fromOrder.totalInEuroCentAfterDiscount / 100
+                    ).toFixed(2)}
+                    €
+                  </span>
+                </p>
+              </div>
+            );
+          })}
+        <InvoiceDetailsModal
+          opened={opened}
+          close={close}
+          invoiceId={invoiceId}
+        />
+      </div>
     </>
   ) : (
     <>
