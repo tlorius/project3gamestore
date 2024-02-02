@@ -61,6 +61,7 @@ Welcome to the GameStore frontend! This README provides an overview of the front
 - **React**: Frontend framework for building user interfaces.
 - **React Router**: Library for declarative routing in React applications.
 - **Axios**: HTTP client for making requests to the backend API.
+- **Otpauth**: Library for generating, validating and verifying one time passwords.
 - **JWT (JSON Web Tokens)**: For user authentication and authorization.
 
 ## Contributing
