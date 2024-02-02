@@ -1,20 +1,41 @@
 .gameDevPageCtn {
   min-height: 90svh;
   color: var(--primary-white);
+  background-color: var(--primary-blue);
 }
 
 .gameDevGrid {
   display: grid;
   grid-template-columns: 3fr 1fr;
+  background-color: var(--secondary-blue);
+  width: 90%;
+  margin-left: 5rem;
+  margin-top: 5rem;
 }
 
 .leftGrid {
   padding: 1rem;
+  padding-top: 3rem;
+}
+
+.leftGridInnerCtn {
+  width: 98%;
+  padding-top: 1rem;
+  margin: 2rem;
+  background-color: var(--primary-blue);
+}
+
+.rightGridInnerCtn {
+  width: 80%;
+  padding: 2rem;
+  margin: 2rem;
+  background-color: var(--primary-blue);
 }
 
 .rightGrid {
   padding: 1rem;
   line-height: 1.5;
+  margin-top: 3rem;
 }
 
 .linkCtn {
@@ -22,10 +43,39 @@
   color: var(--primary-white);
 }
 
+.highlightedSpan {
+  color: var(--highlighting-color);
+  margin-bottom: 3rem;
+  text-transform: uppercase;
+  font-weight: bold;
+  padding-left: 3rem;
+}
+
+.gameTitle {
+  color: var(--highlighting-color);
+  margin-bottom: 1rem;
+}
+
+.noGamesYet {
+  margin-top: 2rem;
+}
+
 .gameListItem {
+  background-color: rgba(77, 113, 179, 0.13);
+  width: 95%;
+  margin-left: 1rem;
+  padding: 2rem;
+  margin-bottom: 2rem;
   margin-top: 1rem;
 }
 
 .gameTitle {
   font-weight: 600;
+}
+
+.scrollableList {
+  max-height: 500px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  scrollbar-width: thin;
 }
