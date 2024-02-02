@@ -48,14 +48,25 @@ function App() {
             </PrivateRoute>
           }
         />
-        <Route path="/games/:gameId/addreview" element={<AddReviewPage />} />
+        <Route
+          path="/games/:gameId/addreview"
+          element={
+            <PrivateRoute>
+              <AddReviewPage />
+            </PrivateRoute>
+          }
+        />
         <Route
           path="/games/:gameId/reviews/:reviewId"
           element={<ReviewDetailPage />}
         />
         <Route
           path="/games/:gameId/updatereview/:reviewId"
-          element={<UpdateReviewPage />}
+          element={
+            <PrivateRoute>
+              <UpdateReviewPage />
+            </PrivateRoute>
+          }
         />
         <Route path="/games/:gameId/reviews" element={<GameReviewsPage />} />
 
