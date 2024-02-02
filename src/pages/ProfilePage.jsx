@@ -16,7 +16,7 @@ const ProfilePage = () => {
     try {
       const response = await authRequestWithToken("/otp/disable", "POST");
       if (response.status === 200) {
-        toast.success("Two-Factor Auth Disabled Successfully", {
+        toast.success("🔓Two-Factor Authentication Disabled Successfully", {
           theme: "dark",
         });
         setNeedsRefresh(true);

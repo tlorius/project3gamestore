@@ -118,15 +118,17 @@ const CheckoutPage = () => {
           );
           if (invoiceResponse.status === 200) {
             setNeedsRefresh(true);
-            toast.success("purchase completed successfully", { theme: "dark" });
+            toast.success("🤩Your Purchase has been successful", {
+              theme: "dark",
+            });
             navigate(`/profile/${userId}`);
           }
         } catch (error) {
-          console.log(error, "issue with creating invoice");
+          console.log(error, "Issue with creating invoice");
         }
       }
     } catch (error) {
-      console.log(error, "issue with order");
+      console.log(error, "Issue with order");
     }
   };
 

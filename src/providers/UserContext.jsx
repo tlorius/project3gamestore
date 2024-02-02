@@ -57,7 +57,7 @@ const UserContextProvider = ({ children }) => {
           setNeedsRefresh(true);
         }
       } catch (error) {
-        toast("😒 unable to remove this game", {
+        toast("😒 Unable to remove this game", {
           theme: "dark",
           autoClose: 3000,
         });
@@ -101,8 +101,8 @@ const UserContextProvider = ({ children }) => {
           setNeedsRefresh(true);
         }
       } catch (error) {
-        //for now just throwing this for every error, need to change later
-        toast("😒 unable to add game again", {
+        //for now just throwing this for every error- lol just keep it
+        toast("😒 Unable to add game again", {
           theme: "dark",
           autoClose: 3000,
         });
