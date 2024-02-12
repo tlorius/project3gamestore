@@ -254,7 +254,6 @@ const GameForm = ({ isUpdate = false }) => {
           </button>
         </div>
       </form>
-      <div className={classes.marginBottom}></div>
     </>
   );
 };
