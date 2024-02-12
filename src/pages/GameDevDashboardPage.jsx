@@ -39,7 +39,7 @@ const GameDevDashboardPage = () => {
 
   return isAuthenticated ? (
     <div className={classes.gameDevPageCtn}>
-      <h1>Game Developer Dashboard</h1>
+      <h1 className={classes.dashHeader}>Game Developer Dashboard</h1>
       <div className={classes.gameDevGrid}>
         <div className={classes.leftGrid}>
           {" "}
