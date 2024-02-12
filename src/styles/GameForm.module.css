@@ -41,7 +41,6 @@
   gap: 0.5rem;
   justify-content: center;
   color: var(--primary-white);
-  margin-top: -17rem;
 }
 
 .formHeader {
@@ -59,9 +58,9 @@
   display: flex;
   justify-content: center;
   color: var(--primary-white);
-  margin-top: 2rem;
-  margin-left: 15rem;
   gap: 5rem;
+  margin-left: 8.79rem;
+  text-align: right;
 }
 
 .removeTagBtn {

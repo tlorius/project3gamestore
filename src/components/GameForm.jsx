@@ -208,25 +208,6 @@ const GameForm = ({ isUpdate = false }) => {
             onChange={(event) => setDiscountPercent(event.target.value)}
           />
         </label>
-        <div className={classes.bottomBtns}>
-          {" "}
-          <input
-            className={classes.submitBtn}
-            type="submit"
-            value={isUpdate ? "Update Game" : "Add Game"}
-          />
-          <button
-            className={classes.cancelBtn}
-            type="button"
-            onClick={() =>
-              navigate(`${isUpdate ? `/games/${gameId}` : "/dashboard/dev"}`)
-            }
-          >
-            Cancel
-          </button>
-        </div>
-      </form>
-      <div className={classes.marginBottom}>
         <div className={classes.tagsCtn}>
           {tags.map((tag) => {
             return (
@@ -255,7 +236,25 @@ const GameForm = ({ isUpdate = false }) => {
             />
           </div>
         </label>
-      </div>
+        <div className={classes.bottomBtns}>
+          {" "}
+          <input
+            className={classes.submitBtn}
+            type="submit"
+            value={isUpdate ? "Update Game" : "Add Game"}
+          />
+          <button
+            className={classes.cancelBtn}
+            type="button"
+            onClick={() =>
+              navigate(`${isUpdate ? `/games/${gameId}` : "/dashboard/dev"}`)
+            }
+          >
+            Cancel
+          </button>
+        </div>
+      </form>
+      <div className={classes.marginBottom}></div>
     </>
   );
 };
