@@ -79,3 +79,9 @@
   overflow-x: hidden;
   scrollbar-width: thin;
 }
+
+.dashHeader{
+  padding-top: 1rem;
+  text-align: center;
+  font-size: var(--title-two);
+}
