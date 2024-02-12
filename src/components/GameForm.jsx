@@ -26,7 +26,9 @@ const GameForm = ({ isUpdate = false }) => {
   const autocompleteRef = useRef(null);
 
   const handleTagSelect = (tag) => {
-    if (!tags.includes(tag)) {
+    if (tags.length >= 5) {
+      toast.error("A game may only have 5 tags");
+    } else if (!tags.includes(tag)) {
       setTags([...tags, tag]);
     }
     //doesnt clear field if its focussed
