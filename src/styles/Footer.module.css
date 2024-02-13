@@ -1,7 +1,7 @@
 .footerCtn {
-  font-size: 1rem;
   border-top: 0.2rem var(--primary-white) solid;
   padding-left: 1rem;
+  font-size: .7rem;
   display: flex;
   justify-content: center;
   color: var(--primary-white);
@@ -11,11 +11,20 @@
 }
 
 .ghImg {
-  height: 1rem;
+  height: .7rem;
 }
 
 .linkCtn {
   text-decoration: none;
   cursor: pointer;
   color: var(--primary-white);
+}
+
+@media (min-width: 700px) {
+  .footerCtn{
+  font-size: 1rem;
+  }
+  .ghImg{
+  height: 1rem;
+  }
 }
