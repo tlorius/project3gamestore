@@ -6,6 +6,7 @@
   margin: 5rem auto;
   text-align: right;
   color: var(--primary-white);
+  min-height: 68svh;
 }
 .gameFormCtn input {
   margin-left: 5rem;
